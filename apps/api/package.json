@@ -1,0 +1,29 @@
+{
+  "name": "@resilience/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Hono API on Vercel functions: registry CRUD with versioning and review, place-pack manifest, scenario library index, run log, sign-off queue.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsx watch src/dev.ts",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src",
+    "db:migrate": "tsx scripts/migrate.ts"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.2",
+    "hono": "^4.10.3",
+    "ws": "^8.18.3",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@hono/node-server": "^1.19.5",
+    "@types/ws": "^8.18.1",
+    "tsx": "^4.20.6"
+  }
+}

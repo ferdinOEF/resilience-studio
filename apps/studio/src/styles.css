@@ -1,0 +1,14 @@
+/* Design tokens from the approved mockups: docs/DESIGN_TOKENS.md */
+:root {
+  --ink: #1a1d1f; --muted: #5b6468; --muted-2: #3c4549;
+  --hairline: #e3e6e8; --hairline-2: #f0f2f3; --panel: #f6f7f8; --map-bg: #eef1f2; --water: #cfe0e6;
+  --teal: #0f6e76; --teal-ink: #0a4f55; --teal-bg: #eaf3f4;
+  --risk-1: #d9e6ec; --risk-2: #f3d3a6; --risk-3: #e9a96b; --risk-4: #d55a1f;
+  --green: #2e7d4f; --green-ink: #1f5a38; --green-bg: #e6f2ea; --covered: #cfe5d6;
+  --warn-ink: #8a3e0e; --warn-bg: #fff1e6; --flood-shallow: #4a8fb5; --flood-deep: #2d6a8e; --not-modelled: #9aa4a8;
+}
+html, body, #root { height: 100%; margin: 0; }
+body { font-family: Inter, system-ui, sans-serif; font-size: 14px; line-height: 1.45; color: var(--ink); background: #fff; }
+a { color: var(--teal); }
+a:hover { color: var(--teal-ink); }
+button, input, select { font: inherit; }

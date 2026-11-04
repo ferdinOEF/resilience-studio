@@ -1,0 +1,30 @@
+{
+  "name": "@resilience/studio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The studio: React + Vite, MapLibre GL JS, one map-first layout at State, City and Ward scale; admin side role-gated.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit -p tsconfig.json && vite build",
+    "preview": "vite preview",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src",
+    "smoke": "node tools/smoke.mjs"
+  },
+  "dependencies": {
+    "maplibre-gl": "^5.24.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.15.4"
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.16",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.7.0",
+    "playwright": "^1.62.1",
+    "vite": "^6.4.1"
+  }
+}
