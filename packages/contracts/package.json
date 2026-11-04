@@ -1,0 +1,30 @@
+{
+  "name": "@resilience/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Model contracts (spec section 2): the JSON schema every model in the mesh carries, the hand-off validator, the Liaison routing rules, and the contracts of the ported chain.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "contracts",
+    "schema"
+  ],
+  "scripts": {
+    "build": "tsup && node scripts/export-schema.mjs && node scripts/write-docs.mjs",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src tests"
+  },
+  "dependencies": {
+    "zod": "^4.1.12"
+  }
+}
