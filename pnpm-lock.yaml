@@ -42,9 +42,15 @@ importers:
       '@neondatabase/serverless':
         specifier: ^1.0.2
         version: 1.2.0
+      '@resilience/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
       '@resilience/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@resilience/meta-mind':
+        specifier: workspace:*
+        version: link:../../packages/meta-mind
       '@resilience/registry':
         specifier: workspace:*
         version: link:../../packages/registry
@@ -116,6 +122,18 @@ importers:
       '@types/geojson':
         specifier: ^7946.0.16
         version: 7946.0.16
+
+  packages/meta-mind:
+    dependencies:
+      '@resilience/contracts':
+        specifier: workspace:*
+        version: link:../contracts
+      '@resilience/core':
+        specifier: workspace:*
+        version: link:../core
+      '@resilience/registry':
+        specifier: workspace:*
+        version: link:../registry
 
   packages/registry:
     dependencies:

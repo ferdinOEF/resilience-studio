@@ -23,7 +23,9 @@
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
+    "@resilience/contracts": "workspace:*",
     "@resilience/core": "workspace:*",
+    "@resilience/meta-mind": "workspace:*",
     "@resilience/registry": "workspace:*",
     "hono": "^4.10.3",
     "ws": "^8.18.3",
