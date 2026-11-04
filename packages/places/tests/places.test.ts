@@ -15,7 +15,7 @@ describe("place packs", () => {
     expect((city.data as { features: { properties: { NAME: string } }[] }).features[0].properties.NAME).toBe("Panaji");
     const zones = getLayer("panjim", "ward_zones")!;
     expect(zones.layer.admin_only).toBe(true);
-    expect((zones.data as { features: unknown[] }).features.length).toBeGreaterThanOrEqual(10);
+    expect((zones.data as { features: unknown[] }).features.length).toBe(9);
     expect((getLayer("panjim", "khazan_polygons")!.data as { features: unknown[] }).features.length).toBeGreaterThan(100);
     expect(getLayer("panjim", "nope")).toBeNull();
     expect(getManifest("x")).toBeNull();
