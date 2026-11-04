@@ -333,3 +333,22 @@ export function citationIdsInUse(): Set<string> {
   walk(sviJson);
   return ids;
 }
+
+/** The raw data files, for the science registry seed (packages/registry): every Param in them becomes a registry entry. */
+export const RAW_DATA = {
+  solutions: solutionsJson as unknown as Record<string, unknown>,
+  hazards: hazardsJson as unknown as Record<string, unknown>,
+  damage: damageJson as unknown as Record<string, unknown>,
+  ecology: ecologyJson as unknown as Record<string, unknown>,
+  svi: sviJson as unknown as Record<string, unknown>,
+  areas: areasJson as unknown as Record<string, unknown>,
+  rubric: rubricJsonData as unknown as Record<string, unknown>,
+  defenses: defensesJson as unknown as Record<string, unknown>
+};
+/** Provenance of the gridded datasets (the grids themselves stay in the data files). */
+export const DATASETS = {
+  crzGrid: { source: (panjimGrid as unknown as { source?: unknown }).source ?? null, grounding: (panjimGrid as unknown as { grounding_quality?: string }).grounding_quality ?? null, note: GRID_DATA.grounding_note, citations: ["czmp_goa", "crz2011"], label: "CRZ classification grid (CZMP Goa, 55 m cells)" },
+  dem: { source: (panjimDem as unknown as { source?: unknown }).source ?? null, label: DEM_LABEL, citations: DEM_CITATIONS },
+  popGrid: { source: POP_GRID.source, grounding: POP_GRID.grounding_quality, note: POP_GRID.grounding_note },
+  exposureGrid: { source: EXPOSURE_GRID.source, grounding: EXPOSURE_GRID.grounding_quality, note: EXPOSURE_GRID.grounding_note }
+};

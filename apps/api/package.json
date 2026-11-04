@@ -18,11 +18,13 @@
     "test": "vitest run --passWithNoTests",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "lint": "eslint src",
-    "db:migrate": "tsx scripts/migrate.ts"
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:seed": "tsx scripts/seed-registry.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
     "@resilience/core": "workspace:*",
+    "@resilience/registry": "workspace:*",
     "hono": "^4.10.3",
     "ws": "^8.18.3",
     "zod": "^4.1.12"

@@ -1,0 +1,22 @@
+{
+  "name": "@resilience/registry",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Science registry: entry schema, versioning and review workflow, resolution order (local overrides national), stale-scenario detection, and the seed extracted from the ported data files.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src tests"
+  },
+  "dependencies": {
+    "@resilience/core": "workspace:*",
+    "zod": "^4.1.12"
+  }
+}

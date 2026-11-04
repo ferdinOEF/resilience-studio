@@ -19,6 +19,11 @@ try {
   await page.goto("http://localhost:4179/");
   await page.getByText("Resilience Studio").first().waitFor();
   await page.screenshot({ path: OUT + "/01-shell.png", fullPage: true });
+  // admin side without an API: the layout renders and the sign-in page shows
+  await page.goto("http://localhost:4179/admin/registry");
+  await page.getByText("ADMIN").first().waitFor();
+  await page.getByRole("button", { name: "Send sign-in link" }).waitFor();
+  await page.screenshot({ path: OUT + "/02-admin-sign-in.png", fullPage: true });
   if (errors.length) { console.error("console errors:\n" + errors.join("\n")); process.exitCode = 1; } else console.log("ok  smoke");
 } finally {
   await browser.close();
