@@ -1,0 +1,478 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Goa regression scenario: compound 1`] = `
+{
+  "impact": {
+    "buildingsWet": 1496,
+    "damageInr": [
+      14555373.397629,
+      3546746786.879244,
+      24989273333.60872,
+    ],
+    "peopleAffected": [
+      8.159738,
+      4868.653914,
+      27179.298015,
+    ],
+  },
+  "rain": null,
+  "risk": {
+    "eadInr": [
+      811860.199085,
+      1288342475.559393,
+      7969230934.587576,
+    ],
+    "peoplePerYear": [
+      3.118165,
+      1827.360784,
+      9677.996782,
+    ],
+  },
+  "segments": [
+    {
+      "bundedKm2": 0.00593,
+      "flags": [
+        "scour",
+      ],
+      "floodedKm2": [
+        0.00593,
+        0.02372,
+        2.84047,
+      ],
+      "id": "miramar_caranzalem",
+      "wlM": [
+        1.381589,
+        2.030654,
+        4.217643,
+      ],
+    },
+    {
+      "bundedKm2": 1.12077,
+      "flags": [],
+      "floodedKm2": [
+        0.074125,
+        0.987345,
+        1.55959,
+      ],
+      "id": "panjim_riverfront",
+      "wlM": [
+        1.437372,
+        2.180401,
+        4.219363,
+      ],
+    },
+    {
+      "bundedKm2": 1.758245,
+      "flags": [
+        "breached",
+      ],
+      "floodedKm2": [
+        0.03558,
+        2.16445,
+        2.624025,
+      ],
+      "id": "st_inez_ribandar",
+      "wlM": [
+        1.639235,
+        2.398113,
+        4.250819,
+      ],
+    },
+    {
+      "bundedKm2": 0,
+      "flags": [],
+      "floodedKm2": [
+        0.026685,
+        0.04744,
+        0.26685,
+      ],
+      "id": "dona_paula",
+      "wlM": [
+        1.297,
+        1.792692,
+        4.191604,
+      ],
+    },
+  ],
+  "totals": {
+    "buildings": {
+      "central": 855,
+      "high": 20,
+      "low": 2889,
+    },
+    "population": null,
+    "ruralCrzKm2": {
+      "central": 0.02965,
+      "high": 0,
+      "low": 0.02965,
+    },
+    "urbanKm2": {
+      "central": 0.109705,
+      "high": 0.020755,
+      "low": 0.661195,
+    },
+  },
+}
+`;
+
+exports[`Goa regression scenario: flood 1`] = `
+{
+  "impact": {
+    "buildingsWet": 845,
+    "damageInr": [
+      0,
+      1466134812.376863,
+      21228362251.16463,
+    ],
+    "peopleAffected": [
+      0,
+      2331.754932,
+      24537.567808,
+    ],
+  },
+  "rain": null,
+  "risk": {
+    "eadInr": [
+      0,
+      63746271.514251,
+      6461228596.915052,
+    ],
+    "peoplePerYear": [
+      0,
+      117.442247,
+      7375.958539,
+    ],
+  },
+  "segments": [
+    {
+      "bundedKm2": 0,
+      "flags": [
+        "scour",
+      ],
+      "floodedKm2": [
+        0,
+        0.002965,
+        2.707045,
+      ],
+      "id": "miramar_caranzalem",
+      "wlM": [
+        0.684589,
+        1.333654,
+        3.920643,
+      ],
+    },
+    {
+      "bundedKm2": 1.111875,
+      "flags": [],
+      "floodedKm2": [
+        0,
+        0.82427,
+        1.479535,
+      ],
+      "id": "panjim_riverfront",
+      "wlM": [
+        0.809492,
+        1.520841,
+        3.928123,
+      ],
+    },
+    {
+      "bundedKm2": 1.67226,
+      "flags": [
+        "breached",
+      ],
+      "floodedKm2": [
+        0,
+        1.67819,
+        2.594375,
+      ],
+      "id": "st_inez_ribandar",
+      "wlM": [
+        0.989275,
+        1.726593,
+        3.957739,
+      ],
+    },
+    {
+      "bundedKm2": 0,
+      "flags": [],
+      "floodedKm2": [
+        0,
+        0,
+        0.234235,
+      ],
+      "id": "dona_paula",
+      "wlM": [
+        0.6,
+        1.095692,
+        3.894604,
+      ],
+    },
+  ],
+  "totals": {
+    "buildings": {
+      "central": 532,
+      "high": 0,
+      "low": 2747,
+    },
+    "population": null,
+    "ruralCrzKm2": {
+      "central": 0.026685,
+      "high": 0,
+      "low": 0.02965,
+    },
+    "urbanKm2": {
+      "central": 0.068195,
+      "high": 0,
+      "low": 0.631545,
+    },
+  },
+}
+`;
+
+exports[`Goa regression scenario: rain 1`] = `
+{
+  "impact": {
+    "buildingsWet": 535,
+    "damageInr": [
+      0,
+      823548391.268075,
+      2802954869.324908,
+    ],
+    "peopleAffected": [
+      0,
+      3234.68399,
+      5983.018118,
+    ],
+  },
+  "rain": [
+    {
+      "id": "central",
+      "levelM": 2.896012,
+      "storedM3": 88321.79078,
+    },
+    {
+      "id": "ourem",
+      "levelM": 3.365809,
+      "storedM3": 1303096.163302,
+    },
+    {
+      "id": "mala",
+      "levelM": null,
+      "storedM3": 0,
+    },
+    {
+      "id": "st_inez",
+      "levelM": 3.866366,
+      "storedM3": 250316.19568,
+    },
+  ],
+  "risk": {
+    "eadInr": [
+      0,
+      490985947.919019,
+      1521554352.719265,
+    ],
+    "peoplePerYear": [
+      0,
+      2068.118448,
+      4123.086377,
+    ],
+  },
+  "segments": [
+    {
+      "bundedKm2": 0,
+      "flags": [
+        "scour",
+      ],
+      "floodedKm2": [
+        0,
+        0.42103,
+        0.667125,
+      ],
+      "id": "miramar_caranzalem",
+      "wlM": [
+        0.6,
+        0.6,
+        1,
+      ],
+    },
+    {
+      "bundedKm2": 0.732355,
+      "flags": [],
+      "floodedKm2": [
+        0,
+        0.418065,
+        0.667125,
+      ],
+      "id": "panjim_riverfront",
+      "wlM": [
+        0.6,
+        0.6,
+        1,
+      ],
+    },
+    {
+      "bundedKm2": 0.263885,
+      "flags": [],
+      "floodedKm2": [
+        0,
+        0.257955,
+        0.595965,
+      ],
+      "id": "st_inez_ribandar",
+      "wlM": [
+        0.6,
+        0.6,
+        1,
+      ],
+    },
+    {
+      "bundedKm2": 0,
+      "flags": [],
+      "floodedKm2": [
+        0,
+        0.00593,
+        0.00593,
+      ],
+      "id": "dona_paula",
+      "wlM": [
+        0.6,
+        0.6,
+        1,
+      ],
+    },
+  ],
+  "totals": {
+    "buildings": {
+      "central": 396,
+      "high": 0,
+      "low": 705,
+    },
+    "population": null,
+    "ruralCrzKm2": {
+      "central": 0.01186,
+      "high": 0,
+      "low": 0.014825,
+    },
+    "urbanKm2": {
+      "central": 0.068195,
+      "high": 0,
+      "low": 0.133425,
+    },
+  },
+}
+`;
+
+exports[`Goa regression scenario: surge 1`] = `
+{
+  "impact": {
+    "buildingsWet": 60,
+    "damageInr": [
+      702963.169698,
+      26437076.372445,
+      427601124.856537,
+    ],
+    "peopleAffected": [
+      4.188787,
+      89.271632,
+      445.049178,
+    ],
+  },
+  "rain": null,
+  "risk": {
+    "eadInr": [
+      35714.442177,
+      9320246.242356,
+      317564446.944313,
+    ],
+    "peoplePerYear": [
+      2.056739,
+      42.152602,
+      298.514566,
+    ],
+  },
+  "segments": [
+    {
+      "bundedKm2": 0,
+      "flags": [
+        "scour",
+      ],
+      "floodedKm2": [
+        0.002965,
+        0.002965,
+        0.002965,
+      ],
+      "id": "miramar_caranzalem",
+      "wlM": [
+        1.297,
+        1.297,
+        1.297,
+      ],
+    },
+    {
+      "bundedKm2": 0,
+      "flags": [],
+      "floodedKm2": [
+        0.02965,
+        0.15418,
+        0.52184,
+      ],
+      "id": "panjim_riverfront",
+      "wlM": [
+        1.22788,
+        1.25956,
+        1.29124,
+      ],
+    },
+    {
+      "bundedKm2": 0,
+      "flags": [],
+      "floodedKm2": [
+        0.032615,
+        0.43882,
+        1.052575,
+      ],
+      "id": "st_inez_ribandar",
+      "wlM": [
+        1.24996,
+        1.27152,
+        1.29308,
+      ],
+    },
+    {
+      "bundedKm2": 0,
+      "flags": [],
+      "floodedKm2": [
+        0.026685,
+        0.026685,
+        0.026685,
+      ],
+      "id": "dona_paula",
+      "wlM": [
+        1.297,
+        1.297,
+        1.297,
+      ],
+    },
+  ],
+  "totals": {
+    "buildings": {
+      "central": 60,
+      "high": 2,
+      "low": 158,
+    },
+    "population": null,
+    "ruralCrzKm2": {
+      "central": 0,
+      "high": 0,
+      "low": 0.02372,
+    },
+    "urbanKm2": {
+      "central": 0.01779,
+      "high": 0.002965,
+      "low": 0.050405,
+    },
+  },
+}
+`;

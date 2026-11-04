@@ -1,0 +1,438 @@
+{
+  "_readme": "Hazard scenarios and the water-level model's parameters (model audit Phases 1-2, M11/M15/M16). Every hazard is one water level in metres above mean sea level (EGM2008), built at each water cell from the storm tide and river stage at the chosen return period plus sea-level rise, then spread over connected land (depth = water level - ground). Every number carries a grounding tag; placeholders are editable in Model assumptions. Phase 2 adds 'Heavy rain at high tide' (rain ponding in creek catchments while the outfalls are tide-locked) and removes the compound cap (M16).",
+  "components": {
+    "storm": {
+      "label": "Storm tide",
+      "description": "Tide plus storm surge at the Mandovi mouth (CoDEC), carried flat through the bay and estuary."
+    },
+    "river": {
+      "label": "River stage",
+      "description": "Monsoon river rise above the tide, entering at the upstream (east) edge and decaying towards the sea."
+    },
+    "wave": {
+      "label": "Open-coast wave indicator",
+      "description": "Share of open-sea wave energy reaching an open-coast frontage (Miramar, Dona Paula). Reported on its own, not added to the water level."
+    }
+  },
+  "scenarios": [
+    {
+      "id": "surge",
+      "name": "Storm tide (cyclonic)",
+      "description": "Tide plus storm surge at the chosen return period (CoDEC, Mandovi mouth), raised by sea-level rise, over all water connected to the sea.",
+      "formula": "WL = storm tide(RP) + SLR − mangrove (cm/km × width)"
+    },
+    {
+      "id": "flood",
+      "name": "Monsoon river flood",
+      "description": "River stage at the chosen return period entering at the upstream (east) edge on top of the normal high tide, raised by sea-level rise.",
+      "formula": "WL = MHHW + SLR + river(x, RP) − storage"
+    },
+    {
+      "id": "compound",
+      "name": "Compound storm tide + river flood (stress test)",
+      "description": "Both at once, each at the chosen return period. A stress test, not a likely event: in IBTrACS (1987-2021) only 1 of 9 cyclonic storms within 300 km of the Mandovi mouth came in June-September (Nisarga, 2 June 2020), none in July-August when the river peaks (audit M16, docs/model-audit/LOG.md Phase 2). Panjim's recurring flood is heavy rain at high tide.",
+      "formula": "WL = storm tide(RP) + SLR + river(x, RP) − mangrove − storage (no cap: the parts add in metres)"
+    },
+    {
+      "id": "rain",
+      "name": "Heavy rain at high tide",
+      "description": "A day's heavy rain (IMD gridded rainfall, chosen return period) falls in a burst around high tide. While the tide is above the outfalls they are closed: the runoff from each creek catchment (Ourem, Mala, St Inez, central Panjim) that the outfall, pumps and storage cannot take ponds in the catchment's lowest connected land. Without a flap gate, tide water also backs up the drains to the high-tide level. Sea-level rise raises the tide, so the outfalls stay closed longer.",
+      "formula": "stored = rain × runoff coefficient × catchment area − drained while open − pumped − retained; ponding level h: Σ (h − ground) × area = stored"
+    },
+    {
+      "id": "slr",
+      "name": "High tide + sea-level rise",
+      "description": "The normal high tide (MHHW) raised by sea-level rise: land that would be wet at every high tide. No storm, no river flood.",
+      "formula": "WL = MHHW + SLR"
+    }
+  ],
+  "returnPeriods": {
+    "values": [
+      1,
+      10,
+      50,
+      100
+    ],
+    "note": "Return period in years of the storm tide and river stage. 'RP 1' is the most likely annual maximum (the Gumbel mode, about a 1.6-year return period). The compound layer assumes both reach the same return period together."
+  },
+  "params": {
+    "lambdaWavePerKm": {
+      "label": "Wave decay rate in sheltered water (λ_W), for the open-coast wave indicator",
+      "value": 0.35,
+      "unit": "per km",
+      "grounding": "placeholder_needs_calibration",
+      "note": "Exponential decay per km of travel through bay/channel water, used only for the open-coast wave indicator (waves are not added to the water level, audit M11). 0.35/km halves wave intensity in about 2 km. Resolve with a nearshore wave model (e.g. SWAN) for the Mandovi mouth and Aguada Bay."
+    },
+    "lambdaFluvialPerKm": {
+      "label": "River-stage decay rate along the channel (λ_F)",
+      "value": 0.05,
+      "unit": "per km",
+      "grounding": "placeholder_needs_calibration",
+      "note": "River stage at a water cell = stage(RP) × exp(−λ_F × distance from the upstream edge), for the attenuation of the flood wave as the estuary widens towards the sea. Resolve with gauge records or a 1D/2D hydraulic model of the lower Mandovi. Range 0 to 2 x central (0-0.10 per km, placeholder, M4). Lower decay = more river water reaches the city = more hazardous.",
+      "low": 0.0,
+      "high": 0.1,
+      "moreHazardous": "lower"
+    },
+    "highTideReferenceM": {
+      "label": "Normal high tide (MHHW) above mean sea level",
+      "value": 0.6,
+      "unit": "m above EGM2008",
+      "grounding": "reasoned_extrapolation",
+      "note": "Mean higher high water (MHHW) above mean sea level, range up to spring higher high water. Indian Naval Hydrographic Chart No. 2020, as quoted in Mormugao Port Trust's 2016 capital-dredging ToR (p. 6): MSL +1.3 m CD, MHHW +1.9 m CD, spring higher high water +2.3 m CD, so MHHW = +0.6 m and spring HHW = +1.0 m above MSL. Reasoned, not solid: (1) the values are for Mormugao harbour, about 10 km south of the Mandovi mouth, and are applied to Panjim unchanged; (2) the tool's elevations are relative to the EGM2008 geoid, and MSL at Mormugao is ASSUMED equal to EGM2008 there - that tie is unchecked (the PSMSL 1249 gauge record could test it). Sets the normal high tide that the river flood rides on, and the 'wet at every high tide' class (computed at the central value). The storm-tide levels already include the tide, so MHHW is NOT added to them; for storms it only caps what mangroves can remove (they act on the surge above MHHW).",
+      "low": 0.6,
+      "high": 1.0,
+      "moreHazardous": "higher",
+      "citations": [
+        "mpt_tor_2016_tides"
+      ]
+    },
+    "springHighWaterM": {
+      "label": "Spring high water (spring higher high water) above mean sea level",
+      "value": 1.0,
+      "unit": "m above EGM2008",
+      "grounding": "reasoned_extrapolation",
+      "citations": [
+        "mpt_tor_2016_tides"
+      ],
+      "note": "Mormugao spring higher high water +2.3 m CD, MSL +1.3 m CD (Indian Naval Hydrographic Chart No. 2020, quoted in Mormugao Port Trust's 2016 capital-dredging ToR, p. 6; the same source as MHHW), so +1.0 m above MSL. Reasoned, not solid, for the same two reasons as MHHW: Mormugao harbour applied to Panjim unchanged, and MSL assumed equal to the EGM2008 geoid. Used (audit A1, Phase 3) to sort land that would flood at every spring tide if nothing protected it: mangrove and ponds there are tidal habitat; other land there must be kept dry by defences the data does not have (field bunds, sluices, walls)."
+    },
+    "overlandAttenuationMPerKm": {
+      "label": "Overland water-level attenuation (storm water only)",
+      "value": 0.0,
+      "unit": "m per km",
+      "grounding": "reasoned_extrapolation",
+      "citations": [
+        "vafeidis2019"
+      ],
+      "note": "How fast the storm-driven part of the water level drops as it spreads over land. Vafeidis et al. (2019) test 0 to 1.0 m/km in global assessments (wetland studies report up to 0.7 m/km; 1.0 m/km is their expert upper limit). Default 0 (plain bathtub). Applies only to the storm part: the tide, sea-level rise and river stage are not attenuated. Reasoned: a global sensitivity range, not a Panjim measurement. More attenuation = less flooding.",
+      "low": 0.0,
+      "high": 1.0,
+      "moreHazardous": "lower"
+    },
+    "bundCrestM": {
+      "label": "Khazan bund crest level",
+      "value": 1.5,
+      "unit": "m above MSL (EGM2008)",
+      "grounding": "placeholder_needs_calibration",
+      "citations": [
+        "lwm_khazan"
+      ],
+      "note": "Crest of the bunds (embankments) around khazan land. No bund line or crest survey is in the tool: the bund line is taken as the edge of the CZMP khazan mask, in every segment. 1.5 m is a placeholder set above spring high water (+1.0 m) because the bunds are known to keep out normal tides; it is not a measured height. Range 1.0-2.0 m (placeholder). Water crossing into khazan land from outside is held while its level is at or below the crest. Resolve with a bund survey (WRD / khazan tenant associations).",
+      "low": 1.0,
+      "high": 2.0,
+      "moreHazardous": "lower"
+    },
+    "rainBurstHours": {
+      "label": "Duration of the rain burst",
+      "value": 6,
+      "low": 3,
+      "high": 12,
+      "unit": "hours",
+      "moreHazardous": "lower",
+      "grounding": "placeholder_needs_calibration",
+      "note": "The day's design rainfall (1-day depth at the return period) is taken to fall in one burst of this length, centred on high tide. Shorter = more intense = more of it falls while the outfalls are closed. Placeholder: no hourly rainfall record for Panjim was reachable; the city's engineers describe floods after about an hour of heavy rain at high tide (Gomantak Times, 22 Jun 2023). Resolve with IMD hourly (self-recording gauge) data for Panaji."
+    },
+    "outfallInvertM": {
+      "label": "Storm-drain outfall level",
+      "value": 0.3,
+      "low": 0.0,
+      "high": 0.6,
+      "unit": "m above MSL (EGM2008)",
+      "moreHazardous": "lower",
+      "grounding": "placeholder_needs_calibration",
+      "note": "Level of the drain outfalls into the creeks and the Mandovi. While the tide is above it the outfall cannot discharge. City engineers report outfalls 'getting submerged during some high tide scenarios' (Gomantak Times, 22 Jun 2023), so it is set below normal high tide (MHHW +0.6 m). The time the outfall is closed comes from a semi-diurnal tide (period 12.42 h, the M2 constituent) with amplitude = MHHW above MSL, raised by sea-level rise. Placeholder: no outfall survey. Resolve with the CCP / Imagine Panaji storm-drain survey. A lower outfall is submerged for longer each tide, so it is the more hazardous end of the range."
+    },
+    "runoffCoefImpervious": {
+      "label": "Runoff coefficient, roofs and roads",
+      "value": 0.8,
+      "low": 0.7,
+      "high": 0.87,
+      "unit": "share of rain",
+      "moreHazardous": "higher",
+      "grounding": "reasoned_extrapolation",
+      "citations": [
+        "mccuen2017"
+      ],
+      "note": "Share of rain on roofs and roads that runs off. McCuen (2017) rational-method table: streets 0.70-0.78, parking 0.85-0.87 (as tabulated by the Minnesota Pollution Control Agency). A US table for events under 25 years, applied to Panjim. Each cell's coefficient = this x its built share (building footprints + road surface) + the pervious coefficient x the rest."
+    },
+    "runoffCoefPervious": {
+      "label": "Runoff coefficient, unbuilt ground",
+      "value": 0.25,
+      "low": 0.1,
+      "high": 0.4,
+      "unit": "share of rain",
+      "moreHazardous": "higher",
+      "grounding": "reasoned_extrapolation",
+      "citations": [
+        "mccuen2017"
+      ],
+      "note": "Share of rain on unbuilt ground that runs off. McCuen (2017): open space 0.05-0.28, pasture up to 0.50, rising with slope and clay soils. Set towards the top because monsoon soils are saturated and Altinho is steep laterite. Reasoned, not measured."
+    },
+    "drainCapacityMmPerH": {
+      "label": "Storm-drain capacity while the outfall is open",
+      "value": 25,
+      "low": 15,
+      "high": 50,
+      "unit": "mm of runoff per hour over the catchment",
+      "moreHazardous": "lower",
+      "grounding": "placeholder_needs_calibration",
+      "note": "How much runoff the drains and outfalls of a catchment can pass to the creek or river while the tide is below the outfall, as a depth per hour over the catchment's area. The same value for every catchment, because no drain survey is in the tool. Runoff above it, and all runoff while the outfall is closed, is stored. Creek desilting/widening and mangrove-lined creeks add to it. Resolve with the CCP / Imagine Panaji drain inventory (sizes and gradients) or a SWMM model."
+    }
+  },
+  "stormTideByRp": {
+    "_readme": "Storm-tide return levels (tide + surge, m above MSL) at the Mandovi mouth. Written by tools/build_storm_tide.py.",
+    "source": {
+      "dataset": "CoDEC ERA5 1979-2017, annual maxima, Gumbel fit (CODEC_amax_ERA5_1979_2017_coor_mask_GUM_RPS.nc)",
+      "doi": "10.5281/zenodo.3660927",
+      "pointId": "id_coast_glob_12128",
+      "lon": 73.7549,
+      "lat": 15.5127,
+      "distanceFromMouthKm": 4.9,
+      "gumbelLocationM": 1.1191,
+      "gumbelScaleM": 0.0388,
+      "accessed": "2026-10-22"
+    },
+    "1": {
+      "label": "Storm tide, about 1-year (Gumbel mode)",
+      "value": 1.119,
+      "unit": "m above MSL (EGM2008)",
+      "grounding": "reasoned_extrapolation",
+      "citations": [
+        "muis2020_codec",
+        "sundar2005"
+      ],
+      "note": "CoDEC has no 1-year level (a Gumbel return period must exceed 1 year): this is the Gumbel location, the mode of the annual maxima (return period about 1.58 years). Total water level (astronomical tide + storm surge) above mean sea level, from the Global Tide and Surge Model forced by ERA5 (CoDEC, Muis et al. 2020): Gumbel fit to the 1979-2017 annual maxima at GTSM output point id_coast_glob_12128 (73.7549 E, 15.5127 N), 4.9 km from the Mandovi mouth. The tide is INCLUDED, so the model does not add MHHW on top. Reasoned, not solid: (1) ERA5 at ~31 km under-represents tropical cyclones, so cyclone storm tides are likely UNDER-stated (COAST-RP, which adds synthetic cyclones, was unreachable); (2) no wave setup; (3) GTSM mean sea level is assumed equal to the DEM's EGM2008 zero, as for the tide. Applied uniformly over the estuary (no decay up the channel; Sundar & Shetye 2005 find the tide amplifies up the Mandovi)."
+    },
+    "10": {
+      "label": "Storm tide, 10-year return period",
+      "value": 1.206,
+      "unit": "m above MSL (EGM2008)",
+      "grounding": "reasoned_extrapolation",
+      "citations": [
+        "muis2020_codec",
+        "sundar2005"
+      ],
+      "note": "RP 10 years. Total water level (astronomical tide + storm surge) above mean sea level, from the Global Tide and Surge Model forced by ERA5 (CoDEC, Muis et al. 2020): Gumbel fit to the 1979-2017 annual maxima at GTSM output point id_coast_glob_12128 (73.7549 E, 15.5127 N), 4.9 km from the Mandovi mouth. The tide is INCLUDED, so the model does not add MHHW on top. Reasoned, not solid: (1) ERA5 at ~31 km under-represents tropical cyclones, so cyclone storm tides are likely UNDER-stated (COAST-RP, which adds synthetic cyclones, was unreachable); (2) no wave setup; (3) GTSM mean sea level is assumed equal to the DEM's EGM2008 zero, as for the tide. Applied uniformly over the estuary (no decay up the channel; Sundar & Shetye 2005 find the tide amplifies up the Mandovi)."
+    },
+    "50": {
+      "label": "Storm tide, 50-year return period",
+      "value": 1.27,
+      "unit": "m above MSL (EGM2008)",
+      "grounding": "reasoned_extrapolation",
+      "citations": [
+        "muis2020_codec",
+        "sundar2005"
+      ],
+      "note": "RP 50 years. Total water level (astronomical tide + storm surge) above mean sea level, from the Global Tide and Surge Model forced by ERA5 (CoDEC, Muis et al. 2020): Gumbel fit to the 1979-2017 annual maxima at GTSM output point id_coast_glob_12128 (73.7549 E, 15.5127 N), 4.9 km from the Mandovi mouth. The tide is INCLUDED, so the model does not add MHHW on top. Reasoned, not solid: (1) ERA5 at ~31 km under-represents tropical cyclones, so cyclone storm tides are likely UNDER-stated (COAST-RP, which adds synthetic cyclones, was unreachable); (2) no wave setup; (3) GTSM mean sea level is assumed equal to the DEM's EGM2008 zero, as for the tide. Applied uniformly over the estuary (no decay up the channel; Sundar & Shetye 2005 find the tide amplifies up the Mandovi)."
+    },
+    "100": {
+      "label": "Storm tide, 100-year return period",
+      "value": 1.297,
+      "unit": "m above MSL (EGM2008)",
+      "grounding": "reasoned_extrapolation",
+      "citations": [
+        "muis2020_codec",
+        "sundar2005"
+      ],
+      "note": "RP 100 years. Total water level (astronomical tide + storm surge) above mean sea level, from the Global Tide and Surge Model forced by ERA5 (CoDEC, Muis et al. 2020): Gumbel fit to the 1979-2017 annual maxima at GTSM output point id_coast_glob_12128 (73.7549 E, 15.5127 N), 4.9 km from the Mandovi mouth. The tide is INCLUDED, so the model does not add MHHW on top. Reasoned, not solid: (1) ERA5 at ~31 km under-represents tropical cyclones, so cyclone storm tides are likely UNDER-stated (COAST-RP, which adds synthetic cyclones, was unreachable); (2) no wave setup; (3) GTSM mean sea level is assumed equal to the DEM's EGM2008 zero, as for the tide. Applied uniformly over the estuary (no decay up the channel; Sundar & Shetye 2005 find the tide amplifies up the Mandovi)."
+    }
+  },
+  "riverStageByRp": {
+    "_readme": "River stage (m above the tide) at the upstream edge, by return period. All placeholders.",
+    "1": {
+      "label": "River stage, about 1-year",
+      "value": 0.5,
+      "unit": "m above the tide",
+      "grounding": "placeholder_needs_calibration",
+      "note": "Monsoon river rise above the tide at the upstream (east) edge of the window. Placeholder: CWC Goa stage records are not published online in a usable form, and GloFAS reanalysis needs a Copernicus EWDS account, so neither could be fetched (22 Oct 2026). The 10-year value keeps the earlier reference stage (1.0 m, range 0.5-2.0 m, audit M4); the other return periods scale it by a judgement, not by data. Resolve with a CWC gauge series or GloFAS discharge at the Mandovi plus a rating curve.",
+      "low": 0.25,
+      "high": 1.0,
+      "moreHazardous": "higher"
+    },
+    "10": {
+      "label": "River stage, 10-year return period",
+      "value": 1.0,
+      "unit": "m above the tide",
+      "grounding": "placeholder_needs_calibration",
+      "note": "Monsoon river rise above the tide at the upstream (east) edge of the window. Placeholder: CWC Goa stage records are not published online in a usable form, and GloFAS reanalysis needs a Copernicus EWDS account, so neither could be fetched (22 Oct 2026). The 10-year value keeps the earlier reference stage (1.0 m, range 0.5-2.0 m, audit M4); the other return periods scale it by a judgement, not by data. Resolve with a CWC gauge series or GloFAS discharge at the Mandovi plus a rating curve.",
+      "low": 0.5,
+      "high": 2.0,
+      "moreHazardous": "higher"
+    },
+    "50": {
+      "label": "River stage, 50-year return period",
+      "value": 1.3,
+      "unit": "m above the tide",
+      "grounding": "placeholder_needs_calibration",
+      "note": "Monsoon river rise above the tide at the upstream (east) edge of the window. Placeholder: CWC Goa stage records are not published online in a usable form, and GloFAS reanalysis needs a Copernicus EWDS account, so neither could be fetched (22 Oct 2026). The 10-year value keeps the earlier reference stage (1.0 m, range 0.5-2.0 m, audit M4); the other return periods scale it by a judgement, not by data. Resolve with a CWC gauge series or GloFAS discharge at the Mandovi plus a rating curve.",
+      "low": 0.65,
+      "high": 2.6,
+      "moreHazardous": "higher"
+    },
+    "100": {
+      "label": "River stage, 100-year return period",
+      "value": 1.5,
+      "unit": "m above the tide",
+      "grounding": "placeholder_needs_calibration",
+      "note": "Monsoon river rise above the tide at the upstream (east) edge of the window. Placeholder: CWC Goa stage records are not published online in a usable form, and GloFAS reanalysis needs a Copernicus EWDS account, so neither could be fetched (22 Oct 2026). The 10-year value keeps the earlier reference stage (1.0 m, range 0.5-2.0 m, audit M4); the other return periods scale it by a judgement, not by data. Resolve with a CWC gauge series or GloFAS discharge at the Mandovi plus a rating curve.",
+      "low": 0.75,
+      "high": 3.0,
+      "moreHazardous": "higher"
+    }
+  },
+  "seaLevelRise": {
+    "label": "Relative sea-level rise at Mormugao (PSMSL 1249), IPCC AR6, relative to 1995-2014",
+    "grounding": "reasoned_extrapolation",
+    "citations": [
+      "ar6_slr_tool",
+      "ipcc_ar6_wg1_slr"
+    ],
+    "note": "IPCC AR6 projections downscaled to the Mormugao tide gauge (PSMSL 1249) by the NASA/IPCC AR6 Sea Level Projection Tool: process 'total' (ocean dynamics, ice sheets, glaciers, land-water storage and vertical land motion; the gauge's VLM median is -0.031 m by 2100), medium confidence. Central = median, range = likely range (17th-83rd percentile). Reasoned, not solid: the gauge is about 10 km south of the Mandovi mouth, and its vertical land motion is assumed to hold at Panjim. Applied as a modifier on every hazard: it raises the normal high tide and every storm and river level by the same amount (audit M6/M7).",
+    "station": {
+      "psmslId": 1249,
+      "name": "Mormugao",
+      "url": "https://sealevel.nasa.gov/ipcc-ar6-sea-level-projection-tool?psmsl_id=1249",
+      "accessed": "2026-10-22"
+    },
+    "horizons": {
+      "2050": {
+        "ssp126": [
+          0.168,
+          0.105,
+          0.248
+        ],
+        "ssp245": [
+          0.188,
+          0.126,
+          0.268
+        ],
+        "ssp585": [
+          0.218,
+          0.154,
+          0.301
+        ]
+      },
+      "2100": {
+        "ssp126": [
+          0.384,
+          0.221,
+          0.597
+        ],
+        "ssp245": [
+          0.508,
+          0.339,
+          0.748
+        ],
+        "ssp585": [
+          0.75,
+          0.544,
+          1.05
+        ]
+      }
+    },
+    "sspLabels": {
+      "ssp126": "SSP1-2.6 (low)",
+      "ssp245": "SSP2-4.5 (mid)",
+      "ssp585": "SSP5-8.5 (high)"
+    },
+    "global": {
+      "label": "Global mean sea-level rise (GMSL), IPCC AR6, relative to 1995–2014",
+      "grounding": "solid_direct",
+      "citations": [
+        "ipcc_ar6_wg1_slr"
+      ],
+      "note": "Global mean figures, NOT regionally downscaled for Goa or the Arabian Sea. Regional sea-level change (ocean dynamics, vertical land motion) can differ from the global mean. Downscaling is a real calibration step still to do (e.g. with the NASA/IPCC AR6 sea-level projection tool for the nearest tide gauge). Central = median, range = AR6 likely range. Values as supplied in the step prompt; see the README flag about two lower bounds.",
+      "horizons": {
+        "2050": {
+          "ssp126": [
+            0.19,
+            0.16,
+            0.25
+          ],
+          "ssp245": [
+            0.2,
+            0.17,
+            0.26
+          ],
+          "ssp585": [
+            0.23,
+            0.2,
+            0.29
+          ]
+        },
+        "2100": {
+          "ssp126": [
+            0.44,
+            0.32,
+            0.61
+          ],
+          "ssp245": [
+            0.56,
+            0.43,
+            0.76
+          ],
+          "ssp585": [
+            0.77,
+            0.63,
+            1.01
+          ]
+        }
+      }
+    }
+  },
+  "rainDepthByRp": {
+    "_note": "1-day rainfall at Panjim by return period (audit M15): Gumbel (L-moments) fit to the annual maximum 1-day rainfall 1975-2024 (50 years) at the IMD 0.25 deg grid cell centred 15.50 N 73.75 E, which holds Panjim. Built by tools/build_rain_rp.py; do not edit by hand.",
+    "1": {
+      "label": "1-day rainfall, about 1-year return period",
+      "value": 160,
+      "low": 151,
+      "high": 171,
+      "unit": "mm in a day",
+      "moreHazardous": "higher",
+      "grounding": "reasoned_extrapolation",
+      "citations": [
+        "imd_gridded_rain"
+      ],
+      "note": "Gumbel fit (L-moments) to 50 annual maxima of 1-day rainfall, 1975-2024, IMD 0.25 deg gridded data (Pai et al. 2014), cell 15.50 N 73.75 E (mean annual maximum 187 mm, largest 377 mm). 'RP 1' is the Gumbel mode (most likely annual maximum, about a 1.6-year return period), as for the storm tide. Range: 90% bootstrap interval of the fit. Reasoned, not solid: a grid cell averages rain over about 27 x 27 km, so it under-states the peak at a point such as the Panaji station; IMD station return periods would replace it."
+    },
+    "10": {
+      "label": "1-day rainfall, 10-year return period",
+      "value": 266,
+      "low": 237,
+      "high": 293,
+      "unit": "mm in a day",
+      "moreHazardous": "higher",
+      "grounding": "reasoned_extrapolation",
+      "citations": [
+        "imd_gridded_rain"
+      ],
+      "note": "Gumbel fit (L-moments) to 50 annual maxima of 1-day rainfall, 1975-2024, IMD 0.25 deg gridded data (Pai et al. 2014), cell 15.50 N 73.75 E (mean annual maximum 187 mm, largest 377 mm). Range: 90% bootstrap interval of the fit. Reasoned, not solid: a grid cell averages rain over about 27 x 27 km, so it under-states the peak at a point such as the Panaji station; IMD station return periods would replace it."
+    },
+    "50": {
+      "label": "1-day rainfall, 50-year return period",
+      "value": 343,
+      "low": 297,
+      "high": 386,
+      "unit": "mm in a day",
+      "moreHazardous": "higher",
+      "grounding": "reasoned_extrapolation",
+      "citations": [
+        "imd_gridded_rain"
+      ],
+      "note": "Gumbel fit (L-moments) to 50 annual maxima of 1-day rainfall, 1975-2024, IMD 0.25 deg gridded data (Pai et al. 2014), cell 15.50 N 73.75 E (mean annual maximum 187 mm, largest 377 mm). Range: 90% bootstrap interval of the fit. Reasoned, not solid: a grid cell averages rain over about 27 x 27 km, so it under-states the peak at a point such as the Panaji station; IMD station return periods would replace it."
+    },
+    "100": {
+      "label": "1-day rainfall, 100-year return period",
+      "value": 376,
+      "low": 322,
+      "high": 425,
+      "unit": "mm in a day",
+      "moreHazardous": "higher",
+      "grounding": "reasoned_extrapolation",
+      "citations": [
+        "imd_gridded_rain"
+      ],
+      "note": "Gumbel fit (L-moments) to 50 annual maxima of 1-day rainfall, 1975-2024, IMD 0.25 deg gridded data (Pai et al. 2014), cell 15.50 N 73.75 E (mean annual maximum 187 mm, largest 377 mm). Range: 90% bootstrap interval of the fit. Reasoned, not solid: a grid cell averages rain over about 27 x 27 km, so it under-states the peak at a point such as the Panaji station; IMD station return periods would replace it."
+    }
+  }
+}

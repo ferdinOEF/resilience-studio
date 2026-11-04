@@ -1,0 +1,113 @@
+{
+  "_readme": "Feasibility rubric for local ratings. STRUCTURE (six dimensions; High / Medium / Low; plus a limited-evidence / no-evidence state, LE/NE) follows IPCC AR6 WGII Cross-Chapter Box FEASIB (Ch. 18, Fig. FEASIB.2), checked against the figure caption 2026-09-26. The one-line LEVEL DESCRIPTIONS are adapted from the per-option justifications in IPCC AR6 WGII Ch. 3 Table SM3.3 (rows named in `fromRows`); neither source gives formal level definitions, so the wording is reasoned_extrapolation, not verbatim IPCC text. The six dimensions follow Singh et al. (2020); Ch. 3 pairs them as given in `ar6Pair`.",
+  "scale": [
+    "High",
+    "Medium",
+    "Low"
+  ],
+  "grounding": "reasoned_extrapolation",
+  "citations": [
+    "ipcc_ar6_wg2_ccb_feasib",
+    "singh2020",
+    "ipcc_ar6_wg2_ch3_smtable"
+  ],
+  "dimensions": [
+    {
+      "id": "Economic",
+      "ar6Pair": "Technical & economic",
+      "levels": {
+        "High": "Low costs or high economic returns relative to cost; no significant economic barrier.",
+        "Medium": "Economically possible but with large or high costs that need dedicated public or private investment.",
+        "Low": "High costs (e.g. relocation, new infrastructure) make it economically hard to implement."
+      },
+      "fromRows": [
+        "Early warning systems",
+        "Protection & beach and shore nourishment",
+        "Accommodation and re-location",
+        "Migration"
+      ]
+    },
+    {
+      "id": "Technological",
+      "ar6Pair": "Technical & economic",
+      "levels": {
+        "High": "Technology is mature and in widespread use.",
+        "Medium": "Technologically ready but at adaptation-planning or early-implementation stage, or needs high technical capacity.",
+        "Low": "Early planning stage with little implementation; technical readiness not demonstrated."
+      },
+      "fromRows": [
+        "Early warning systems",
+        "Seasonal and dynamic forecasts",
+        "Habitat restoration",
+        "Mobility"
+      ]
+    },
+    {
+      "id": "Institutional",
+      "ar6Pair": "Institutional & geophysical",
+      "levels": {
+        "High": "High political acceptability; supporting institutions and regulatory framework already in place.",
+        "Medium": "Mixed regulation and governance; institutions not designed for it, but no major transformation needed.",
+        "Low": "Rigid institutions or legal barriers; not implemented in existing governance; would need transformational change."
+      },
+      "fromRows": [
+        "Early warning systems",
+        "Marine protected areas (MPAs) & OECMs",
+        "Ecosystem-based management",
+        "Livelihood diversification",
+        "Participation"
+      ]
+    },
+    {
+      "id": "Socio-cultural",
+      "ar6Pair": "Socio-ecological",
+      "levels": {
+        "High": "High social acceptability; supports equity, participation and co-management; social co-benefits.",
+        "Medium": "Generally accepted, but can disbenefit some groups or cause conflict if not well designed.",
+        "Low": "Likely conflicts between communities or groups; risks loss of livelihood, identity or increased vulnerability."
+      },
+      "fromRows": [
+        "Ecosystem-based management",
+        "Protection & beach and shore nourishment",
+        "Mobility",
+        "Accommodation and re-location"
+      ]
+    },
+    {
+      "id": "Environmental / ecological",
+      "ar6Pair": "Socio-ecological",
+      "levels": {
+        "High": "Supports ecosystem services and biodiversity; provides ecological resilience; no known trade-offs.",
+        "Medium": "Transforms natural habitats while aiming to maintain ecosystem services, or has mixed effects.",
+        "Low": "Irreversible environmental change or added pressure on the environment."
+      },
+      "fromRows": [
+        "Habitat restoration",
+        "Protection & beach and shore nourishment",
+        "Accommodation and re-location",
+        "Livelihood diversification"
+      ]
+    },
+    {
+      "id": "Geophysical",
+      "ar6Pair": "Institutional & geophysical",
+      "levels": {
+        "High": "Physically feasible at the needed scale; the setting already supports it.",
+        "Medium": "Possible but scope or scalability is limited (e.g. by materials, footprint or habitat type).",
+        "Low": "Not physically feasible in many settings (e.g. constrained by urbanised coastline or physical limits)."
+      },
+      "fromRows": [
+        "Marine protected areas (MPAs) & OECMs",
+        "Protection & beach and shore nourishment",
+        "Habitat restoration",
+        "Accommodation and re-location",
+        "Migration"
+      ]
+    }
+  ],
+  "evidenceState": {
+    "id": "LE/NE",
+    "label": "Limited / no evidence (LE/NE)",
+    "description": "Someone looked, and the evidence to rate this dimension is limited or absent. Distinct from 'Not assessed' (nobody has looked yet). IPCC AR6 CCB FEASIB uses this state alongside high / medium / low."
+  }
+}

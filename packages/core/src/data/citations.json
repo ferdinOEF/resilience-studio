@@ -1,0 +1,347 @@
+{
+  "_readme": "Every reference used anywhere in the tool. `provenance` records where each citation came from: `prior_project` = researched in the Khazan project (STEP_PROMPT_hazard_science.md / elements.json) and carried over; `build_spec` = named in docs/COASTAL_DRR_TOOL_BUILD_PROMPT.md; `this_pass` = added in this build from the literature as known to the author, NOT yet checked against the source document. The UI labels this_pass citations as 'to verify'. `checked_this_pass` = read against the source document itself in this build.",
+  "citations": {
+    "mcivor2012_waves": {
+      "short": "McIvor et al. 2012a",
+      "full": "McIvor, A.L., Möller, I., Spencer, T. & Spalding, M. (2012). Reduction of wind and swell waves by mangroves. Natural Coastal Protection Series: Report 1. Cambridge Coastal Research Unit Working Paper 40. The Nature Conservancy and Wetlands International.",
+      "usedFor": "Mangrove wave-height reduction of 13–66% per 100 m of mangrove belt.",
+      "provenance": "prior_project"
+    },
+    "mazda1997": {
+      "short": "Mazda et al. 1997",
+      "full": "Mazda, Y., Magi, M., Kogo, M. & Hong, P.N. (1997). Mangroves as a coastal protection from waves in the Tong King delta, Vietnam. Mangroves and Salt Marshes 1: 127–135.",
+      "usedFor": "Field measurements underlying the McIvor et al. (2012a) wave-attenuation range.",
+      "provenance": "prior_project"
+    },
+    "mazda2006": {
+      "short": "Mazda et al. 2006",
+      "full": "Mazda, Y., Magi, M., Ikeda, Y., Kurokawa, T. & Asano, T. (2006). Wave reduction in a mangrove forest dominated by Sonneratia sp. Wetlands Ecology and Management 14: 365–378.",
+      "usedFor": "Field measurements underlying the McIvor et al. (2012a) wave-attenuation range.",
+      "provenance": "prior_project"
+    },
+    "mcivor2012_surge": {
+      "short": "McIvor et al. 2012b",
+      "full": "McIvor, A.L., Spencer, T., Möller, I. & Spalding, M. (2012). Storm surge reduction by mangroves. Natural Coastal Protection Series: Report 2. Cambridge Coastal Research Unit Working Paper 41. The Nature Conservancy and Wetlands International.",
+      "usedFor": "Mangrove reduction of peak storm-surge water level, reported as roughly 4–48 cm per km of mangrove width.",
+      "provenance": "this_pass"
+    },
+    "goda2010": {
+      "short": "Goda 2010",
+      "full": "Goda, Y. (2010). Random Seas and Design of Maritime Structures, 3rd edition. Advanced Series on Ocean Engineering, Vol. 33. World Scientific.",
+      "usedFor": "Reflection coefficient of vertical seawalls (Kr ≈ 0.7–1.0).",
+      "provenance": "prior_project"
+    },
+    "usace_cem": {
+      "short": "USACE CEM",
+      "full": "U.S. Army Corps of Engineers (2002, with later updates). Coastal Engineering Manual. Engineer Manual EM 1110-2-1100 (Part VI: Design of Coastal Project Elements). Washington, DC.",
+      "usedFor": "Seawall reflection behaviour and failure once overtopped/breached; dune design framework.",
+      "provenance": "prior_project"
+    },
+    "fema_coastal_structures_2024": {
+      "short": "FEMA 2024",
+      "full": "FEMA (2024, November). Guidance for Flood Risk Analysis and Mapping: Coastal Structures. Federal Emergency Management Agency.",
+      "usedFor": "Framework for treating dunes and coastal structures in flood-risk analysis.",
+      "provenance": "build_spec"
+    },
+    "fema_540_rule": {
+      "short": "FEMA dune-removal criterion",
+      "full": "FEMA. Guidance for Flood Risk Analysis and Mapping: Coastal Erosion — the \"540 square foot rule\": a frontal dune with less than 540 ft² (≈50.2 m²) of cross-sectional area above the 1%-annual-chance stillwater elevation is assumed to be removed during the base flood; one with at least that area is assumed to be retained (eroded by retreat). Criterion traces to FEMA's 1988 dune-erosion methodology.",
+      "usedFor": "Dune retained-vs-removed test by cross-sectional volume.",
+      "provenance": "this_pass"
+    },
+    "njseagrant_dune": {
+      "short": "NJ Sea Grant dune manual",
+      "full": "New Jersey Sea Grant Consortium. Dune engineering / management manual (as named in the build spec; edition and authors to be confirmed).",
+      "usedFor": "Dune design framework (not used for any number).",
+      "provenance": "build_spec"
+    },
+    "dangremond1996": {
+      "short": "d'Angremond et al. 1996",
+      "full": "d'Angremond, K., van der Meer, J.W. & de Jong, R.J. (1996). Wave transmission at low-crested structures. Proceedings of the 25th International Conference on Coastal Engineering (Coastal Engineering 1996), ASCE, pp. 2418–2427.",
+      "usedFor": "Wave transmission coefficient range for low-crested/detached breakwaters (Kt ≈ 0.075–0.8).",
+      "provenance": "prior_project"
+    },
+    "fema_p946": {
+      "short": "FEMA P-946",
+      "full": "FEMA (2013). Federal Guidelines for Inundation Mapping of Flood Risks Associated with Dam Incidents and Failures. FEMA P-946.",
+      "usedFor": "Framework for store-and-release and breach behaviour of small dams (not used for any number).",
+      "provenance": "prior_project"
+    },
+    "usace_em1110_2_1420": {
+      "short": "USACE EM 1110-2-1420",
+      "full": "U.S. Army Corps of Engineers (1997). Hydrologic Engineering Requirements for Reservoirs. Engineer Manual EM 1110-2-1420.",
+      "usedFor": "Framework for reservoir flood-storage accounting (not used for any number).",
+      "provenance": "prior_project"
+    },
+    "naro_paddy_dam": {
+      "short": "NARO / JSCE paddy-field-dam literature",
+      "full": "National Agriculture and Food Research Organization (NARO), Japan, and Japan Society of Civil Engineers (JSCE) literature on paddy-field-dam flood mitigation, as assembled in the prior Khazan project (STEP_PROMPT_hazard_science.md §4). A representative study: Yoshikawa, N., Nagao, N. & Misawa, S. (2010). Evaluation of the flood mitigation effect of a Paddy Field Dam project. Agricultural Water Management 97(2): 259–270. Specific source for the 1,000–2,000 m³/ha figure still to be pinned.",
+      "usedFor": "Order-of-magnitude flood-storage headroom of bunded paddy/wetland, ~1,000–2,000 m³ per hectare.",
+      "provenance": "prior_project"
+    },
+    "wahl2015": {
+      "short": "Wahl et al. 2015",
+      "full": "Wahl, T., Jain, S., Bender, J., Meyers, S.D. & Luther, M.E. (2015). Increasing risk of compound flooding from storm surge and rainfall for major US cities. Nature Climate Change 5: 1093–1097.",
+      "usedFor": "Compound surge + rainfall/fluvial flooding as a dependent, worse-than-either event.",
+      "provenance": "prior_project"
+    },
+    "moftakhari2017": {
+      "short": "Moftakhari et al. 2017",
+      "full": "Moftakhari, H.R., Salvadori, G., AghaKouchak, A., Sanders, B.F. & Matthew, R.A. (2017). Compounding effects of sea level rise and fluvial flooding. Proceedings of the National Academy of Sciences 114(37): 9785–9790.",
+      "usedFor": "Compound coastal + fluvial flooding in estuaries.",
+      "provenance": "prior_project"
+    },
+    "sendai2015": {
+      "short": "UNISDR 2015",
+      "full": "UNISDR (2015). Sendai Framework for Disaster Risk Reduction 2015–2030. United Nations Office for Disaster Risk Reduction, Geneva.",
+      "usedFor": "Risk as a function of hazard, exposure and vulnerability.",
+      "provenance": "build_spec"
+    },
+    "ipcc_ar6_wg2": {
+      "short": "IPCC AR6 WG2 2022",
+      "full": "IPCC (2022). Climate Change 2022: Impacts, Adaptation and Vulnerability. Contribution of Working Group II to the Sixth Assessment Report. Cambridge University Press. In particular Chapter 3 (Oceans and Coastal Ecosystems and their Services; Cooley et al.), Figure 3.24 and Table 3.SM.3, and Cross-Chapter Paper 2 (Cities and Settlements by the Sea; Glavovic et al.).",
+      "usedFor": "Risk framing; separate feasibility and effectiveness assessment of coastal adaptation options.",
+      "provenance": "build_spec"
+    },
+    "singh2020": {
+      "short": "Singh et al. 2020",
+      "full": "Singh, C., Ford, J., Ley, D., Bazaz, A. & Revi, A. (2020). Assessing the feasibility of adaptation options: methodological advancements and directions for climate adaptation research and practice. Climatic Change 162: 255–277.",
+      "usedFor": "Feasibility dimensions used in the feasibility × effectiveness view.",
+      "provenance": "build_spec"
+    },
+    "iucn2020": {
+      "short": "IUCN 2020",
+      "full": "IUCN (2020). IUCN Global Standard for Nature-based Solutions: a user-friendly framework for the verification, design and scaling up of NbS. First edition. Gland, Switzerland: IUCN.",
+      "usedFor": "Eight-criterion checklist shown for every nature-based or hybrid solution.",
+      "provenance": "build_spec"
+    },
+    "invest_cv": {
+      "short": "InVEST Coastal Vulnerability",
+      "full": "Natural Capital Project. InVEST User's Guide: Coastal Vulnerability model. Stanford University, University of Minnesota, The Nature Conservancy and WWF.",
+      "usedFor": "Methodology precedent: a transparent, formula-based index combining physical variables, with the formula shown.",
+      "provenance": "build_spec"
+    },
+    "czmp_goa": {
+      "short": "CZMP Goa (NCSCM)",
+      "full": "National Centre for Sustainable Coastal Management (NCSCM), MoEF&CC, for the Department of Environment & Climate Change, Government of Goa. Coastal Zone Management Plan (CZMP), Goa, prepared under the CRZ Notification 2011; mapped period 2017–2022; 1:25,000.",
+      "usedFor": "CRZ classification of the Panjim pilot area (all CRZ areas and the map layer).",
+      "provenance": "build_spec"
+    },
+    "crz2011": {
+      "short": "CRZ Notification 2011",
+      "full": "Ministry of Environment and Forests, Government of India (2011). Coastal Regulation Zone Notification, 2011. S.O. 19(E), 6 January 2011.",
+      "usedFor": "Definitions of the CRZ categories (CRZ-I to CRZ-IV, the 0–200 m No Development Zone).",
+      "provenance": "this_pass"
+    },
+    "huizinga2017": {
+      "short": "Huizinga et al. 2017",
+      "full": "Huizinga, J., de Moel, H. & Szewczyk, W. (2017). Global flood depth-damage functions: Methodology and the database with guidelines. JRC Technical Report EUR 28552 EN. Publications Office of the European Union. doi:10.2760/16510. Database: copy_of_global_flood_depth-damage_functions__30102017.xlsx, publications.jrc.ec.europa.eu/repository/handle/JRC105688, downloaded 23 Oct 2026.",
+      "usedFor": "Depth-damage functions (Asia: residential, commercial, industrial, roads, agriculture) and India's maximum damage values, for damage in INR (audit M12, Phase 2).",
+      "provenance": "checked_this_pass"
+    },
+    "shetye2007": {
+      "short": "Shetye et al. 2007",
+      "full": "Shetye, S.R., Dileep Kumar, M. & Shankar, D. (eds) (2007). The Mandovi and Zuari Estuaries. National Institute of Oceanography, Goa.",
+      "usedFor": "Named as the calibration route for surge/tide and river-flood propagation along the Mandovi (not used for any number).",
+      "provenance": "this_pass"
+    },
+    "sandrp_goa": {
+      "short": "SANDRP Goa river profile",
+      "full": "South Asia Network on Dams, Rivers and People (SANDRP). Goa river profile (as gathered in the prior Khazan project; exact title and date to be confirmed).",
+      "usedFor": "Context on the Mandovi/Zuari system.",
+      "provenance": "build_spec"
+    },
+    "lwm_khazan": {
+      "short": "Living Waters Museum",
+      "full": "Living Waters Museum. Documentation of Goa's khazan bund-and-sluice system (as gathered in the prior Khazan project; exact page to be confirmed).",
+      "usedFor": "Context on the khazan system as the illustrative tidal-wetland / polder hybrid.",
+      "provenance": "build_spec"
+    },
+    "ipcc_ar6_wg1_slr": {
+      "short": "IPCC AR6 WG1 2021 (sea level)",
+      "full": "Fox-Kemper, B., Hewitt, H.T., Xiao, C., et al. (2021). Ocean, Cryosphere and Sea Level Change. In: Climate Change 2021: The Physical Science Basis. Contribution of Working Group I to the Sixth Assessment Report of the IPCC, Chapter 9 (GMSL projections, Table 9.9), Cambridge University Press; with the WG1 Summary for Policymakers (B.5.3). Also used in the AR6 Synthesis Report (2023).",
+      "usedFor": "Global mean sea-level rise by 2050 and 2100 under SSP1-2.6, SSP2-4.5 and SSP5-8.5, relative to 1995–2014 (median and likely range).",
+      "provenance": "build_spec"
+    },
+    "copernicus_glo30": {
+      "short": "Copernicus GLO-30 DEM",
+      "full": "European Space Agency / Airbus (2021, 2022 release). Copernicus DEM GLO-30: global 1 arc-second Digital Surface Model, heights relative to the EGM2008 geoid. Copernicus Programme; accessed via the AWS Open Data registry (s3://copernicus-dem-30m), tile N15 E073.",
+      "usedFor": "Ground (surface) elevation for the bathtub-fill inundation extents.",
+      "provenance": "build_spec"
+    },
+    "ipcc_ar6_wg2_ch3_smtable": {
+      "short": "IPCC AR6 WGII Ch3 SM, Table SM3.3",
+      "full": "IPCC (2022). Chapter 3 Supplementary Material (Cooley, S. et al., Oceans and Coastal Ecosystems and their Services), Table SM3.3: Background materials and data for Figures 3.23 and 3.24, including the full feasibility assessment (pp. SM3-36 to SM3-43). In: Climate Change 2022: Impacts, Adaptation and Vulnerability, Working Group II contribution to the Sixth Assessment Report. Final Draft (accepted version). Feasibility is assessed in three paired dimensions (technical & economic; institutional & geophysical; socio-ecological), each High / Medium / Low, plus general feasibility and effectiveness (High / Medium / Low).",
+      "usedFor": "Feasibility rating scale (High / Medium / Low), the wording of the feasibility rubric (adapted from the table's per-option justifications), and the global reference ratings shown for 'Habitat restoration' and 'Protection & beach and shore nourishment'.",
+      "provenance": "checked_this_pass"
+    },
+    "sundar2005": {
+      "short": "Sundar & Shetye 2005",
+      "full": "Sundar, D. & Shetye, S.R. (2005). Tides in the Mandovi and Zuari estuaries, Goa, west coast of India. Journal of Earth System Science 114(5): 493–503. doi:10.1007/BF02702025.",
+      "usedFor": "Tidal range in the Mandovi and Zuari increases by about 20% up to ~45 km from the mouth, then drops sharply near the upstream end (tide-pole records at 13 stations, March–April 2003): evidence that a near-zero decay of surge level along the channel is the right direction of simplification.",
+      "provenance": "checked_this_pass"
+    },
+    "ramakrishnan2022": {
+      "short": "Ramakrishnan et al. 2022",
+      "full": "Ramakrishnan, R., Remya, P.G., Mandal, A., Mohanty, P., Arayakandy, P., Mahendra, R.S. & Nair, T.M.B. (2022). Wave induced coastal flooding along the southwest coast of India during tropical cyclone Tauktae. Scientific Reports 12: 19966. doi:10.1038/s41598-022-24557-z.",
+      "usedFor": "Analog for an extreme-event coastal water level on this coast: at Chellanam (Kerala) during Cyclone Tauktae (2021), infragravity waves plus wave setup raised coastal water elevation to about 1.5 m, while the forecast storm surge there was only about 0.15 m.",
+      "provenance": "checked_this_pass"
+    },
+    "ipcc_ar6_wg2_ccb_feasib": {
+      "short": "IPCC AR6 WGII CCB FEASIB",
+      "full": "IPCC (2022). Cross-Chapter Box FEASIB: Feasibility Assessment of Adaptation Options: An Update of the SR1.5, in Chapter 18 (Climate Resilient Development Pathways) of Climate Change 2022: Impacts, Adaptation and Vulnerability, Working Group II contribution to the Sixth Assessment Report; Figure Cross-Chapter Box FEASIB.2. Each option is assessed across six dimensions (economic, technological, institutional, socio-cultural, environmental, geophysical), each as high, medium or low feasibility, or limited evidence / no evidence (LE/NE).",
+      "usedFor": "The feasibility rubric's structure: the six dimensions and the High / Medium / Low / LE/NE rating states.",
+      "provenance": "checked_this_pass"
+    },
+    "esri_elevation": {
+      "short": "ArcGIS Elevation service",
+      "full": "Esri (2026). ArcGIS Elevation service, /elevation/at-many-points (ArcGIS Location Platform), TopoBathy elevation at the best resolution available. Sources at Panjim per the WorldElevation/Terrain mosaic catalogue: Airbus WorldDEM4Ortho 24 m and 74 m, SRTM 1 arc-second, EarthEnv-DEM90, GMTED2010. Queried 2026-09-27.",
+      "usedFor": "Independent cross-check of the Copernicus GLO-30 heights (not used in the model: not finer here; see the DEM grounding note).",
+      "provenance": "checked_this_pass"
+    },
+    "esri_places": {
+      "short": "ArcGIS Places service",
+      "full": "Esri (2026). ArcGIS Places service, /places/within-extent (ArcGIS Location Platform); places data based on Foursquare Open Source Places. Categories: Hospital; Primary and Secondary School; Fire Station; Police Station; Government Building; Town Hall. Queried live; results are not stored (Places terms of use).",
+      "usedFor": "Optional critical-facilities map layer (hospitals, schools, fire and police stations, government buildings) shown against the selected flood extent. Coverage in Panjim is incomplete.",
+      "provenance": "checked_this_pass"
+    },
+    "census2011_panaji": {
+      "short": "Census of India 2011, Panaji",
+      "full": "Census of India (2011). Panaji (M Corp. + OG), North Goa, Goa: population 70,991 (Panaji Municipal Corporation alone: 40,017), listed across 37 wards and out-growth units including Taleigao (24,201). Compiled at census2011.co.in/data/town/803243-panaji-goa.html (a secondary compilation of Census of India 2011 town data).",
+      "usedFor": "Population exposure: the 70,991 total allocated to the four segments by their share of in-scope land area.",
+      "provenance": "checked_this_pass"
+    },
+    "mpt_tor_2016_tides": {
+      "short": "Mormugao Port Trust 2016 (Chart No. 2020)",
+      "full": "Mormugao Port Trust (2016). Capital dredging of the approach channel and berths at Mormugao Port: Form I and draft Terms of Reference, Rev. 00, Section 2.3.1 Tides (p. 6), quoting Indian Naval Hydrographic Chart No. 2020: tide levels w.r.t. chart datum at Mormugao Harbour: higher high water at spring +2.3 m, mean higher high water +1.9 m, mean lower high water +1.8 m, mean higher low water +1.0 m, mean lower low water +0.5 m, mean sea level +1.3 m. environmentclearance.nic.in/writereaddata/Online/TOR/21_Sep_2016_185740063Y7IXR73WCapital_dredging_MPT_Rev00.pdf (accessed 22 Oct 2026).",
+      "usedFor": "High-tide reference: MHHW +0.6 m above MSL (default), spring HHW +1.0 m (top of range).",
+      "provenance": "checked_this_pass"
+    },
+    "eurotop2018": {
+      "short": "EurOtop 2018",
+      "full": "Van der Meer, J.W., Allsop, N.W.H., Bruce, T., De Rouck, J., Kortenhaus, A., Pullen, T., Schüttrumpf, H., Troch, P. & Zanuttigh, B. (2018). EurOtop: Manual on wave overtopping of sea defences and related structures. An overtopping manual largely based on European research, but for worldwide application. 2nd edition. www.overtopping-manual.com (accessed 22 Oct 2026).",
+      "usedFor": "Seawalls and dunes act by crest height: they hold still water below the crest and are overtopped above it. Reflection does not lower the still-water level behind a wall.",
+      "provenance": "checked_this_pass"
+    },
+    "muis2020_codec": {
+      "short": "Muis et al. 2020 (CoDEC)",
+      "full": "Muis, S., Irazoqui Apecechea, M., Dullaart, J., de Lima Rego, J., Madsen, K.S., Su, J., Yan, K. & Verlaan, M. (2020). A high-resolution global dataset of extreme sea levels, tides, and storm surges, including future projections. Frontiers in Marine Science 7:263. https://doi.org/10.3389/fmars.2020.00263. Data: CoDEC Dataset, Zenodo, https://doi.org/10.5281/zenodo.3660927 (CC BY 4.0; file CODEC_amax_ERA5_1979_2017_coor_mask_GUM_RPS.nc, accessed 22 Oct 2026).",
+      "usedFor": "Storm-tide (tide + surge) return levels at the Mandovi mouth, GTSM point id_coast_glob_12128.",
+      "provenance": "checked_this_pass"
+    },
+    "ar6_slr_tool": {
+      "short": "NASA/IPCC AR6 Sea Level Projection Tool",
+      "full": "Garner, G.G., Hermans, T., Kopp, R.E., Slangen, A.B.A., Edwards, T.L., Levermann, A., Nowicki, S., Palmer, M.D., Smith, C., Fox-Kemper, B., et al. (2021). IPCC AR6 Sea Level Projections, version 20210809. Zenodo, https://doi.org/10.5281/zenodo.5914709. Accessed through the NASA Sea Level Projection Tool, https://sealevel.nasa.gov/ipcc-ar6-sea-level-projection-tool?psmsl_id=1249 (Mormugao, PSMSL 1249), 22 Oct 2026.",
+      "usedFor": "Relative sea-level rise at Mormugao by 2050 and 2100 for SSP1-2.6, SSP2-4.5 and SSP5-8.5 (median and likely range).",
+      "provenance": "checked_this_pass"
+    },
+    "vafeidis2019": {
+      "short": "Vafeidis et al. 2019",
+      "full": "Vafeidis, A.T., Schuerch, M., Wolff, C., Spencer, T., Merkens, J.L., Hinkel, J., Lincke, D., Brown, S. & Nicholls, R.J. (2019). Water-level attenuation in global-scale assessments of exposure to coastal flooding: a sensitivity analysis. Natural Hazards and Earth System Sciences 19, 973-984. https://doi.org/10.5194/nhess-19-973-2019",
+      "usedFor": "Overland water-level attenuation range, 0 to 1.0 m/km (storm-driven water only).",
+      "provenance": "checked_this_pass"
+    },
+    "pronk2024_deltadtm": {
+      "short": "Pronk et al. 2024 (DeltaDTM)",
+      "full": "Pronk, M., Hooijer, A., Eilander, D., Haag, A., de Jong, T., Vousdoukas, M., Vernimmen, R., Ledoux, H. & Eleveld, M. (2024). DeltaDTM: A global coastal digital terrain model. Scientific Data 11: 273. doi:10.1038/s41597-024-03091-9. Data: DeltaDTM v1.1, 4TU.ResearchData, doi:10.4121/21997565 (CC BY 4.0); the Mandovi tile was supplied by Ferdin (23 Oct 2026) because 4TU was unreachable. Produced using Copernicus WorldDEM-30 (c) DLR e.V. 2010-2014 and (c) Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA.",
+      "usedFor": "Terrain model (audit M8): bare-earth heights below 10 m, replacing the GLO-30 surface model; GLO-30 fills cells above 10 m and water.",
+      "provenance": "checked_this_pass"
+    },
+    "ghs_pop_2023": {
+      "short": "GHS-POP R2023A",
+      "full": "Schiavina, M., Freire, S., Carioli, A. & MacManus, K. (2023). GHS-POP R2023A - GHS population grid multitemporal (1975-2030). European Commission, Joint Research Centre (JRC). doi:10.2905/2FF68A52-5B5B-4A22-8F40-C41DA8332CFE. CC BY 4.0. Epoch 2020, 3 arc-second, tile R8_C26, downloaded 23 Oct 2026 from jeodpp.jrc.ec.europa.eu.",
+      "usedFor": "People per grid cell (exposure, people affected), replacing the uniform spread of the census total (audit Phase 2, P2.1).",
+      "provenance": "checked_this_pass"
+    },
+    "osm_buildings": {
+      "short": "OpenStreetMap",
+      "full": "OpenStreetMap contributors (2026). Building footprints, roads, landuse and creek geometry in the Panjim window, via the Overpass API (overpass-api.de), fetched 23 Oct 2026. Open Database License (ODbL) 1.0.",
+      "usedFor": "Building footprints and use class, road surfaces, farmland, creek outlets for the rain catchments.",
+      "provenance": "checked_this_pass"
+    },
+    "ms_buildings": {
+      "short": "Microsoft Global ML Building Footprints",
+      "full": "Microsoft (2026). Global ML Building Footprints, India, release 2026-02-03 (quadkeys 123303002, 123303003), github.com/microsoft/GlobalMLBuildingFootprints. Open Database License (ODbL). Downloaded 23 Oct 2026.",
+      "usedFor": "Buildings missing from OpenStreetMap (13,909 of 18,802 footprints in the window). Used instead of Google Open Buildings, whose tile for Goa is 4.8 GB.",
+      "provenance": "checked_this_pass"
+    },
+    "datameet_villages": {
+      "short": "DataMeet village boundaries, Goa",
+      "full": "DataMeet (2016-). Indian Village Boundaries: Goa (ga.geojson), github.com/datameet/indian_village_boundaries, Census 2001 codes. ODbL. Downloaded 23 Oct 2026.",
+      "usedFor": "Census town/village each grid cell lies in, for the social vulnerability index.",
+      "provenance": "checked_this_pass"
+    },
+    "census2011_pca_units": {
+      "short": "Census of India 2011 PCA (towns near Panaji)",
+      "full": "Office of the Registrar General & Census Commissioner, India (2011). Primary Census Abstract, as compiled by Brinkhoff, T., City Population (citypopulation.de), pages for Panaji (M Corp. + OG), Calapor, Chimbel and Bambolim, accessed 23 Oct 2026: population, literacy (age 7+) and activity status (age 7+). censusindia.gov.in itself refused the connection (revoked TLS certificate) on 23 Oct 2026.",
+      "usedFor": "Social vulnerability indicators per census unit; census check on GHS-POP.",
+      "provenance": "checked_this_pass"
+    },
+    "worldbank_fx_deflator": {
+      "short": "World Bank WDI (exchange rates, deflator)",
+      "full": "World Bank (2026). World Development Indicators via api.worldbank.org: PA.NUS.FCRF (official exchange rate, LCU per US$, period average) for India and the Euro area, and NY.GDP.DEFL.ZS (GDP deflator) for India. Accessed 23 Oct 2026.",
+      "usedFor": "Converting the JRC maximum damage values (EUR, 2010 prices) to INR at 2024 prices.",
+      "provenance": "checked_this_pass"
+    },
+    "imd_gridded_rain": {
+      "short": "IMD 0.25 deg gridded rainfall (Pai et al. 2014)",
+      "full": "Pai, D.S., Rajeevan, M., Sreejith, O.P., Mukhopadhyay, B. & Satbha, N.S. (2014). Development of a new high spatial resolution (0.25 x 0.25 degree) long period (1901-2010) daily gridded rainfall data set over India and its comparison with existing data sets over the region. MAUSAM 65(1): 1-18. doi:10.54302/mausam.v65i1.851. Data: IMD Pune, imdpune.gov.in/cmpg/Griddata/Rainfall_25_Bin.html, years 1975-2024 downloaded 23 Oct 2026.",
+      "usedFor": "Annual maximum 1-day rainfall at the cell over Panjim; Gumbel return levels for the rain-at-high-tide hazard (audit M15).",
+      "provenance": "checked_this_pass"
+    },
+    "mccuen2017": {
+      "short": "McCuen 2017 (runoff coefficients)",
+      "full": "McCuen, R.H. (2017). Hydrologic Analysis and Design, 4th edition. Pearson. Rational-method runoff coefficients as tabulated in the Minnesota Stormwater Manual, 'Runoff coefficients for different soil groups and slopes' (stormwater.pca.state.mn.us), accessed 23 Oct 2026.",
+      "usedFor": "Runoff coefficients for built and unbuilt ground in the rain-at-high-tide volume balance.",
+      "provenance": "checked_this_pass"
+    },
+    "gomantak2023_flood": {
+      "short": "Gomantak Times, 22 Jun 2023",
+      "full": "Rodrigues, A. (2023, 22 June). Will Smart City Panjim flood or will not, this monsoon? Gomantak Times. gomantaktimes.com/news/goa/will-smart-city-panjim-flood-or-will-not-this-monsoon. Accessed 23 Oct 2026.",
+      "usedFor": "Panjim's flood mechanism (heavy rain at high tide, outfalls submerged, about 15-20 such days a monsoon; water from Altinho); Mala pumps (3 x 300 HP + 2 x 60 HP), Mala lake as a retention basin. Press source quoting city engineers.",
+      "provenance": "checked_this_pass"
+    },
+    "goa_dip_2023_mala": {
+      "short": "Goa DIP press release, 5 Jul 2023",
+      "full": "Department of Information & Publicity, Government of Goa (2023, 5 July). CM inaugurates flood water pumping station (DI/NB/AXP/AS/2023/770). goa.gov.in/wp-content/uploads/2023/07/CM-INAUGURATES-FLOOD-WATER-PUMPING-STATION-.pdf. Accessed 23 Oct 2026.",
+      "usedFor": "Mala flood-water pumping station: cost about Rs 15.90 crore; drains the Altinho catchment into Mala lake; two actuator gates close at high tide.",
+      "provenance": "checked_this_pass"
+    },
+    "ibtracs_v4": {
+      "short": "IBTrACS v04r01 (Knapp et al. 2010)",
+      "full": "Knapp, K.R., Kruk, M.C., Levinson, D.H., Diamond, H.J. & Neumann, C.J. (2010). The International Best Track Archive for Climate Stewardship (IBTrACS). Bulletin of the American Meteorological Society 91: 363-376. doi:10.1175/2009BAMS2755.1. Data: IBTrACS v04r01, North Indian basin CSV, NOAA NCEI, downloaded 23 Oct 2026.",
+      "usedFor": "Compound-event timing check (audit M16): months of cyclonic storms passing near Goa.",
+      "provenance": "checked_this_pass"
+    },
+    "schuerch2018": {
+      "short": "Schuerch et al. 2018",
+      "full": "Schuerch, M., Spencer, T., Temmerman, S., Kirwan, M.L., Wolff, C., Lincke, D., McOwen, C.J., Pickering, M.D., Reef, R., Vafeidis, A.T., Hinkel, J., Nicholls, R.J. & Brown, S. (2018). Future response of global coastal wetlands to sea-level rise. Nature 561: 231-234. doi:10.1038/s41586-018-0476-5.",
+      "usedFor": "Mangrove squeeze indicator: wetlands keep pace with sea-level rise where they have landward accommodation space; barriers and development remove it.",
+      "provenance": "checked_this_pass"
+    },
+    "pontee2013": {
+      "short": "Pontee 2013",
+      "full": "Pontee, N. (2013). Defining coastal squeeze: a discussion. Ocean & Coastal Management 84: 204-207. doi:10.1016/j.ocecoaman.2013.07.010.",
+      "usedFor": "Definition of coastal squeeze (intertidal habitat lost where landward migration is blocked by fixed structures).",
+      "provenance": "checked_this_pass"
+    },
+    "drr_audit_2026": {
+      "short": "DRR tool model audit, 22 Oct 2026",
+      "full": "Coastal Resilience Studio: DRR Tool Review and Model Audit (22 October 2026), docs/DRR_Tool_Review_and_Model_Audit_2026-10-22.docx, Sections 5-6 (findings M1-M18; metric chain).",
+      "usedFor": "Metric chain and the 0.15 m people-affected convention (stated there as a convention, not a standard).",
+      "provenance": "checked_this_pass"
+    },
+    "cutter2003": {
+      "short": "Cutter et al. 2003",
+      "full": "Cutter, S.L., Boruff, B.J. & Shirley, W.L. (2003). Social vulnerability to environmental hazards. Social Science Quarterly 84(2): 242-261. doi:10.1111/1540-6237.8402002.",
+      "usedFor": "Choice of social vulnerability indicators (education, dependants, livelihood security) and the additive z-score index.",
+      "provenance": "checked_this_pass"
+    },
+    "ferdin2026_field_bunds": {
+      "short": "Ferdin (OneEarth Foundation), field knowledge, 23 Oct 2026",
+      "full": "Field knowledge, Ferdin, OneEarth Foundation, 23 Oct 2026: Patto and Taleigao fields are bunded; the St Inez / Merces fields east of 73.848 E are bunded too (same day). Personal communication recorded in docs/STEP_PROMPT_model_p3_accuracy.md and docs/model-audit/LOG.md (Phase 3).",
+      "usedFor": "Treating the low fields at Patto, Taleigao and St Inez / Merces (outside the CZMP khazan mask) as bund-protected land (audit A1, Phase 3).",
+      "provenance": "this_pass"
+    }
+  }
+}

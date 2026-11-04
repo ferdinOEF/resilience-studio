@@ -1,0 +1,21 @@
+{
+  "_readme": "Basemap sources for the MapLibre map (docs/STEP_PROMPT_basemap_placement_and_calibration.md §2). Terms and attribution were checked against the providers' own metadata on 2026-09-26; re-check before changing anything here. Esri is used when VITE_ARCGIS_API_KEY is set at build time (an ArcGIS Location Platform API key, ideally referrer-restricted to the deployment's domains); otherwise the openly licensed fallback is used, and the map says so.",
+  "esri": {
+    "name": "Esri World Imagery",
+    "tiles": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    "tokenParam": "token",
+    "maxzoom": 19,
+    "attribution": "Powered by <a href=\"https://www.esri.com\" target=\"_blank\" rel=\"noopener\">Esri</a> | Esri, Vantor, Earthstar Geographics, and the GIS User Community",
+    "licence": "Esri Master License Agreement (World Imagery item 10df2279f9684e4a9f6a7f08febac2a9, licenseInfo). Esri's MapLibre GL JS guide states an API key or access token is required; ArcGIS Location Platform includes 2 million free basemap tiles per month.",
+    "verified": "2026-09-26: item metadata (url, accessInformation = attribution, licenseInfo) read from arcgis.com/sharing/rest/content/items/10df2279f9684e4a9f6a7f08febac2a9?f=json; token requirement from developers.arcgis.com/maplibre-gl-js/data/add-a-map-tile-layer/."
+  },
+  "fallback": {
+    "name": "Sentinel-2 cloudless 2016 (EOX)",
+    "tiles": "https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless_3857/default/g/{z}/{y}/{x}.jpg",
+    "maxzoom": 14,
+    "attribution": "<a href=\"https://s2maps.eu\" target=\"_blank\" rel=\"noopener\">Sentinel-2 cloudless 2016</a> by EOX IT Services GmbH (contains modified Copernicus Sentinel data 2016), CC BY 4.0",
+    "licence": "Creative Commons Attribution 4.0 (EOX WMTS capabilities, layer s2cloudless_3857). The 2018-and-later layers are CC BY-NC-SA 4.0 (non-commercial) and are deliberately NOT used; the 2017 layer returned no-data tiles for Panjim.",
+    "caveat": "10 m Sentinel-2 imagery from 2016: soft at street scale and nearly a decade old. It stands in until an Esri API key is configured.",
+    "verified": "2026-09-26: licence text read from tiles.maps.eox.at/wmts/1.0.0/WMTSCapabilities.xml; tiles for Panjim fetched and inspected at z12–z14."
+  }
+}

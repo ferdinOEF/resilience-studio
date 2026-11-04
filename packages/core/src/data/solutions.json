@@ -1,0 +1,882 @@
+{
+  "_readme": "Phase 1 solutions catalog (build spec §3). Each solution lists one or more `effects`; each effect names a generic mechanism `kind` that src/core/effects.ts implements once. No per-solution logic exists anywhere in code. Every numeric parameter carries `grounding` (solid_direct | reasoned_extrapolation | placeholder_needs_calibration), `citations` (ids in citations.json) and/or a `note`. `low`/`high` give the literature range where one exists; `moreProtective` says which end of that range protects more, so the model can report least- and most-protective bounds. `instanceParams` are what a user sets when placing the solution on a segment.",
+  "solutions": [
+    {
+      "id": "mangrove",
+      "name": "Mangrove restoration / conservation",
+      "category": "nbs",
+      "summary": "A mangrove belt dissipates wave energy through drag on stems, prop roots and pneumatophores, and slows the landward advance of storm-surge water.",
+      "hazardComponents": [
+        "wave",
+        "level"
+      ],
+      "evidence": "Wave attenuation is solid and direct (McIvor et al. 2012a, 13–66% wave-height reduction per 100 m, built on Mazda et al. 1997/2006). Surge-level attenuation per km comes from McIvor et al. 2012b and has not yet been checked against that report in this pass. The literature describes a separate flood-roughness effect (higher Manning's n in vegetated channels), but no portable number was found for it, so it is not modelled.",
+      "effects": [
+        {
+          "kind": "wave_attenuation_per_100m",
+          "params": {
+            "reductionPer100m": {
+              "label": "Wave-height reduction per 100 m of belt",
+              "value": 0.395,
+              "low": 0.13,
+              "high": 0.66,
+              "unit": "fraction",
+              "moreProtective": "higher",
+              "grounding": "solid_direct",
+              "citations": [
+                "mcivor2012_waves",
+                "mazda1997",
+                "mazda2006"
+              ],
+              "note": "The 13–66% range is the literature's; it varies with stand density, species and water depth. The central value (39.5%) is simply the midpoint, not a site measurement. Results are reported across the full range."
+            }
+          }
+        },
+        {
+          "kind": "level_attenuation_per_km",
+          "params": {
+            "reductionCmPerKm": {
+              "label": "Peak surge-level reduction per km of belt",
+              "value": 26,
+              "low": 4,
+              "high": 48,
+              "unit": "cm/km",
+              "moreProtective": "higher",
+              "grounding": "solid_direct",
+              "citations": [
+                "mcivor2012_surge"
+              ],
+              "note": "Range as reported by McIvor et al. 2012b (4–48 cm/km); added this pass, still to be checked against the report. The central value is the midpoint. Converting cm into the hazard index uses the reference surge height, which is itself a placeholder (see Model assumptions)."
+            }
+          }
+        }
+      ],
+      "instanceParams": [
+        {
+          "key": "widthM",
+          "label": "Belt width (cross-shore)",
+          "unit": "m",
+          "default": 200,
+          "min": 10,
+          "max": 1000,
+          "step": 10,
+          "grounding": "placeholder_needs_calibration",
+          "note": "Set from a site survey of the planned or existing belt."
+        },
+        {
+          "key": "maturity",
+          "label": "Stand maturity / density",
+          "unit": "fraction",
+          "default": 1,
+          "min": 0,
+          "max": 1,
+          "step": 0.05,
+          "grounding": "reasoned_extrapolation",
+          "note": "Scales the per-100 m reduction linearly: 0 is newly planted with negligible effect, 1 is a mature, dense stand like those the literature measured. The linear scaling is a reasoned simplification, not a fitted growth curve."
+        }
+      ],
+      "ipccAr6Reference": {
+        "row": "Habitat restoration",
+        "technicalEconomic": "Medium",
+        "institutionalGeophysical": "Medium",
+        "socioEcological": "High",
+        "general": "Medium",
+        "effectiveness": "High",
+        "mappingGrounding": "reasoned_extrapolation",
+        "mappingNote": "The table's Habitat restoration row names mangroves explicitly ('Mangroves more scalable than seagrasses'). These are GLOBAL assessments of the generic option, not ratings for Panjim; use them as a reference point for the local rating, not as a substitute.",
+        "citations": [
+          "ipcc_ar6_wg2_ch3_smtable"
+        ]
+      },
+      "placeAs": "point",
+      "allowedSettings": [
+        "estuary_bank",
+        "creek"
+      ]
+    },
+    {
+      "id": "coastal_vegetation",
+      "name": "Coastal vegetation buffer (dune / backshore species, e.g. Pandanus-type)",
+      "category": "nbs",
+      "summary": "Backshore shrubs and screw-pine stabilise sand against erosion and give modest drag on wave run-up.",
+      "hazardComponents": [
+        "wave"
+      ],
+      "evidence": "Reasoned extrapolation. No direct measurement exists for this species group. Pandanus has a sparser canopy with a different root structure than the mangrove stands McIvor et al. studied, so its effect should sit well below the mangrove figure. The number used here was a balance value in the prior project, not a measurement.",
+      "effects": [
+        {
+          "kind": "wave_attenuation_per_100m",
+          "params": {
+            "reductionPer100m": {
+              "label": "Wave-height reduction per 100 m of buffer",
+              "value": 0.2,
+              "unit": "fraction",
+              "moreProtective": "higher",
+              "grounding": "placeholder_needs_calibration",
+              "note": "Carried from the prior project's balance value (0.2 at maturity), not a measured figure. It resolves with a species-specific field or flume study of Pandanus-type backshore vegetation. The only grounded constraint is qualitative (reasoned_extrapolation): it should sit below the mangrove figure for the same width and density. Its evidence base is much thinner than the mangrove figures it is modelled alongside: wave attenuation by tropical backshore dune vegetation (Pandanus-type) has sparse, non-standardised literature, and no species- and site-comparable figure was found (search 2026-09-26). Do not read it with the same confidence as the mangrove values."
+            }
+          }
+        }
+      ],
+      "instanceParams": [
+        {
+          "key": "widthM",
+          "label": "Buffer width (cross-shore)",
+          "unit": "m",
+          "default": 50,
+          "min": 5,
+          "max": 300,
+          "step": 5,
+          "grounding": "placeholder_needs_calibration",
+          "note": "Set from a site survey."
+        },
+        {
+          "key": "maturity",
+          "label": "Maturity / cover",
+          "unit": "fraction",
+          "default": 1,
+          "min": 0,
+          "max": 1,
+          "step": 0.05,
+          "grounding": "reasoned_extrapolation",
+          "note": "Linear scaling; same simplification as for mangrove."
+        }
+      ],
+      "ipccAr6Reference": {
+        "row": "Habitat restoration",
+        "technicalEconomic": "Medium",
+        "institutionalGeophysical": "Medium",
+        "socioEcological": "High",
+        "general": "Medium",
+        "effectiveness": "High",
+        "mappingGrounding": "reasoned_extrapolation",
+        "mappingNote": "Coastal vegetation buffers are habitat restoration; the row is not specific to backshore species. These are GLOBAL assessments of the generic option, not ratings for Panjim; use them as a reference point for the local rating, not as a substitute.",
+        "citations": [
+          "ipcc_ar6_wg2_ch3_smtable"
+        ]
+      },
+      "placeAs": "line",
+      "allowedSettings": [
+        "sandy_open_coast"
+      ]
+    },
+    {
+      "id": "dune",
+      "name": "Dune (restored or engineered)",
+      "category": "hybrid",
+      "summary": "A frontal dune holds back still water up to its crest, as long as it survives erosion during the event (enough sand above stillwater). If it is eroded away, it gives no protection for that event.",
+      "hazardComponents": [
+        "wave",
+        "level"
+      ],
+      "evidence": "Two tests in order. Erosion: FEMA's volume criterion (540 ft² ≈ 50.2 m² of cross-section above stillwater; FEMA Coastal Structures guidance 2024), calibrated on US Atlantic and Gulf dunes, so applying it to Goa is an extrapolation. Then crest: a retained dune holds water below its crest and is overtopped above it, like a seawall (EurOtop 2018). The earlier flat 35% 'protection when retained' was a placeholder with no source and is removed (audit M3). Sandy open coast only.",
+      "effects": [
+        {
+          "kind": "crest_barrier",
+          "params": {
+            "retainedThresholdM2": {
+              "label": "Cross-section needed to survive the event",
+              "value": 50.2,
+              "unit": "m²",
+              "moreProtective": "lower",
+              "grounding": "solid_direct",
+              "citations": [
+                "fema_540_rule",
+                "fema_coastal_structures_2024"
+              ],
+              "note": "FEMA's 540 ft² criterion for the 1%-annual-chance event. Transfer to the Goa coast is reasoned_extrapolation: re-derive it from local beach profiles and design-storm erosion modelling."
+            }
+          }
+        }
+      ],
+      "instanceParams": [
+        {
+          "key": "crossSectionM2",
+          "label": "Dune cross-section above stillwater",
+          "unit": "m²",
+          "default": 60,
+          "min": 0,
+          "max": 200,
+          "step": 1,
+          "grounding": "placeholder_needs_calibration",
+          "note": "From a surveyed beach/dune profile against the design stillwater level."
+        },
+        {
+          "key": "crestM",
+          "label": "Crest level",
+          "unit": "m above MSL (EGM2008)",
+          "default": 3.0,
+          "min": 0.5,
+          "max": 6,
+          "step": 0.1,
+          "grounding": "placeholder_needs_calibration",
+          "note": "Dune crest level. No beach or dune profile survey is in the tool; 3.0 m is an illustrative default. The dune only acts as a barrier if it survives the event (FEMA cross-section test)."
+        },
+        {
+          "key": "frontageShare",
+          "label": "Share of the segment's frontage covered",
+          "unit": "fraction",
+          "default": 1.0,
+          "min": 0,
+          "max": 1,
+          "step": 0.05,
+          "grounding": "placeholder_needs_calibration",
+          "note": "Fraction of the segment's shore cells behind this structure. Water still enters through the uncovered frontage and creek mouths (flanking), so the structure can never cut the segment's hazard by more than this share."
+        }
+      ],
+      "ipccAr6Reference": {
+        "row": "Protection & beach and shore nourishment",
+        "technicalEconomic": "Medium",
+        "institutionalGeophysical": "High",
+        "socioEcological": "Medium",
+        "general": "Medium",
+        "effectiveness": "Medium",
+        "mappingGrounding": "reasoned_extrapolation",
+        "mappingNote": "Dune restoration or construction is soft coastal protection. These are GLOBAL assessments of the generic option, not ratings for Panjim; use them as a reference point for the local rating, not as a substitute.",
+        "citations": [
+          "ipcc_ar6_wg2_ch3_smtable"
+        ]
+      },
+      "placeAs": "line",
+      "allowedSettings": [
+        "sandy_open_coast"
+      ]
+    },
+    {
+      "id": "seawall",
+      "name": "Seawall / revetment",
+      "category": "engineered",
+      "summary": "A vertical or steep structure holds back still water up to its crest level. Above the crest it is overtopped and gives no protection for that event; water can always enter round its ends (flanking).",
+      "hazardComponents": [
+        "wave",
+        "level"
+      ],
+      "evidence": "Seawalls work by crest height: below the crest no water crosses the covered frontage; above it the wall is overtopped (EurOtop 2018). The earlier version multiplied the hazard by (1 − Kr²), which treated reflected wave energy as protection; that was wrong (audit M2) and is removed. The reflection coefficient (Goda 2010; USACE CEM: Kr ≈ 0.7–1.0) now only raises a toe-scour flag on sandy beaches. A wall landward of mangroves also gets a coastal-squeeze flag: it blocks the mangroves' landward migration as the sea rises.",
+      "effects": [
+        {
+          "kind": "crest_barrier",
+          "params": {
+            "reflectionCoefficient": {
+              "label": "Reflection coefficient Kr (intact)",
+              "value": 0.9,
+              "low": 0.7,
+              "high": 1.0,
+              "unit": "–",
+              "moreProtective": "higher",
+              "grounding": "solid_direct",
+              "citations": [
+                "goda2010",
+                "usace_cem",
+                "eurotop2018"
+              ],
+              "note": "Kept for a FLAG only, not as protection: a reflective wall concentrates wave energy at its toe, which scours the fronting beach (raised as a toe-scour / beach-loss flag on sandy segments). Reflection does not lower the still-water level behind the wall (EurOtop 2018); the crest does that."
+            }
+          }
+        }
+      ],
+      "instanceParams": [
+        {
+          "key": "crestM",
+          "label": "Crest level",
+          "unit": "m above MSL (EGM2008)",
+          "default": 2.5,
+          "min": 0.5,
+          "max": 6,
+          "step": 0.1,
+          "grounding": "placeholder_needs_calibration",
+          "note": "Design or as-built crest level of this structure. No crest survey or design drawing is in the tool; 2.5 m is an illustrative default that holds the central reference event (0.6 m MHHW + 1.5 m surge = 2.1 m) and is overtopped at the top of the hazard range."
+        },
+        {
+          "key": "frontageShare",
+          "label": "Share of the segment's frontage covered",
+          "unit": "fraction",
+          "default": 1.0,
+          "min": 0,
+          "max": 1,
+          "step": 0.05,
+          "grounding": "placeholder_needs_calibration",
+          "note": "Fraction of the segment's shore cells behind this structure. Water still enters through the uncovered frontage and creek mouths (flanking), so the structure can never cut the segment's hazard by more than this share."
+        }
+      ],
+      "ipccAr6Reference": {
+        "row": "Protection & beach and shore nourishment",
+        "technicalEconomic": "Medium",
+        "institutionalGeophysical": "High",
+        "socioEcological": "Medium",
+        "general": "Medium",
+        "effectiveness": "Medium",
+        "mappingGrounding": "reasoned_extrapolation",
+        "mappingNote": "Seawalls and revetments are hard coastal protection. These are GLOBAL assessments of the generic option, not ratings for Panjim; use them as a reference point for the local rating, not as a substitute.",
+        "citations": [
+          "ipcc_ar6_wg2_ch3_smtable"
+        ]
+      },
+      "placeAs": "line",
+      "allowedSettings": [
+        "sandy_open_coast",
+        "rocky_coast",
+        "estuary_bank",
+        "creek",
+        "khazan"
+      ]
+    },
+    {
+      "id": "tidal_wetland_polder",
+      "name": "Tidal wetland / polder hybrid (bund-and-sluice; e.g. Goa's khazan)",
+      "category": "hybrid",
+      "summary": "Low-lying bunded land with sluice gates stores floodwater up to a volume, then passes the excess. Goa's khazan lands are the illustrative example: estuarine fields enclosed by earthen bunds, with sluice gates (manos) regulating tidal exchange.",
+      "hazardComponents": [
+        "fluvial"
+      ],
+      "evidence": "Reasoned and dimensionally grounded. Paddy-field-dam literature (NARO, JSCE; carried over from the prior project) gives roughly 1,000–2,000 m³/ha of storage headroom. It is transferred here from Japanese paddy to Goan khazan, which is reasonable but unmeasured. The sluice gates' role in excluding tidal water from the fields is not modelled; only storage is.",
+      "effects": [
+        {
+          "kind": "flood_storage",
+          "params": {
+            "storageM3PerHa": {
+              "label": "Flood-storage headroom per hectare",
+              "value": 1500,
+              "low": 1000,
+              "high": 2000,
+              "unit": "m³/ha",
+              "moreProtective": "higher",
+              "grounding": "reasoned_extrapolation",
+              "citations": [
+                "naro_paddy_dam",
+                "lwm_khazan"
+              ],
+              "note": "Order-of-magnitude range from paddy-field-dam studies. Resolve with a bund-height and field-level survey of the actual khazan units."
+            }
+          }
+        }
+      ],
+      "instanceParams": [
+        {
+          "key": "areaHa",
+          "label": "Bunded area",
+          "unit": "ha",
+          "default": 20,
+          "min": 1,
+          "max": 500,
+          "step": 1,
+          "grounding": "placeholder_needs_calibration",
+          "note": "From a survey or cadastral map of the bunded unit."
+        },
+        {
+          "key": "condition",
+          "label": "Bund and sluice condition",
+          "unit": "fraction",
+          "default": 1,
+          "min": 0,
+          "max": 1,
+          "step": 0.05,
+          "grounding": "placeholder_needs_calibration",
+          "note": "Share of design storage actually available (breached or silted bunds reduce it). Needs a condition survey."
+        }
+      ],
+      "ipccAr6Reference": {
+        "row": null,
+        "mappingNote": "No direct row in Table SM3.3: bunded tidal wetland / polder storage (khazan) is not assessed as such; the nearest rows (Habitat restoration, Protection) each cover only part of it.",
+        "citations": [
+          "ipcc_ar6_wg2_ch3_smtable"
+        ]
+      },
+      "placeAs": "point",
+      "allowedSettings": [
+        "khazan"
+      ]
+    },
+    {
+      "id": "check_dam",
+      "name": "Small check dam / flood-storage structure",
+      "category": "engineered",
+      "summary": "Stores runoff from a creek catchment up to a capacity and releases it slowly. Loaded beyond its capacity, it is assumed to breach and give no protection for that event.",
+      "hazardComponents": [
+        "fluvial"
+      ],
+      "evidence": "The framework is solid (FEMA P-946 2013; USACE EM 1110-2-1420), but every number here is a placeholder. The Panjim segments are tidal, so a check dam only helps on a creek catchment draining into them (e.g. the St Inez creek). It does nothing against surge.",
+      "effects": [
+        {
+          "kind": "flood_storage_with_breach",
+          "params": {
+            "breachRatio": {
+              "label": "Breach when inflow exceeds capacity by",
+              "value": 1.5,
+              "unit": "× capacity",
+              "moreProtective": "higher",
+              "grounding": "placeholder_needs_calibration",
+              "note": "Prior-project style placeholder. Resolve from the structure's spillway design and a dam-break assessment."
+            }
+          }
+        }
+      ],
+      "instanceParams": [
+        {
+          "key": "capacityM3",
+          "label": "Storage capacity",
+          "unit": "m³",
+          "default": 20000,
+          "min": 1000,
+          "max": 500000,
+          "step": 1000,
+          "grounding": "placeholder_needs_calibration",
+          "note": "From the structure's design drawings or a reservoir survey."
+        }
+      ],
+      "ipccAr6Reference": {
+        "row": null,
+        "mappingNote": "No direct row in Table SM3.3: catchment flood-storage structures fall outside the ocean and coastal options assessed in Chapter 3.",
+        "citations": [
+          "ipcc_ar6_wg2_ch3_smtable"
+        ]
+      },
+      "placeAs": "point",
+      "allowedSettings": [
+        "creek"
+      ]
+    },
+    {
+      "id": "breakwater",
+      "name": "Breakwater (detached / low-crested)",
+      "category": "engineered",
+      "summary": "An offshore or nearshore structure that lets through only a fraction of incident wave height. A low-crested structure does little to still-water surge level.",
+      "hazardComponents": [
+        "wave"
+      ],
+      "evidence": "The framework is solid (d'Angremond, Van der Meer & de Jong 1996). The transmission coefficient Kt runs from about 0.075 to 0.8 depending on crest freeboard, crest width and wave steepness. This pass shows it as that range rather than one value; the site value needs the structure's geometry and local wave climate.",
+      "effects": [
+        {
+          "kind": "wave_transmission",
+          "params": {
+            "transmissionCoefficient": {
+              "label": "Wave transmission coefficient Kt",
+              "value": 0.44,
+              "low": 0.075,
+              "high": 0.8,
+              "unit": "–",
+              "moreProtective": "lower",
+              "grounding": "reasoned_extrapolation",
+              "citations": [
+                "dangremond1996"
+              ],
+              "note": "The operating range 0.075–0.8 is solid_direct (d'Angremond et al. 1996). The single central value 0.44 is only the range midpoint, a reasoned stand-in, not a design value, which is why this is tagged reasoned rather than solid. Results are always reported across the full range. Compute the site Kt from the d'Angremond formula once crest freeboard, crest width and design wave are known."
+            }
+          }
+        }
+      ],
+      "instanceParams": [],
+      "ipccAr6Reference": {
+        "row": "Protection & beach and shore nourishment",
+        "technicalEconomic": "Medium",
+        "institutionalGeophysical": "High",
+        "socioEcological": "Medium",
+        "general": "Medium",
+        "effectiveness": "Medium",
+        "mappingGrounding": "reasoned_extrapolation",
+        "mappingNote": "Detached breakwaters are hard coastal protection. These are GLOBAL assessments of the generic option, not ratings for Panjim; use them as a reference point for the local rating, not as a substitute.",
+        "citations": [
+          "ipcc_ar6_wg2_ch3_smtable"
+        ]
+      },
+      "placeAs": "line",
+      "allowedSettings": [
+        "sandy_open_coast",
+        "rocky_coast"
+      ]
+    },
+    {
+      "id": "retention_basin",
+      "name": "Retention basin / detention pond",
+      "category": "engineered",
+      "summary": "Holds storm runoff during high tide and releases it when the outfalls reopen, like Mala lake.",
+      "hazardComponents": [
+        "rain"
+      ],
+      "evidence": "Acts only on the 'Heavy rain at high tide' hazard (audit M15), through a volume balance per creek catchment; it does nothing against storm tide, river flood or sea-level rise. Every number is a placeholder until the city's drainage designs are in the tool.",
+      "effects": [
+        {
+          "kind": "rain_retention",
+          "params": {
+            "usableShare": {
+              "label": "Share of the volume free when the storm starts",
+              "value": 0.8,
+              "low": 0.5,
+              "high": 1.0,
+              "unit": "share",
+              "moreProtective": "higher",
+              "grounding": "placeholder_needs_calibration",
+              "note": "Basins are often part-full from earlier rain or silt. Placeholder; resolve with basin operating records."
+            }
+          }
+        }
+      ],
+      "instanceParams": [
+        {
+          "key": "volumeM3",
+          "label": "Storage volume",
+          "unit": "m³",
+          "default": 20000,
+          "min": 1000,
+          "max": 500000,
+          "step": 1000,
+          "grounding": "placeholder_needs_calibration",
+          "note": "Design volume of the basin."
+        },
+        {
+          "key": "catchment",
+          "label": "Creek catchment it serves",
+          "unit": "catchment",
+          "default": 1,
+          "min": 0,
+          "max": 3,
+          "step": 1,
+          "grounding": "reasoned_extrapolation",
+          "options": [
+            {
+              "value": 0,
+              "label": "Central Panjim"
+            },
+            {
+              "value": 1,
+              "label": "Ourem creek"
+            },
+            {
+              "value": 2,
+              "label": "Mala lake"
+            },
+            {
+              "value": 3,
+              "label": "St Inez creek"
+            }
+          ],
+          "note": "Which creek catchment's drainage the measure serves (the rain-at-high-tide hazard works per catchment). Placing it on the map picks the catchment under the point."
+        }
+      ],
+      "ipccAr6Reference": {
+        "row": null,
+        "mappingNote": "No direct row in Table SM3.3: urban drainage measures fall outside the ocean and coastal options assessed in Chapter 3.",
+        "citations": [
+          "ipcc_ar6_wg2_ch3_smtable"
+        ]
+      },
+      "placeAs": "point",
+      "allowedSettings": [
+        "sandy_open_coast",
+        "rocky_coast",
+        "estuary_bank",
+        "creek",
+        "khazan"
+      ]
+    },
+    {
+      "id": "pumping_station",
+      "name": "Stormwater pumping station",
+      "category": "engineered",
+      "summary": "Pumps runoff over the closed outfall into the creek or river while the tide is high, like the Mala pumping station.",
+      "hazardComponents": [
+        "rain"
+      ],
+      "evidence": "Acts only on the 'Heavy rain at high tide' hazard (audit M15), through a volume balance per creek catchment; it does nothing against storm tide, river flood or sea-level rise. Every number is a placeholder until the city's drainage designs are in the tool.",
+      "effects": [
+        {
+          "kind": "rain_pumping",
+          "params": {
+            "availability": {
+              "label": "Share of rated capacity delivered",
+              "value": 0.8,
+              "low": 0.6,
+              "high": 1.0,
+              "unit": "share",
+              "moreProtective": "higher",
+              "grounding": "placeholder_needs_calibration",
+              "note": "Pumps rarely deliver their rating in a storm (start-up time, blocked screens, generator faults). Placeholder."
+            }
+          }
+        }
+      ],
+      "instanceParams": [
+        {
+          "key": "capacityM3s",
+          "label": "Pumping capacity",
+          "unit": "m³/s",
+          "default": 2,
+          "min": 0.1,
+          "max": 30,
+          "step": 0.1,
+          "grounding": "placeholder_needs_calibration",
+          "note": "Rated discharge of all pumps together."
+        },
+        {
+          "key": "catchment",
+          "label": "Creek catchment it serves",
+          "unit": "catchment",
+          "default": 1,
+          "min": 0,
+          "max": 3,
+          "step": 1,
+          "grounding": "reasoned_extrapolation",
+          "options": [
+            {
+              "value": 0,
+              "label": "Central Panjim"
+            },
+            {
+              "value": 1,
+              "label": "Ourem creek"
+            },
+            {
+              "value": 2,
+              "label": "Mala lake"
+            },
+            {
+              "value": 3,
+              "label": "St Inez creek"
+            }
+          ],
+          "note": "Which creek catchment's drainage the measure serves (the rain-at-high-tide hazard works per catchment). Placing it on the map picks the catchment under the point."
+        }
+      ],
+      "ipccAr6Reference": {
+        "row": null,
+        "mappingNote": "No direct row in Table SM3.3: urban drainage measures fall outside the ocean and coastal options assessed in Chapter 3.",
+        "citations": [
+          "ipcc_ar6_wg2_ch3_smtable"
+        ]
+      },
+      "placeAs": "point",
+      "allowedSettings": [
+        "sandy_open_coast",
+        "rocky_coast",
+        "estuary_bank",
+        "creek",
+        "khazan"
+      ]
+    },
+    {
+      "id": "creek_desilting",
+      "name": "Creek desilting / widening",
+      "category": "engineered",
+      "summary": "Restores or adds conveyance in the creek and drains, so more runoff leaves while the outfalls are open.",
+      "hazardComponents": [
+        "rain"
+      ],
+      "evidence": "Acts only on the 'Heavy rain at high tide' hazard (audit M15), through a volume balance per creek catchment; it does nothing against storm tide, river flood or sea-level rise. Every number is a placeholder until the city's drainage designs are in the tool.",
+      "effects": [
+        {
+          "kind": "drain_capacity",
+          "params": {}
+        }
+      ],
+      "instanceParams": [
+        {
+          "key": "addedCapacityM3s",
+          "label": "Added drain capacity",
+          "unit": "m³/s",
+          "default": 1,
+          "min": 0.1,
+          "max": 20,
+          "step": 0.1,
+          "grounding": "placeholder_needs_calibration",
+          "note": "Extra discharge the creek and drains can pass at low tide after the works (from a hydraulic design)."
+        },
+        {
+          "key": "catchment",
+          "label": "Creek catchment it serves",
+          "unit": "catchment",
+          "default": 1,
+          "min": 0,
+          "max": 3,
+          "step": 1,
+          "grounding": "reasoned_extrapolation",
+          "options": [
+            {
+              "value": 0,
+              "label": "Central Panjim"
+            },
+            {
+              "value": 1,
+              "label": "Ourem creek"
+            },
+            {
+              "value": 2,
+              "label": "Mala lake"
+            },
+            {
+              "value": 3,
+              "label": "St Inez creek"
+            }
+          ],
+          "note": "Which creek catchment's drainage the measure serves (the rain-at-high-tide hazard works per catchment). Placing it on the map picks the catchment under the point."
+        }
+      ],
+      "ipccAr6Reference": {
+        "row": null,
+        "mappingNote": "No direct row in Table SM3.3: urban drainage measures fall outside the ocean and coastal options assessed in Chapter 3.",
+        "citations": [
+          "ipcc_ar6_wg2_ch3_smtable"
+        ]
+      },
+      "placeAs": "line",
+      "allowedSettings": [
+        "sandy_open_coast",
+        "rocky_coast",
+        "estuary_bank",
+        "creek",
+        "khazan"
+      ]
+    },
+    {
+      "id": "flap_gate",
+      "name": "Flap / sluice gates on the outfalls",
+      "category": "engineered",
+      "summary": "One-way gates stop tide water backing up the drains into low streets; they do not let rain out while the tide is high.",
+      "hazardComponents": [
+        "rain"
+      ],
+      "evidence": "Acts only on the 'Heavy rain at high tide' hazard (audit M15), through a volume balance per creek catchment; it does nothing against storm tide, river flood or sea-level rise. Every number is a placeholder until the city's drainage designs are in the tool. Without gates the model lets the tide back up the drains to the high-tide level over the catchment's land that lies below it.",
+      "effects": [
+        {
+          "kind": "backflow_gate",
+          "params": {}
+        }
+      ],
+      "instanceParams": [
+        {
+          "key": "catchment",
+          "label": "Creek catchment it serves",
+          "unit": "catchment",
+          "default": 1,
+          "min": 0,
+          "max": 3,
+          "step": 1,
+          "grounding": "reasoned_extrapolation",
+          "options": [
+            {
+              "value": 0,
+              "label": "Central Panjim"
+            },
+            {
+              "value": 1,
+              "label": "Ourem creek"
+            },
+            {
+              "value": 2,
+              "label": "Mala lake"
+            },
+            {
+              "value": 3,
+              "label": "St Inez creek"
+            }
+          ],
+          "note": "Which creek catchment's drainage the measure serves (the rain-at-high-tide hazard works per catchment). Placing it on the map picks the catchment under the point."
+        }
+      ],
+      "ipccAr6Reference": {
+        "row": null,
+        "mappingNote": "No direct row in Table SM3.3: urban drainage measures fall outside the ocean and coastal options assessed in Chapter 3.",
+        "citations": [
+          "ipcc_ar6_wg2_ch3_smtable"
+        ]
+      },
+      "placeAs": "point",
+      "allowedSettings": [
+        "sandy_open_coast",
+        "rocky_coast",
+        "estuary_bank",
+        "creek",
+        "khazan"
+      ]
+    },
+    {
+      "id": "mangrove_creek",
+      "name": "Mangrove-lined creek (naturalised channel)",
+      "category": "nbs",
+      "summary": "Widens a creek with a mangrove fringe instead of a concrete channel: adds conveyance and tidal habitat.",
+      "hazardComponents": [
+        "rain"
+      ],
+      "evidence": "Acts only on the 'Heavy rain at high tide' hazard (audit M15), through a volume balance per creek catchment; it does nothing against storm tide, river flood or sea-level rise. Every number is a placeholder until the city's drainage designs are in the tool. The habitat area is reported on the ecology card, not as damage avoided.",
+      "effects": [
+        {
+          "kind": "drain_capacity",
+          "params": {}
+        }
+      ],
+      "instanceParams": [
+        {
+          "key": "addedCapacityM3s",
+          "label": "Added creek capacity",
+          "unit": "m³/s",
+          "default": 0.5,
+          "min": 0.1,
+          "max": 10,
+          "step": 0.1,
+          "grounding": "placeholder_needs_calibration",
+          "note": "Extra discharge at low tide from the wider section (mangrove roots add roughness, so less than a concrete channel of the same width)."
+        },
+        {
+          "key": "habitatHa",
+          "label": "Mangrove fringe planted",
+          "unit": "ha",
+          "default": 1,
+          "min": 0.1,
+          "max": 20,
+          "step": 0.1,
+          "grounding": "placeholder_needs_calibration",
+          "note": "Area of new tidal mangrove habitat along the creek."
+        },
+        {
+          "key": "catchment",
+          "label": "Creek catchment it serves",
+          "unit": "catchment",
+          "default": 1,
+          "min": 0,
+          "max": 3,
+          "step": 1,
+          "grounding": "reasoned_extrapolation",
+          "options": [
+            {
+              "value": 0,
+              "label": "Central Panjim"
+            },
+            {
+              "value": 1,
+              "label": "Ourem creek"
+            },
+            {
+              "value": 2,
+              "label": "Mala lake"
+            },
+            {
+              "value": 3,
+              "label": "St Inez creek"
+            }
+          ],
+          "note": "Which creek catchment's drainage the measure serves (the rain-at-high-tide hazard works per catchment). Placing it on the map picks the catchment under the point."
+        }
+      ],
+      "ipccAr6Reference": {
+        "row": null,
+        "mappingNote": "No direct row in Table SM3.3: urban drainage measures fall outside the ocean and coastal options assessed in Chapter 3.",
+        "citations": [
+          "ipcc_ar6_wg2_ch3_smtable"
+        ]
+      },
+      "placeAs": "line",
+      "allowedSettings": [
+        "sandy_open_coast",
+        "rocky_coast",
+        "estuary_bank",
+        "creek",
+        "khazan"
+      ]
+    }
+  ],
+  "dropped": [
+    {
+      "name": "Purely economic / extractive buildings from the prior game (e.g. resort, yacht, food economy)",
+      "reason": "No hazard-facing DRR function (build spec §3). Not carried over. If land-use pressure such as mangrove clearance or sand mining matters locally, model it explicitly as removing a natural buffer: take an existing mangrove belt's width down in the scenario."
+    }
+  ],
+  "_placeAs_readme": "placeAs: how 'Place on map' captures this solution's geometry: 'point' (one click) or 'line' (two clicks: start and end of a short run). The geometry is where the structure is meant to sit; its hazard-reduction effect is still modelled at the segment level (see docs/basemap/LOG.md)."
+}

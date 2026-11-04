@@ -1,0 +1,82 @@
+{
+  "_readme": "Social vulnerability index per Census 2011 unit (audit M12, Phase 2). Built by tools/build_svi.py; do not edit by hand.",
+  "grounding": "reasoned_extrapolation",
+  "citations": [
+    "census2011_pca_units",
+    "datameet_villages",
+    "cutter2003"
+  ],
+  "indicators": {
+    "illiteracy7plus": "Illiteracy, age 7+: education limits access to warnings, recovery information and formal jobs (a core social vulnerability variable, Cutter et al. 2003).",
+    "children0to6": "Children aged 0-6: dependants who need help to evacuate and are most at risk from floodwater-borne disease.",
+    "casualWorkerShare": "Casual (marginal) workers among workers: under six months' work a year, so the least income security; flood days cost them wages."
+  },
+  "method": "Mean of the three indicators' z-scores across the four units (equal weights). Class higher if > +0.5, lower if < -0.5, else middle. The classes rank the four units against each other; they are not absolute levels.",
+  "note": "Town-level, not ward-level: ward tables exist for Panaji but no open ward boundaries, so every cell in Panaji (M Corp. + OG) gets one class. Unit boundaries are DataMeet's 2001 village/town polygons, which are approximate. Bambolim's census population is male-heavy (about 70% male), probably an institutional population, which lowers its children and casual-worker shares. Cells outside these four units (Curca and slivers of other villages, about 1,600 GHS-POP people) are 'not classified'.",
+  "units": [
+    {
+      "code2001": "3001000340120000",
+      "id": "panaji",
+      "name": "Panaji (M Corp. + OG, incl. Taleigao)",
+      "population2011": 70991,
+      "illiteracy7plus": 0.0731,
+      "children0to6": 0.0871,
+      "casualWorkerShare": 0.0831,
+      "z": {
+        "illiteracy7plus": -0.539,
+        "children0to6": -0.579,
+        "casualWorkerShare": 0.144
+      },
+      "index": -0.325,
+      "class": "middle"
+    },
+    {
+      "code2001": "3001000340121000",
+      "id": "calapor",
+      "name": "Calapor (Santa Cruz)",
+      "population2011": 14077,
+      "illiteracy7plus": 0.0796,
+      "children0to6": 0.1025,
+      "casualWorkerShare": 0.0878,
+      "z": {
+        "illiteracy7plus": -0.42,
+        "children0to6": 0.284,
+        "casualWorkerShare": 0.333
+      },
+      "index": 0.066,
+      "class": "middle"
+    },
+    {
+      "code2001": "3001000340119000",
+      "id": "chimbel",
+      "name": "Chimbel",
+      "population2011": 15289,
+      "illiteracy7plus": 0.1957,
+      "children0to6": 0.1239,
+      "casualWorkerShare": 0.1074,
+      "z": {
+        "illiteracy7plus": 1.719,
+        "children0to6": 1.478,
+        "casualWorkerShare": 1.132
+      },
+      "index": 1.443,
+      "class": "higher"
+    },
+    {
+      "code2001": "3001000340122000",
+      "id": "bambolim",
+      "name": "Bambolim",
+      "population2011": 6885,
+      "illiteracy7plus": 0.0612,
+      "children0to6": 0.0763,
+      "casualWorkerShare": 0.04,
+      "z": {
+        "illiteracy7plus": -0.76,
+        "children0to6": -1.183,
+        "casualWorkerShare": -1.609
+      },
+      "index": -1.184,
+      "class": "lower"
+    }
+  ]
+}

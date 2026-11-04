@@ -1,0 +1,25 @@
+{
+  "_readme": "Ecology card parameters (audit M14, Phase 2). Reported apart from damage.",
+  "mangroveMigrationM": {
+    "label": "How far mangroves can move inland",
+    "value": 200,
+    "low": 100,
+    "high": 500,
+    "unit": "m",
+    "grounding": "placeholder_needs_calibration",
+    "citations": [
+      "schuerch2018"
+    ],
+    "note": "A mangrove cell counts as squeezed when no free land in the future tidal frame lies within this distance. Placeholder: set at a few grid cells; the real distance depends on the slope behind the stand and how fast the sea rises over the horizon. Schuerch et al. (2018) frame survival by the landward accommodation space; this is the tool's simple stand-in for it."
+  },
+  "builtBlockShare": {
+    "label": "Built share that blocks migration",
+    "value": 0.2,
+    "unit": "share of the cell",
+    "grounding": "placeholder_needs_calibration",
+    "citations": [
+      "pontee2013"
+    ],
+    "note": "Land with at least this share under roofs and roads (OSM + Microsoft footprints, OSM roads) is not available to mangroves, nor is any CRZ-II urban cell; seawalls, dunes and khazan bunds block by holding the future high tide back. Placeholder threshold."
+  }
+}

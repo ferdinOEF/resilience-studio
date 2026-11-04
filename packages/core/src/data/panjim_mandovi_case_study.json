@@ -1,0 +1,41 @@
+{
+  "id": "panjim_mandovi_pilot",
+  "name": "Panjim (Panaji) and the Mandovi estuary frontage",
+  "source": {
+    "dataset": "Coastal Zone Management Plan (CZMP), Goa",
+    "preparer": "National Centre for Sustainable Coastal Management (NCSCM), MoEF&CC, for Dept. of Environment & Climate Change, Govt. of Goa",
+    "basis": "CRZ Notification, 2011",
+    "mapped_period": "2017-2022",
+    "scale": "1:25,000",
+    "crs": "EPSG:4326 (WGS84)",
+    "user_supplied_files": [
+      "goa_mandovi_4sec_v3.tif (raster)",
+      "1.pdf (legend reference, CZMP sheet template)"
+    ]
+  },
+  "pilot_extent_bbox": {
+    "lon_min": 73.76,
+    "lon_max": 73.9,
+    "lat_min": 15.45,
+    "lat_max": 15.53
+  },
+  "method": "Per-pixel nearest-color classification against calibrated legend swatch RGB values, sampled directly from the supplied legend PDF at 300dpi. Distance threshold separates mapped CRZ categories from unclassified basemap (roads, text, boundaries, land not covered by a CRZ fill).",
+  "grounding_quality": "reasoned_extrapolation",
+  "grounding_note": "Areas are derived from an official government CRZ map via automated raster color classification, visually cross-checked against the source image, but NOT manually digitized or field-verified. Treat area figures as good working estimates, not survey-grade.",
+  "crz_areas_km2": {
+    "CRZ-IA (mangrove/ecologically sensitive)": 8.402,
+    "CRZ-II (urban/built-up)": 3.641,
+    "CRZ-III NDZ (0-200m No Development Zone)": 2.732,
+    "CRZ-III (200-500m from HTL)": 1.408,
+    "CRZ-IVA (territorial waters)": 14.197,
+    "CRZ-IVB (tidal water body / river channel)": 21.733,
+    "Waterbody (non-CRZ, e.g. ponds)": 0.874
+  },
+  "unclassified_km2": 80.778,
+  "total_window_km2": 133.763,
+  "khazan_land_estimate_km2": 4.577,
+  "khazan_grounding_quality": "placeholder_needs_calibration",
+  "khazan_grounding_note": "Khazan Land hatch-pattern detected via color-signature + morphological closing, not a clean polygon match. Visually plausible (clusters around mangrove-fringed estuary margins, consistent with real khazan geography) but includes likely false positives (e.g. along the outer Bardez dune coast) and needs manual review before treating as authoritative.",
+  "pre_1991_infrastructure_policy": "Per user instruction 2026-09-25: Bund and Sluice Gate features marked \"prior to 1991\" on the source CRZ map are to be treated as CURRENT existing infrastructure in this tool, not historical/deprecated.",
+  "bund_sluice_extraction_status": "NOT YET DONE. Both symbols render in near-grey/black tones nearly identical to roads, boundary lines, and map text at this resolution, so simple color-threshold detection would be unreliably noisy. Needs either manual point digitization from the source file at full resolution, or a dedicated icon/template-matching pass."
+}

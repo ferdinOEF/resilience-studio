@@ -6,7 +6,12 @@
   "description": "Hono API on Vercel functions: registry CRUD with versioning and review, place-pack manifest, scenario library index, run log, sign-off queue.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "scripts": {
     "build": "tsup",
     "dev": "tsx watch src/dev.ts",
@@ -17,6 +22,7 @@
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
+    "@resilience/core": "workspace:*",
     "hono": "^4.10.3",
     "ws": "^8.18.3",
     "zod": "^4.1.12"

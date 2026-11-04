@@ -1,0 +1,242 @@
+{
+ "_readme": "Depth-damage model (audit M12, Phase 2). Built by tools/build_damage.py from the JRC global flood depth-damage database (Huizinga et al. 2017) and World Bank price series; do not edit by hand. Damage of a flooded cell = sum over asset classes of exposure (m2 of building footprint or road surface, ha of farmland) x maximum damage x damage factor(depth).",
+ "priceYear": 2024,
+ "conversion": {
+  "inrPerUsd2010": 45.7258121212121,
+  "eurPerUsd2010": 0.754308990105961,
+  "inrPerEur2010": 60.6195,
+  "gdpDeflator2010to": 1.86335,
+  "inrPerEur2010AtPriceYear": 112.955
+ },
+ "curves": {
+  "residential": {
+   "depthM": [
+    0.0,
+    0.5,
+    1.0,
+    1.5,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "factor": [
+    0.0,
+    0.3266,
+    0.4941,
+    0.6166,
+    0.7207,
+    0.8695,
+    0.9315,
+    0.9836,
+    1.0
+   ],
+   "label": "Residential buildings",
+   "grounding": "reasoned_extrapolation",
+   "citations": [
+    "huizinga2017"
+   ],
+   "note": "Huizinga et al. (2017) average continental damage function for Asia (share of the maximum damage reached at each depth; linear between the points). Asia's functions come from a handful of studies (e.g. China, Indonesia, Vietnam, Bangladesh); none from Goa."
+  },
+  "commercial": {
+   "depthM": [
+    0.0,
+    0.5,
+    1.0,
+    1.5,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "factor": [
+    0.0,
+    0.3768,
+    0.5377,
+    0.6593,
+    0.7628,
+    0.8833,
+    0.9419,
+    0.9808,
+    1.0
+   ],
+   "label": "Commercial and public buildings",
+   "grounding": "reasoned_extrapolation",
+   "citations": [
+    "huizinga2017"
+   ],
+   "note": "Huizinga et al. (2017) average continental damage function for Asia (share of the maximum damage reached at each depth; linear between the points). Asia's functions come from a handful of studies (e.g. China, Indonesia, Vietnam, Bangladesh); none from Goa."
+  },
+  "industrial": {
+   "depthM": [
+    0.0,
+    0.5,
+    1.0,
+    1.5,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "factor": [
+    0.0,
+    0.2832,
+    0.4816,
+    0.6292,
+    0.7172,
+    0.8567,
+    0.9086,
+    0.9553,
+    1.0
+   ],
+   "label": "Industrial buildings",
+   "grounding": "reasoned_extrapolation",
+   "citations": [
+    "huizinga2017"
+   ],
+   "note": "Huizinga et al. (2017) average continental damage function for Asia (share of the maximum damage reached at each depth; linear between the points). Asia's functions come from a handful of studies (e.g. China, Indonesia, Vietnam, Bangladesh); none from Goa."
+  },
+  "roads": {
+   "depthM": [
+    0.0,
+    0.5,
+    1.0,
+    1.5,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "factor": [
+    0.0,
+    0.2144,
+    0.3728,
+    0.6039,
+    0.7097,
+    0.8084,
+    0.8872,
+    0.9688,
+    1.0
+   ],
+   "label": "Roads",
+   "grounding": "reasoned_extrapolation",
+   "citations": [
+    "huizinga2017"
+   ],
+   "note": "Huizinga et al. (2017) average continental damage function for Asia (share of the maximum damage reached at each depth; linear between the points). Asia's functions come from a handful of studies (e.g. China, Indonesia, Vietnam, Bangladesh); none from Goa."
+  },
+  "agriculture": {
+   "depthM": [
+    0.0,
+    0.5,
+    1.0,
+    1.5,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "factor": [
+    0.0,
+    0.135,
+    0.37,
+    0.524,
+    0.558,
+    0.66,
+    0.834,
+    0.988,
+    1.0
+   ],
+   "label": "Agriculture (crop value added)",
+   "grounding": "reasoned_extrapolation",
+   "citations": [
+    "huizinga2017"
+   ],
+   "note": "Huizinga et al. (2017) average continental damage function for Asia (share of the maximum damage reached at each depth; linear between the points). Asia's functions come from a handful of studies (e.g. China, Indonesia, Vietnam, Bangladesh); none from Goa."
+  }
+ },
+ "maxDamage": {
+  "residential": {
+   "label": "Maximum damage, residential buildings",
+   "value": 24035,
+   "unit": "INR per m2 of footprint",
+   "grounding": "reasoned_extrapolation",
+   "citations": [
+    "huizinga2017",
+    "worldbank_fx_deflator"
+   ],
+   "note": "Huizinga et al. (2017) India value 212.78 EUR/m2 (2010 prices, building-based: structure + content per m2 of footprint) x 60.62 INR/EUR (2010 average official rates, World Bank) x 1.863 (India GDP deflator 2024/2010, World Bank) = INR 24,035 at 2024 prices. Range: the database's 90% confidence interval (-28%/+53%). Reasoned, not solid: a regression on national construction costs, not a Goa survey.",
+   "low": 17305,
+   "high": 36773,
+   "moreHazardous": "higher"
+  },
+  "commercial": {
+   "label": "Maximum damage, commercial and public buildings",
+   "value": 36596,
+   "unit": "INR per m2 of footprint",
+   "grounding": "reasoned_extrapolation",
+   "citations": [
+    "huizinga2017",
+    "worldbank_fx_deflator"
+   ],
+   "note": "Huizinga et al. (2017) India value 323.98 EUR/m2 (2010 prices, building-based: structure + content per m2 of footprint) x 60.62 INR/EUR (2010 average official rates, World Bank) x 1.863 (India GDP deflator 2024/2010, World Bank) = INR 36,596 at 2024 prices. Range: the database's 90% confidence interval (-31%/+35%). Reasoned, not solid: a regression on national construction costs, not a Goa survey.",
+   "low": 25251,
+   "high": 49404,
+   "moreHazardous": "higher"
+  },
+  "industrial": {
+   "label": "Maximum damage, industrial buildings",
+   "value": 33107,
+   "unit": "INR per m2 of footprint",
+   "grounding": "reasoned_extrapolation",
+   "citations": [
+    "huizinga2017",
+    "worldbank_fx_deflator"
+   ],
+   "note": "Huizinga et al. (2017) India value 293.10 EUR/m2 (2010 prices, building-based: structure + content per m2 of footprint) x 60.62 INR/EUR (2010 average official rates, World Bank) x 1.863 (India GDP deflator 2024/2010, World Bank) = INR 33,107 at 2024 prices. Range: the database's 90% confidence interval (-30%/+53%). Reasoned, not solid: a regression on national construction costs, not a Goa survey.",
+   "low": 23175,
+   "high": 50654,
+   "moreHazardous": "higher"
+  },
+  "agriculture": {
+   "label": "Maximum damage, agriculture (crop value added)",
+   "value": 129539,
+   "unit": "INR per ha",
+   "grounding": "reasoned_extrapolation",
+   "citations": [
+    "huizinga2017",
+    "worldbank_fx_deflator"
+   ],
+   "note": "Huizinga et al. (2017) India value 1146.82 EUR/ha (2010 prices, value added per ha) x 60.62 INR/EUR (2010 average official rates, World Bank) x 1.863 (India GDP deflator 2024/2010, World Bank) = INR 129,539 at 2024 prices. No interval in the database. Reasoned, not solid: a regression on national construction costs, not a Goa survey."
+  },
+  "roads": {
+   "label": "Maximum damage, roads",
+   "value": 335,
+   "unit": "INR per m2 of road surface",
+   "grounding": "reasoned_extrapolation",
+   "citations": [
+    "huizinga2017",
+    "worldbank_fx_deflator"
+   ],
+   "note": "Huizinga et al. (2017) India value 2.96 EUR/m2 (2010 prices, Asia average 4 EUR/m2 x India/Asia GDP per capita) x 60.62 INR/EUR (2010 average official rates, World Bank) x 1.863 (India GDP deflator 2024/2010, World Bank) = INR 335 at 2024 prices. No interval in the database. Reasoned, not solid: a regression on national construction costs, not a Goa survey."
+  }
+ },
+ "peopleAffectedDepthM": {
+  "label": "Depth at which a person counts as affected",
+  "value": 0.15,
+  "low": 0.1,
+  "high": 0.3,
+  "unit": "m",
+  "grounding": "reasoned_extrapolation",
+  "citations": [
+   "drr_audit_2026"
+  ],
+  "moreHazardous": "lower",
+  "note": "People living in a cell flooded deeper than this count as affected. 0.15 m is a common convention (about kerb height, where water starts entering ground floors and blocking movement), not a standard; editable. Applied to the GHS-POP people in each flooded cell."
+ }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "@resilience/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Ported risk engine (one water level in metres, depth-damage, EAD, rain at high tide) and the Panjim case-study loaders. Pure and unit-tested; every number lives in the data files, none in code.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src tests"
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.16"
+  }
+}
