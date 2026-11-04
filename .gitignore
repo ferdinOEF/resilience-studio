@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.turbo/
+.vercel/
+.env
+.env.local
+.env.*.local
+*.log
+coverage/
+.DS_Store
