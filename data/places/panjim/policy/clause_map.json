@@ -1,0 +1,31 @@
+{
+  "place": "panjim",
+  "note": "Seeded clause map (spec section 8, step 7): the six instruments of section 7 against the risks the chain models. Every cell is 'unassessed' until a clause-level assessment exists and is signed off by an expert. No status is asserted here; the Policy agent comes in a later phase.",
+  "states": {
+    "covered": "a clause in force addresses the modelled risk",
+    "partial": "a rule exists but its threshold or scope is outdated",
+    "gap": "no rule addresses the risk",
+    "conflict": "a rule blocks the best solution",
+    "unassessed": "not yet assessed"
+  },
+  "instruments": [
+    { "id": "crz_2019", "short": "CRZ 2019 / CZMP", "title": "Coastal Regulation Zone Notification 2019 and the Goa CZMP" },
+    { "id": "dm_act_2005_sdmp_ddmp", "short": "District DM Plan", "title": "Disaster Management Act 2005; Goa SDMP 2024; North Goa DDMP 2022" },
+    { "id": "rp_goa_odp_panaji", "short": "Panaji ODP", "title": "Regional Plan for Goa and the Panaji Outline Development Plan" },
+    { "id": "goa_sapcc", "short": "State Climate Plan", "title": "Goa State Action Plan on Climate Change" },
+    { "id": "wetlands_rules_2017", "short": "Wetlands Rules", "title": "Wetlands (Conservation and Management) Rules 2017" },
+    { "id": "nbc_bye_laws", "short": "Building bye-laws", "title": "National Building Code and local building bye-laws" }
+  ],
+  "risks": [
+    { "id": "surge", "title": "Storm surge + cyclone", "chain_hazard": "surge" },
+    { "id": "flood", "title": "Monsoon river flood", "chain_hazard": "flood" },
+    { "id": "compound", "title": "Compound surge + river flood", "chain_hazard": "compound" },
+    { "id": "rain", "title": "Heavy rain at high tide", "chain_hazard": "rain" },
+    { "id": "slr", "title": "Sea-level rise 2050 / 2100", "chain_hazard": "slr" },
+    { "id": "khazan_bund_failure", "title": "Khazan bund failure", "chain_hazard": "compound" }
+  ],
+  "cells": [],
+  "default_state": "unassessed",
+  "clauses": [],
+  "findings": []
+}

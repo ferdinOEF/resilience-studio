@@ -26,6 +26,7 @@
     "@resilience/contracts": "workspace:*",
     "@resilience/core": "workspace:*",
     "@resilience/meta-mind": "workspace:*",
+    "@resilience/places": "workspace:*",
     "@resilience/registry": "workspace:*",
     "hono": "^4.10.3",
     "ws": "^8.18.3",

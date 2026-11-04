@@ -1,0 +1,12 @@
+{
+  "source": "North Goa District Disaster Management Plan 2022 (named in RESILIENCE_STUDIO_BUILD_SPEC_phase1.md section 4). The PDF has not been supplied; names only, no positions.",
+  "status": "not_yet_supplied",
+  "grounding": "placeholder_needs_calibration",
+  "admin_only": true,
+  "facilities": [
+    { "id": "gps_karem", "name": "GPS Karem (Government Primary School)", "role": "relief centre (per the spec)", "lon": null, "lat": null, "position_source": null },
+    { "id": "gps_madel", "name": "GPS Madel (Government Primary School)", "role": "relief centre (per the spec)", "lon": null, "lat": null, "position_source": null },
+    { "id": "altinho_mpcs", "name": "Altinho MPCS", "role": "relief centre (per the spec)", "lon": null, "lat": null, "position_source": null }
+  ],
+  "geocoding_attempt": "Nominatim (OpenStreetMap), 2026-11-04: no feature found for GPS Karem or GPS Madel; 'Altinho MPCS' did not match an OpenStreetMap school. Positions stay empty until the DDMP PDF gives them."
+}

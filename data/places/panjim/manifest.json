@@ -1,0 +1,444 @@
+{
+  "id": "panjim",
+  "name": "Panjim (Panaji), Goa — pilot place pack",
+  "level": "city",
+  "geography": {
+    "city": "IN-GA-panjim",
+    "state": "IN-GA",
+    "national": "IN"
+  },
+  "bbox": [
+    73.76,
+    15.45,
+    73.9,
+    15.53
+  ],
+  "description": "Panjim and the frontage directly touching it on the same bank of the Mandovi (spec section 4). Every layer lists its source, level, grounding and status; placeholder layers are admin-only until replaced. Model parameters live in the science registry, not here.",
+  "layers": [
+    {
+      "id": "city_boundary",
+      "title": "Panjim city footprint (Census 2001 town boundary)",
+      "kind": "boundary",
+      "file": "boundaries/panjim_city_census2001.geojson",
+      "format": "geojson",
+      "crs": "EPSG:4326",
+      "source": "DataMeet community maps (CC BY 4.0): Census of India 2001 town boundary of Panaji (CEN_2001 3001000340120000)",
+      "source_type": "official_dataset",
+      "citation_ids": [
+        "datameet_villages"
+      ],
+      "level": "city",
+      "grounding": "reasoned_extrapolation",
+      "status": "supplied",
+      "admin_only": false,
+      "replaced_by": "CCP municipal boundary (spec section 7, item 5)",
+      "note": "2001 boundary; the Corporation of the City of Panaji limits may differ. The Tiswadi taluka footprint (GADM) frames it at state scale."
+    },
+    {
+      "id": "tiswadi_towns",
+      "title": "Census 2001 towns of Tiswadi (Panaji, Chimbel, Bambolim, Calapor, Goa Velha)",
+      "kind": "boundary",
+      "file": "boundaries/tiswadi_census2001_towns.geojson",
+      "format": "geojson",
+      "crs": "EPSG:4326",
+      "source": "DataMeet community maps (CC BY 4.0): Census of India 2001 town boundaries",
+      "source_type": "official_dataset",
+      "citation_ids": [
+        "datameet_villages"
+      ],
+      "level": "city",
+      "grounding": "reasoned_extrapolation",
+      "status": "supplied",
+      "admin_only": false,
+      "replaced_by": null,
+      "note": "The SVI census units (packages/core/src/data/svi.json) use these codes."
+    },
+    {
+      "id": "ward_zones",
+      "title": "Ward zones (landmark-derived placeholder, 9 zones)",
+      "kind": "zones",
+      "file": "boundaries/ward_zones_landmark.geojson",
+      "format": "geojson",
+      "crs": "EPSG:4326",
+      "source": "Voronoi cells of OpenStreetMap place nodes (Nominatim, 2026-11-04: Patto, Fontainhas, Mala, Altinho, St Inez, Campal, Miramar, Caranzalem, Taleigao, Ribandar, Merces) clipped to the Census 2001 Panaji town boundary; data/places/panjim/tools/ward_zones_from_landmarks.py",
+      "source_type": "official_dataset",
+      "citation_ids": [
+        "osm"
+      ],
+      "level": "city",
+      "grounding": "placeholder_needs_calibration",
+      "status": "placeholder",
+      "admin_only": true,
+      "replaced_by": "CCP ward boundary shapefile (spec section 7, item 5)",
+      "note": "Not wards: the mockups' landmark zones. Tonca has no OpenStreetMap place node; Ribandar and Merces lie outside the Census 2001 town boundary, so their 'edge' zones are not drawn. The studio never shows these; the admin side does."
+    },
+    {
+      "id": "landmarks",
+      "title": "Landmark positions used for the zones (OpenStreetMap via Nominatim)",
+      "kind": "points",
+      "file": "boundaries/landmarks_nominatim_2026-11-04.json",
+      "format": "json",
+      "crs": "EPSG:4326",
+      "source": "Nominatim search results, 2026-11-04, bounded to the Panjim window; each hit carries its osm_type/osm_id",
+      "source_type": "official_dataset",
+      "citation_ids": [
+        "osm"
+      ],
+      "level": "city",
+      "grounding": "reasoned_extrapolation",
+      "status": "supplied",
+      "admin_only": true,
+      "replaced_by": null,
+      "note": ""
+    },
+    {
+      "id": "osm_admin_tags",
+      "title": "OpenStreetMap administrative relations in the window (tags only)",
+      "kind": "table",
+      "file": "boundaries/admin_tags.json",
+      "format": "json",
+      "crs": "none",
+      "source": "Overpass API, 2026-10-23 (old repo cache): Goa, North Goa, Tiswadi, Bardez relations",
+      "source_type": "official_dataset",
+      "citation_ids": [
+        "osm"
+      ],
+      "level": "state",
+      "grounding": "reasoned_extrapolation",
+      "status": "supplied",
+      "admin_only": true,
+      "replaced_by": null,
+      "note": ""
+    },
+    {
+      "id": "creeks",
+      "title": "Creeks and drains (OpenStreetMap waterways)",
+      "kind": "vector",
+      "file": "boundaries/creeks.json",
+      "format": "overpass-json",
+      "crs": "EPSG:4326",
+      "source": "Overpass API, 2026-10-23 (old repo cache): waterway ways in the window; used by the rain-at-high-tide catchments",
+      "source_type": "official_dataset",
+      "citation_ids": [
+        "osm"
+      ],
+      "level": "city",
+      "grounding": "reasoned_extrapolation",
+      "status": "supplied",
+      "admin_only": false,
+      "replaced_by": "CCP / Imagine Panaji drain network and outfall levels",
+      "note": ""
+    },
+    {
+      "id": "terrain_deltadtm",
+      "title": "DeltaDTM v1.1 Mandovi tile (default terrain)",
+      "kind": "terrain",
+      "file": "terrain/DeltaDTM_Mandovi_EPSG32643.tif",
+      "format": "geotiff",
+      "crs": "EPSG:32643",
+      "source": "Pronk et al. (2024) DeltaDTM v1.1, 1 arc-second bare-earth coastal DTM (EGM2008), tile supplied by Ferdin (4TU.ResearchData was unreachable); also as terrain/DeltaDTM_Mandovi_EPSG4326.tif; gridded to the CRZ grid in packages/core/src/data/panjimDemGrid.deltadtm.json",
+      "source_type": "official_dataset",
+      "citation_ids": [
+        "pronk2024_deltadtm"
+      ],
+      "level": "city",
+      "grounding": "reasoned_extrapolation",
+      "status": "supplied",
+      "admin_only": false,
+      "replaced_by": "a finer DTM (LiDAR) when available",
+      "note": "Pixels above 10 m are outside DeltaDTM's domain and keep GLO-30 (docs/MODEL_AUDIT_LOG_ported.md, DeltaDTM switch)."
+    },
+    {
+      "id": "terrain_glo30",
+      "title": "Copernicus GLO-30 (surface model, above 10 m)",
+      "kind": "grid",
+      "file": null,
+      "format": "json-grid",
+      "crs": "EPSG:4326",
+      "source": "Copernicus DEM GLO-30, tile N15 E073, gridded in packages/core/src/data/panjimDemGrid.json",
+      "source_type": "official_dataset",
+      "citation_ids": [
+        "copernicus_glo30"
+      ],
+      "level": "national",
+      "grounding": "reasoned_extrapolation",
+      "status": "supplied",
+      "admin_only": false,
+      "replaced_by": null,
+      "note": ""
+    },
+    {
+      "id": "crz_grid",
+      "title": "CRZ classification grid (CZMP Goa), 55 m cells",
+      "kind": "grid",
+      "file": "crz/panjim_crz_classification.csv",
+      "format": "json-grid",
+      "crs": "EPSG:4326",
+      "source": "Goa CZMP (NCSCM, CRZ Notification 2011) raster goa_mandovi_4sec_v3.tif, colour-classified in the old repo (docs/PANAJI_PILOT_DATA_INVENTORY.md); grid in packages/core/src/data/panjimCrzGrid.json; class totals in crz/panjim_crz_classification.csv; preview crz/panjim_crz_classified_map.png",
+      "source_type": "government_doc",
+      "citation_ids": [
+        "czmp_goa",
+        "crz2011"
+      ],
+      "level": "city",
+      "grounding": "reasoned_extrapolation",
+      "status": "supplied",
+      "admin_only": false,
+      "replaced_by": "CZMP vector (spec section 7, item 6)",
+      "note": "The CRZ classification areas are vectorised at run time by the engine's marching squares (packages/core/src/engine/vectorize.ts)."
+    },
+    {
+      "id": "czmp_raster",
+      "title": "CZMP raster (goa_mandovi_4sec_v3.tif, 3.1 m per pixel)",
+      "kind": "raster",
+      "file": null,
+      "format": "geotiff",
+      "crs": "EPSG:4326",
+      "source": "Supplied by Ferdin 2026-09-25 (old repo); not committed (size)",
+      "source_type": "government_doc",
+      "citation_ids": [
+        "czmp_goa"
+      ],
+      "level": "city",
+      "grounding": "solid_direct",
+      "status": "supplied",
+      "admin_only": true,
+      "replaced_by": null,
+      "note": "Kept in the old repo's data/source; decide external object storage before Phase 2 (spec section 5)."
+    },
+    {
+      "id": "khazan_polygons",
+      "title": "Khazan polygons (CZMP hatch, vectorised)",
+      "kind": "vector",
+      "file": "khazan/khazan_polygons.geojson",
+      "format": "geojson",
+      "crs": "EPSG:4326",
+      "source": "CZMP khazan hatch, colour-classified and morphologically closed in the old repo, vectorised from the 55 m grid mask (packages/core/tools/khazan_polygons.ts)",
+      "source_type": "government_doc",
+      "citation_ids": [
+        "czmp_goa"
+      ],
+      "level": "city",
+      "grounding": "placeholder_needs_calibration",
+      "status": "placeholder",
+      "admin_only": true,
+      "replaced_by": "manual review against the CZMP sheets; a khazan tenant-association or WRD layer",
+      "note": "Pre-1991 bunds and sluices are treated as current infrastructure (standing instruction, 2026-09-25)."
+    },
+    {
+      "id": "field_bunds",
+      "title": "Traced field bunds outside the khazan mask (Patto, Taleigao, St Inez / Merces)",
+      "kind": "vector",
+      "file": "khazan/field_bunds_traced.geojson",
+      "format": "geojson",
+      "crs": "EPSG:4326",
+      "source": "Traced in the old repo (Phase 3, A1) from Sentinel-2 cloudless 2016, building footprints and OSM farmland; Ferdin's ground truth that these fields are bunded (23 Oct 2026)",
+      "source_type": "field_survey",
+      "citation_ids": [],
+      "level": "city",
+      "grounding": "reasoned_extrapolation",
+      "status": "derived",
+      "admin_only": false,
+      "replaced_by": "a bund survey (crest heights)",
+      "note": "Extent reasoned; crest height a registry placeholder (hazards.params.bundCrestM)."
+    },
+    {
+      "id": "existing_defenses",
+      "title": "Sluice-gate candidates and defence notes (CZMP symbology)",
+      "kind": "points",
+      "file": null,
+      "format": "json",
+      "crs": "EPSG:4326",
+      "source": "packages/core/src/data/existingDefenses.json (old repo extraction from the CZMP symbology)",
+      "source_type": "government_doc",
+      "citation_ids": [
+        "czmp_goa"
+      ],
+      "level": "city",
+      "grounding": "placeholder_needs_calibration",
+      "status": "placeholder",
+      "admin_only": true,
+      "replaced_by": "manual digitisation of bund and sluice symbols at full resolution",
+      "note": ""
+    },
+    {
+      "id": "ddmp_facilities",
+      "title": "Emergency facilities named in the North Goa DDMP 2022",
+      "kind": "points",
+      "file": "facilities/ddmp_2022_facilities.json",
+      "format": "json",
+      "crs": "EPSG:4326",
+      "source": "North Goa District Disaster Management Plan 2022 (named in the spec: GPS Karem, GPS Madel, Altinho MPCS); the PDF has not been supplied, so the facilities are listed without positions",
+      "source_type": "government_doc",
+      "citation_ids": [],
+      "level": "city",
+      "grounding": "placeholder_needs_calibration",
+      "status": "not_yet_supplied",
+      "admin_only": true,
+      "replaced_by": "the DDMP PDF (spec section 7, item 1) and geocoding against it",
+      "note": "Nominatim found no OpenStreetMap feature for GPS Karem or GPS Madel on 2026-11-04; nothing was invented."
+    },
+    {
+      "id": "population_census2011",
+      "title": "Population: Census 2011 census-unit totals (fallback)",
+      "kind": "table",
+      "file": null,
+      "format": "json",
+      "crs": "none",
+      "source": "Census of India 2011 PCA, census units Panaji, Taleigao, Bambolim, Chimbel, Calapor… in packages/core/src/data/svi.json; GHS-POP 2020 grid rescaled to these totals in panjimPopGrid.json",
+      "source_type": "government_doc",
+      "citation_ids": [
+        "census2011_pca_units",
+        "census2011_panaji"
+      ],
+      "level": "city",
+      "grounding": "reasoned_extrapolation",
+      "status": "supplied",
+      "admin_only": false,
+      "replaced_by": "CCP ward-level population or household survey (spec section 7, item 5)",
+      "note": "Marked for replacement; growth since 2011 is a registry placeholder."
+    },
+    {
+      "id": "exposure_buildings",
+      "title": "Building footprints and road surface (OSM + Microsoft)",
+      "kind": "grid",
+      "file": null,
+      "format": "json-grid",
+      "crs": "EPSG:4326",
+      "source": "OpenStreetMap and Microsoft Global ML Building Footprints, gridded in packages/core/src/data/panjimExposureGrid.json",
+      "source_type": "official_dataset",
+      "citation_ids": [
+        "osm"
+      ],
+      "level": "city",
+      "grounding": "reasoned_extrapolation",
+      "status": "supplied",
+      "admin_only": false,
+      "replaced_by": "a survey of building classes and floor levels",
+      "note": ""
+    },
+    {
+      "id": "policy_clause_map",
+      "title": "Policy clause map (instruments × modelled risks)",
+      "kind": "document",
+      "file": "policy/clause_map.json",
+      "format": "json",
+      "crs": "none",
+      "source": "Seeded with the six instruments of spec section 7 and the modelled risks; every cell unassessed until the Policy agent and an expert sign-off (later phase)",
+      "source_type": "government_doc",
+      "citation_ids": [],
+      "level": "city",
+      "grounding": "placeholder_needs_calibration",
+      "status": "placeholder",
+      "admin_only": false,
+      "replaced_by": "clause-level assessments signed off by an expert",
+      "note": "The studio shows the board with 'awaiting assessment' states; no status is asserted."
+    }
+  ],
+  "calibration_events": [
+    {
+      "id": "tauktae_2021",
+      "name": "Cyclone Tauktae",
+      "date": "2021-05-16",
+      "hazard": "surge",
+      "observations": [
+        {
+          "kind": "observed flood extent or water levels in Panjim",
+          "source": "to be supplied (WRD, GSDMA, CCP, dated press photos)",
+          "file": null,
+          "status": "not_yet_supplied"
+        }
+      ],
+      "status": "observations_pending"
+    },
+    {
+      "id": "monsoon_2019",
+      "name": "Monsoon floods 2019",
+      "date": "2019-07",
+      "hazard": "rain",
+      "observations": [
+        {
+          "kind": "observed flood extent or water levels in Panjim",
+          "source": "to be supplied (WRD, GSDMA, CCP, dated press photos)",
+          "file": null,
+          "status": "not_yet_supplied"
+        }
+      ],
+      "status": "observations_pending"
+    }
+  ],
+  "policy_corpus": [
+    {
+      "id": "crz_2019",
+      "title": "Coastal Regulation Zone Notification 2019 and the Goa CZMP",
+      "issuer": "MoEF&CC, Government of India; NCSCM for Goa",
+      "year": 2019,
+      "kind": "notification",
+      "file": null,
+      "url": "https://moef.gov.in",
+      "status": "public_not_fetched",
+      "applicability": "to_confirm_clause_by_clause"
+    },
+    {
+      "id": "dm_act_2005_sdmp_ddmp",
+      "title": "Disaster Management Act 2005; Goa State DMP 2024; North Goa DDMP 2022",
+      "issuer": "Government of India; GSDMA; North Goa District",
+      "year": 2024,
+      "kind": "plan",
+      "file": null,
+      "url": null,
+      "status": "not_yet_supplied",
+      "applicability": "to_confirm_clause_by_clause"
+    },
+    {
+      "id": "rp_goa_odp_panaji",
+      "title": "Regional Plan for Goa and the Panaji Outline Development Plan",
+      "issuer": "Town and Country Planning Department, Goa; NGPDA",
+      "year": null,
+      "kind": "plan",
+      "file": null,
+      "url": null,
+      "status": "not_yet_supplied",
+      "applicability": "to_confirm_clause_by_clause"
+    },
+    {
+      "id": "goa_sapcc",
+      "title": "Goa State Action Plan on Climate Change",
+      "issuer": "Government of Goa",
+      "year": null,
+      "kind": "plan",
+      "file": null,
+      "url": null,
+      "status": "public_not_fetched",
+      "applicability": "to_confirm_clause_by_clause"
+    },
+    {
+      "id": "wetlands_rules_2017",
+      "title": "Wetlands (Conservation and Management) Rules 2017",
+      "issuer": "MoEF&CC, Government of India",
+      "year": 2017,
+      "kind": "rules",
+      "file": null,
+      "url": null,
+      "status": "public_not_fetched",
+      "applicability": "to_confirm_clause_by_clause"
+    },
+    {
+      "id": "nbc_bye_laws",
+      "title": "National Building Code and local building bye-laws",
+      "issuer": "BIS; Corporation of the City of Panaji",
+      "year": null,
+      "kind": "code",
+      "file": null,
+      "url": null,
+      "status": "not_yet_supplied",
+      "applicability": "to_confirm_clause_by_clause"
+    }
+  ],
+  "overrides_national": [
+    "terrain_deltadtm",
+    "city_boundary",
+    "population_census2011"
+  ],
+  "updated_at": "2026-11-04"
+}

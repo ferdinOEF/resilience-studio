@@ -1,0 +1,564 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-23T01:32:06Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 1687216927,
+  "lat": 15.4920468,
+  "lon": 73.8294791,
+  "tags": {
+    "name": "Mala",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 2639990518,
+  "lat": 15.5013640,
+  "lon": 73.7710387,
+  "tags": {
+    "addr:city": "Sinquerium, Candolim",
+    "addr:housenumber": "158",
+    "addr:postcode": "403515",
+    "addr:street": "Aguada - Siolim Road",
+    "amenity": "restaurant",
+    "cuisine": "regional;indian;asian",
+    "name": "Himalaya Bar And Restaurant",
+    "opening_hours": "Mo-Su 12:30-22:30",
+    "phone": "+917387963695"
+  }
+},
+{
+  "type": "node",
+  "id": 4297559572,
+  "lat": 15.4951492,
+  "lon": 73.8354156,
+  "tags": {
+    "alt_name": "Patto Centre",
+    "name": "Patto",
+    "official_name": "EDC Patto Plaza",
+    "place": "suburb"
+  }
+},
+{
+  "type": "node",
+  "id": 4561875176,
+  "lat": 15.4881515,
+  "lon": 73.8135988,
+  "tags": {
+    "name": "Campal Beach Resort",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5849720808,
+  "lat": 15.4865423,
+  "lon": 73.8124180,
+  "tags": {
+    "building": "yes",
+    "name": "La Campala Housing Society"
+  }
+},
+{
+  "type": "node",
+  "id": 6909497564,
+  "lat": 15.4885211,
+  "lon": 73.8154247,
+  "tags": {
+    "addr:district": "North Goa",
+    "addr:full": "Next To Bal Bhavan, Opposite Parade Grounds, Campel",
+    "addr:postcode": "403001",
+    "addr:state": "Goa",
+    "amenity": "hospital",
+    "name": "Campal Clinic",
+    "source": "OpenGovernmentData"
+  }
+},
+{
+  "type": "node",
+  "id": 9409203771,
+  "lat": 15.4878853,
+  "lon": 73.8262582,
+  "tags": {
+    "name": "Altinho",
+    "place": "suburb",
+    "wikidata": "Q3525816"
+  }
+},
+{
+  "type": "node",
+  "id": 10749415897,
+  "lat": 15.4842045,
+  "lon": 73.8134104,
+  "tags": {
+    "name": "La Campala Colony",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 10751415930,
+  "lat": 15.4952855,
+  "lon": 73.8367030,
+  "tags": {
+    "highway": "bus_stop",
+    "name": "Platform 19-21 Altinho-Calangute-Aldona"
+  }
+},
+{
+  "type": "node",
+  "id": 10756400904,
+  "lat": 15.4941168,
+  "lon": 73.8195699,
+  "tags": {
+    "name": "Campal",
+    "place": "neighbourhood",
+    "wikidata": "Q5027890"
+  }
+},
+{
+  "type": "node",
+  "id": 10757172840,
+  "lat": 15.4869341,
+  "lon": 73.8175249,
+  "tags": {
+    "name": "Santa Inez",
+    "place": "suburb"
+  }
+},
+{
+  "type": "node",
+  "id": 10757172922,
+  "lat": 15.4987541,
+  "lon": 73.8353455,
+  "tags": {
+    "name": "Patto Colony",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 11167732140,
+  "lat": 15.4893121,
+  "lon": 73.8911462,
+  "tags": {
+    "name": "Kadamba Plateau",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 12395392053,
+  "lat": 15.5290012,
+  "lon": 73.8258576,
+  "tags": {
+    "name": "Hotel Grand Kadamba",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 12595200249,
+  "lat": 15.5220200,
+  "lon": 73.8300267,
+  "tags": {
+    "name": "Kadamba Transport Corporation",
+    "office": "government",
+    "wikidata": "Q6345069"
+  }
+},
+{
+  "type": "node",
+  "id": 12701303421,
+  "lat": 15.4951504,
+  "lon": 73.8368643,
+  "tags": {
+    "name": "Kadamba Control Room Enquiry",
+    "tourism": "information"
+  }
+},
+{
+  "type": "node",
+  "id": 13127014679,
+  "lat": 15.4873380,
+  "lon": 73.8261989,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Altinho Circle",
+    "public_transport": "platform",
+    "shelter": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13130330682,
+  "lat": 15.4874846,
+  "lon": 73.8277012,
+  "tags": {
+    "amenity": "post_office",
+    "name": "Altinho Post Office"
+  }
+},
+{
+  "type": "node",
+  "id": 14077993765,
+  "lat": 15.4873499,
+  "lon": 73.8260914,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Altinho Circle",
+    "public_transport": "platform",
+    "shelter": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 14078698767,
+  "lat": 15.4969479,
+  "lon": 73.8355563,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy",
+    "name": "Patto Chemist And Druggists"
+  }
+},
+{
+  "type": "way",
+  "id": 89208031,
+  "center": {
+    "lat": 15.4908014,
+    "lon": 73.8311342
+  },
+  "tags": {
+    "name": "Mala Lake",
+    "natural": "water",
+    "water": "reservoir"
+  }
+},
+{
+  "type": "way",
+  "id": 89208051,
+  "center": {
+    "lat": 15.4911986,
+    "lon": 73.8384365
+  },
+  "tags": {
+    "intermittent": "no",
+    "name": "Ourem Creek",
+    "name:pt": "Rio de Ourém",
+    "natural": "water",
+    "tidal": "yes",
+    "water": "river"
+  }
+},
+{
+  "type": "way",
+  "id": 156471699,
+  "center": {
+    "lat": 15.4969516,
+    "lon": 73.8244954
+  },
+  "tags": {
+    "highway": "secondary",
+    "lane_markings": "no",
+    "name": "18th June Road",
+    "oneway": "yes",
+    "sidewalk": "both",
+    "smoothness": "good",
+    "surface": "asphalt",
+    "wikidata": "Q4557611"
+  }
+},
+{
+  "type": "way",
+  "id": 295968777,
+  "center": {
+    "lat": 15.4890593,
+    "lon": 73.8115740
+  },
+  "tags": {
+    "leisure": "sports_centre",
+    "name": "Campal Indoor Stadium",
+    "sport": "badminton;table_tennis;gym",
+    "wikidata": "Q24933026"
+  }
+},
+{
+  "type": "way",
+  "id": 316043021,
+  "center": {
+    "lat": 15.4953139,
+    "lon": 73.8370346
+  },
+  "tags": {
+    "building": "transportation",
+    "name": "Kadamba Bus Terminus Panaji"
+  }
+},
+{
+  "type": "way",
+  "id": 317708710,
+  "center": {
+    "lat": 15.4846245,
+    "lon": 73.8142244
+  },
+  "tags": {
+    "leisure": "park",
+    "name": "Jogger's Park, La Campala Colony"
+  }
+},
+{
+  "type": "way",
+  "id": 370495315,
+  "center": {
+    "lat": 15.4903687,
+    "lon": 73.8878212
+  },
+  "tags": {
+    "name": "110KV Kadamba Substation",
+    "power": "substation",
+    "voltage": "110000"
+  }
+},
+{
+  "type": "way",
+  "id": 405337749,
+  "center": {
+    "lat": 15.4881002,
+    "lon": 73.8158881
+  },
+  "tags": {
+    "building": "hospital",
+    "building:levels": "5",
+    "name": "Campal Clinic"
+  }
+},
+{
+  "type": "way",
+  "id": 640502004,
+  "center": {
+    "lat": 15.4972304,
+    "lon": 73.8323351
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "footway",
+    "horse": "no",
+    "layer": "1",
+    "lit": "yes",
+    "name": "Rua de Ourem foot bridge",
+    "oneway": "no",
+    "width": "4"
+  }
+},
+{
+  "type": "way",
+  "id": 812658821,
+  "center": {
+    "lat": 15.4897820,
+    "lon": 73.8323897
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Patto Business Center"
+  }
+},
+{
+  "type": "way",
+  "id": 812658827,
+  "center": {
+    "lat": 15.4956023,
+    "lon": 73.8344566
+  },
+  "tags": {
+    "highway": "unclassified",
+    "junction": "roundabout",
+    "lane_markings": "no",
+    "name": "Patto Circle",
+    "surface": "paving_stones"
+  }
+},
+{
+  "type": "way",
+  "id": 838100155,
+  "center": {
+    "lat": 15.4892374,
+    "lon": 73.8170179
+  },
+  "tags": {
+    "intermittent": "no",
+    "name": "Santa Inez Creek",
+    "waterway": "tidal_channel"
+  }
+},
+{
+  "type": "way",
+  "id": 978893680,
+  "center": {
+    "lat": 15.4986715,
+    "lon": 73.8340903
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "layer": "1",
+    "name": "Old Patto Bridge",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1095648069,
+  "center": {
+    "lat": 15.4894627,
+    "lon": 73.8129574
+  },
+  "tags": {
+    "leisure": "sports_centre",
+    "name": "Campal Swimming Pool",
+    "sport": "swimming"
+  }
+},
+{
+  "type": "way",
+  "id": 1155877317,
+  "center": {
+    "lat": 15.4989001,
+    "lon": 73.8336452
+  },
+  "tags": {
+    "highway": "secondary",
+    "name": "Old Patto Bridge",
+    "name:pt": "Rua de Ourém",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1156762022,
+  "center": {
+    "lat": 15.4904429,
+    "lon": 73.8142231
+  },
+  "tags": {
+    "leisure": "pitch",
+    "name": "Campal Sports Ground",
+    "sport": "multi",
+    "wikidata": "Q4901480"
+  }
+},
+{
+  "type": "way",
+  "id": 1204985199,
+  "center": {
+    "lat": 15.4909021,
+    "lon": 73.8894658
+  },
+  "tags": {
+    "landuse": "residential",
+    "name": "Viva Kadamba Raheja"
+  }
+},
+{
+  "type": "way",
+  "id": 1323678895,
+  "center": {
+    "lat": 15.4914923,
+    "lon": 73.8229376
+  },
+  "tags": {
+    "amenity": "college",
+    "name": "Nirmala Institute of Education"
+  }
+},
+{
+  "type": "way",
+  "id": 1323689605,
+  "center": {
+    "lat": 15.4996541,
+    "lon": 73.8344393
+  },
+  "tags": {
+    "man_made": "bridge",
+    "name": "New Patto Bridge"
+  }
+},
+{
+  "type": "way",
+  "id": 1323689606,
+  "center": {
+    "lat": 15.4986761,
+    "lon": 73.8340786
+  },
+  "tags": {
+    "man_made": "bridge",
+    "name": "Old Patto Bridge"
+  }
+},
+{
+  "type": "way",
+  "id": 1340215327,
+  "center": {
+    "lat": 15.4948940,
+    "lon": 73.8349564
+  },
+  "tags": {
+    "name": "Patto Substation",
+    "power": "substation"
+  }
+},
+{
+  "type": "way",
+  "id": 1340215328,
+  "center": {
+    "lat": 15.4952228,
+    "lon": 73.8346220
+  },
+  "tags": {
+    "landuse": "recreation_ground",
+    "leisure": "park",
+    "name": "Patto Plaza Park"
+  }
+},
+{
+  "type": "way",
+  "id": 1382488716,
+  "center": {
+    "lat": 15.4883764,
+    "lon": 73.8255152
+  },
+  "tags": {
+    "gas_insulated": "yes",
+    "name": "Altinho Substation",
+    "power": "substation",
+    "rating": "40 MVA",
+    "voltage": "33000"
+  }
+},
+{
+  "type": "way",
+  "id": 1547919843,
+  "center": {
+    "lat": 15.4969640,
+    "lon": 73.8356650
+  },
+  "tags": {
+    "building": "commercial",
+    "building:levels": "5",
+    "name": "Patto Center"
+  }
+}
+
+  ]
+}

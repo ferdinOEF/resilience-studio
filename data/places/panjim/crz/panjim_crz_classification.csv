@@ -1,0 +1,10 @@
+category,area_km2,pct_of_mapped_window
+CRZ-IA (mangrove/ecologically sensitive),8.402,6.28
+CRZ-II (urban/built-up),3.641,2.72
+CRZ-III NDZ (0-200m No Development Zone),2.732,2.04
+CRZ-III (200-500m from HTL),1.408,1.05
+CRZ-IVA (territorial waters),14.197,10.61
+CRZ-IVB (tidal water body / river channel),21.733,16.25
+"Waterbody (non-CRZ, e.g. ponds)",0.874,0.65
+Unclassified (land/roads/basemap/text),80.778,60.39
+TOTAL WINDOW,133.763,100.0

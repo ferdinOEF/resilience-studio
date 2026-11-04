@@ -1,0 +1,436 @@
+{
+ "fontainhas": {
+  "query": "Fontainhas, Panaji, Goa",
+  "results": [
+   {
+    "place_id": 249846555,
+    "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 1687185066,
+    "lat": "15.4966560",
+    "lon": "73.8310810",
+    "category": "place",
+    "type": "suburb",
+    "place_rank": 19,
+    "importance": 0.14672120012207213,
+    "addresstype": "suburb",
+    "name": "Fontainhas",
+    "display_name": "Fontainhas, Panaji, Tiswadi, North Goa, Goa, 403001, India",
+    "boundingbox": [
+     "15.4766560",
+     "15.5166560",
+     "73.8110810",
+     "73.8510810"
+    ]
+   }
+  ]
+ },
+ "miramar": {
+  "query": "Miramar, Panaji, Goa",
+  "results": [
+   {
+    "place_id": 251111916,
+    "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 9409169704,
+    "lat": "15.4827569",
+    "lon": "73.8093495",
+    "category": "place",
+    "type": "suburb",
+    "place_rank": 19,
+    "importance": 0.205345191009919,
+    "addresstype": "suburb",
+    "name": "Miramar",
+    "display_name": "Miramar, Panaji, Tiswadi, North Goa, Goa, 403002, India",
+    "boundingbox": [
+     "15.4627569",
+     "15.5027569",
+     "73.7893495",
+     "73.8293495"
+    ]
+   }
+  ]
+ },
+ "caranzalem": {
+  "query": "Caranzalem, Goa",
+  "results": [
+   {
+    "place_id": 252774111,
+    "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 9409186285,
+    "lat": "15.4677228",
+    "lon": "73.8079977",
+    "category": "place",
+    "type": "suburb",
+    "place_rank": 19,
+    "importance": 0.18157831638402872,
+    "addresstype": "suburb",
+    "name": "Caranzalem",
+    "display_name": "Caranzalem, Panaji, Tiswadi, North Goa, Goa, 403004, India",
+    "boundingbox": [
+     "15.4477228",
+     "15.4877228",
+     "73.7879977",
+     "73.8279977"
+    ]
+   }
+  ]
+ },
+ "tonca": {
+  "query": "Tonca, Panaji, Goa",
+  "results": []
+ },
+ "taleigao": {
+  "query": "Taleigao, Goa",
+  "results": [
+   {
+    "place_id": 253771278,
+    "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 9409186284,
+    "lat": "15.4702665",
+    "lon": "73.8225674",
+    "category": "place",
+    "type": "suburb",
+    "place_rank": 19,
+    "importance": 0.14672120012207213,
+    "addresstype": "suburb",
+    "name": "Taleigao",
+    "display_name": "Taleigao, Panaji, Tiswadi, North Goa, Goa, 403002, India",
+    "boundingbox": [
+     "15.4502665",
+     "15.4902665",
+     "73.8025674",
+     "73.8425674"
+    ]
+   }
+  ]
+ },
+ "ribandar": {
+  "query": "Ribandar, Goa",
+  "results": [
+   {
+    "place_id": 252657614,
+    "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 245632174,
+    "lat": "15.5028910",
+    "lon": "73.8660320",
+    "category": "place",
+    "type": "suburb",
+    "place_rank": 19,
+    "importance": 0.14672120012207213,
+    "addresstype": "suburb",
+    "name": "Ribandar",
+    "display_name": "Ribandar, Panaji, Tiswadi, North Goa, Goa, 403006, India",
+    "boundingbox": [
+     "15.4828910",
+     "15.5228910",
+     "73.8460320",
+     "73.8860320"
+    ]
+   }
+  ]
+ },
+ "merces": {
+  "query": "Merces, Tiswadi, Goa",
+  "results": [
+   {
+    "place_id": 253363161,
+    "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 4270026560,
+    "lat": "15.4828297",
+    "lon": "73.8538551",
+    "category": "place",
+    "type": "suburb",
+    "place_rank": 19,
+    "importance": 0.12743869505990896,
+    "addresstype": "suburb",
+    "name": "Merces",
+    "display_name": "Merces, Panaji, Tiswadi, North Goa, Goa, 403005, India",
+    "boundingbox": [
+     "15.4628297",
+     "15.5028297",
+     "73.8338551",
+     "73.8738551"
+    ]
+   }
+  ]
+ },
+ "patto": {
+  "query": "Patto, Panaji, Goa",
+  "results": [
+   {
+    "place_id": 253025177,
+    "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 4297559572,
+    "lat": "15.4951492",
+    "lon": "73.8354156",
+    "category": "place",
+    "type": "suburb",
+    "place_rank": 19,
+    "importance": 0.14672120012207213,
+    "addresstype": "suburb",
+    "name": "Patto",
+    "display_name": "Patto, Panaji, Tiswadi, North Goa, Goa, 403001, India",
+    "boundingbox": [
+     "15.4751492",
+     "15.5151492",
+     "73.8154156",
+     "73.8554156"
+    ]
+   }
+  ]
+ },
+ "mala": {
+  "query": "Mala, Panaji, Goa",
+  "results": [
+   {
+    "place_id": 253058395,
+    "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 1687216927,
+    "lat": "15.4920468",
+    "lon": "73.8294791",
+    "category": "place",
+    "type": "neighbourhood",
+    "place_rank": 24,
+    "importance": 0.08005453345540547,
+    "addresstype": "neighbourhood",
+    "name": "Mala",
+    "display_name": "Mala, Fontainhas, Panaji, Tiswadi, North Goa, Goa, 403001, India",
+    "boundingbox": [
+     "15.4820468",
+     "15.5020468",
+     "73.8194791",
+     "73.8394791"
+    ]
+   },
+   {
+    "place_id": 252870037,
+    "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "way",
+    "osm_id": 89208031,
+    "lat": "15.4908223",
+    "lon": "73.8311681",
+    "category": "water",
+    "type": "reservoir",
+    "place_rank": 20,
+    "importance": 0.13338786678873882,
+    "addresstype": "reservoir",
+    "name": "Mala Lake",
+    "display_name": "Mala Lake, Altinho, Panaji, Tiswadi, North Goa, Goa, India",
+    "boundingbox": [
+     "15.4902078",
+     "15.4913951",
+     "73.8304045",
+     "73.8318640"
+    ]
+   }
+  ]
+ },
+ "altinho": {
+  "query": "Altinho, Panaji, Goa",
+  "results": [
+   {
+    "place_id": 249786328,
+    "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 9409203771,
+    "lat": "15.4878853",
+    "lon": "73.8262582",
+    "category": "place",
+    "type": "suburb",
+    "place_rank": 19,
+    "importance": 0.14672120012207213,
+    "addresstype": "suburb",
+    "name": "Altinho",
+    "display_name": "Altinho, Panaji, Tiswadi, North Goa, Goa, 403001, India",
+    "boundingbox": [
+     "15.4678853",
+     "15.5078853",
+     "73.8062582",
+     "73.8462582"
+    ]
+   }
+  ]
+ },
+ "st_inez": {
+  "query": "Santa Inez, Panaji, Goa",
+  "results": [
+   {
+    "place_id": 251109155,
+    "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 10757172840,
+    "lat": "15.4869341",
+    "lon": "73.8175249",
+    "category": "place",
+    "type": "suburb",
+    "place_rank": 19,
+    "importance": 0.14672120012207213,
+    "addresstype": "suburb",
+    "name": "Santa Inez",
+    "display_name": "Santa Inez, Panaji, Tiswadi, North Goa, Goa, 403001, India",
+    "boundingbox": [
+     "15.4669341",
+     "15.5069341",
+     "73.7975249",
+     "73.8375249"
+    ]
+   }
+  ]
+ },
+ "campal": {
+  "query": "Campal, Panaji, Goa",
+  "results": [
+   {
+    "place_id": 251557868,
+    "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 10756400904,
+    "lat": "15.4941168",
+    "lon": "73.8195699",
+    "category": "place",
+    "type": "neighbourhood",
+    "place_rank": 24,
+    "importance": 0.08005453345540547,
+    "addresstype": "neighbourhood",
+    "name": "Campal",
+    "display_name": "Campal, Santa Inez, Panaji, Tiswadi, North Goa, Goa, 403001, India",
+    "boundingbox": [
+     "15.4841168",
+     "15.5041168",
+     "73.8095699",
+     "73.8295699"
+    ]
+   }
+  ]
+ },
+ "dona_paula": {
+  "query": "Dona Paula, Goa",
+  "results": [
+   {
+    "place_id": 252424116,
+    "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 1944441069,
+    "lat": "15.4581997",
+    "lon": "73.8038671",
+    "category": "place",
+    "type": "suburb",
+    "place_rank": 19,
+    "importance": 0.22697289548003588,
+    "addresstype": "suburb",
+    "name": "Dona Paula",
+    "display_name": "Dona Paula, Panaji, Tiswadi, North Goa, Goa, 403004, India",
+    "boundingbox": [
+     "15.4381997",
+     "15.4781997",
+     "73.7838671",
+     "73.8238671"
+    ]
+   },
+   {
+    "place_id": 252670205,
+    "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 1328303571,
+    "lat": "15.4505271",
+    "lon": "73.8030641",
+    "category": "tourism",
+    "type": "artwork",
+    "place_rank": 30,
+    "importance": 0.22697289548003588,
+    "addresstype": "tourism",
+    "name": "Dona paula",
+    "display_name": "Dona paula, Dias Beach Access, La Marvel Colony, Dona Paula, Panaji, Tiswadi, North Goa, Goa, 403004, India",
+    "boundingbox": [
+     "15.4504771",
+     "15.4505771",
+     "73.8030141",
+     "73.8031141"
+    ]
+   }
+  ]
+ },
+ "gps_karem": {
+  "query": "Government Primary School Karem Goa",
+  "results": []
+ },
+ "gps_madel": {
+  "query": "Government Primary School Madel Goa",
+  "results": []
+ },
+ "altinho_mpcs": {
+  "query": "Altinho Panaji school",
+  "results": [
+   {
+    "place_id": 251114183,
+    "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "way",
+    "osm_id": 338292078,
+    "lat": "15.4975170",
+    "lon": "73.8220217",
+    "category": "building",
+    "type": "yes",
+    "place_rank": 30,
+    "importance": 5.4533455405462995e-05,
+    "addresstype": "building",
+    "name": "Don Bosco High School Oratory",
+    "display_name": "Don Bosco High School Oratory, Governador Pestana Road, Campal, Altinho, Panaji, Tiswadi, North Goa, Goa, 403001, India",
+    "boundingbox": [
+     "15.4972825",
+     "15.4977515",
+     "73.8218069",
+     "73.8222366"
+    ]
+   },
+   {
+    "place_id": 252302430,
+    "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "way",
+    "osm_id": 1020178831,
+    "lat": "15.4970431",
+    "lon": "73.8213040",
+    "category": "amenity",
+    "type": "school",
+    "place_rank": 30,
+    "importance": 5.4533455405462995e-05,
+    "addresstype": "amenity",
+    "name": "Don Bosco High School",
+    "display_name": "Don Bosco High School, General Bernado Guedes Road, Panjim Bazaar, Fontainhas, Panaji, Tiswadi, North Goa, Goa, 403001, India",
+    "boundingbox": [
+     "15.4958618",
+     "15.4983354",
+     "73.8200998",
+     "73.8223931"
+    ]
+   },
+   {
+    "place_id": 251114395,
+    "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "way",
+    "osm_id": 1095611953,
+    "lat": "15.4968330",
+    "lon": "73.8217881",
+    "category": "building",
+    "type": "school",
+    "place_rank": 30,
+    "importance": 5.4533455405462995e-05,
+    "addresstype": "building",
+    "name": "Don Bosco High school",
+    "display_name": "Don Bosco High school, Mahatma Gandhi Road, Panjim Bazaar, Fontainhas, Panaji, Tiswadi, North Goa, Goa, 403001, India",
+    "boundingbox": [
+     "15.4965571",
+     "15.4973471",
+     "73.8214928",
+     "73.8220921"
+    ]
+   }
+  ]
+ }
+}

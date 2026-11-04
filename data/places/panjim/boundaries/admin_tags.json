@@ -1,0 +1,86 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-23T01:36:08Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "relation",
+  "id": 1997193,
+  "tags": {
+    "admin_level": "5",
+    "boundary": "administrative",
+    "name": "North Goa",
+    "name:cs": "Severní Goa",
+    "name:de": "Nord-Goa",
+    "name:kn": "ಉತ್ತರ ಗೋವಾ",
+    "name:ml": "നോർത്ത് ഗോവ",
+    "name:zh": "北果阿",
+    "official_name": "North Goa District",
+    "ref:LGD:district": "551",
+    "type": "boundary",
+    "wikidata": "Q108234",
+    "wikipedia": "en:North Goa district"
+  }
+},
+{
+  "type": "relation",
+  "id": 10090776,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Tiswadi",
+    "ref:LGD:subdistrict": "5611",
+    "type": "boundary",
+    "wikidata": "Q3291873"
+  }
+},
+{
+  "type": "relation",
+  "id": 10090779,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Bardez",
+    "ref:LGD:subdistrict": "5610",
+    "type": "boundary",
+    "wikidata": "Q3632943"
+  }
+},
+{
+  "type": "relation",
+  "id": 11251493,
+  "tags": {
+    "ISO3166-2": "IN-GA",
+    "admin_level": "4",
+    "boundary": "administrative",
+    "name": "Goa",
+    "name:cs": "Goa",
+    "name:en": "Goa",
+    "name:eo": "Goao",
+    "name:gom": "गोंय",
+    "name:he": "גואה",
+    "name:hi": "गोवा",
+    "name:ja": "ゴア",
+    "name:kn": "ಗೋವಾ",
+    "name:ko": "고아",
+    "name:ku": "Goa",
+    "name:mr": "गोआ",
+    "name:pa": "ਗੋਆ",
+    "name:pt": "Goa",
+    "name:ru": "Гоа",
+    "name:ta": "கோவா",
+    "name:uk": "Ґоа",
+    "name:zh": "果阿邦",
+    "ref:LGD:state": "30",
+    "source": "https://mapwarper.net/layers/2054",
+    "type": "boundary",
+    "wikidata": "Q1171"
+  }
+}
+
+  ]
+}

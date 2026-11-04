@@ -3,6 +3,7 @@ import { cors } from "hono/cors";
 import { auth } from "./routes/auth";
 import { health } from "./routes/health";
 import { models } from "./routes/models";
+import { places } from "./routes/places";
 import { registry } from "./routes/registry";
 import { runs } from "./routes/runs";
 import { signoff } from "./routes/signoff";
@@ -16,6 +17,7 @@ export function createApp() {
   app.route("/registry", registry);
   app.route("/runs", runs);
   app.route("/models", models);
+  app.route("/places", places);
   app.route("/signoff", signoff);
   app.notFound((c) => c.json({ error: "not found", path: c.req.path }, 404));
   app.onError((err, c) => {

@@ -1,0 +1,24 @@
+{
+  "name": "@resilience/places",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Place layer (spec section 1.1 and 4): the national base data and the place packs, each with a manifest that lists every layer, its source, level, grounding and status. The loader validates the manifests and serves the vector layers.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src tests"
+  },
+  "dependencies": {
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.16"
+  }
+}
