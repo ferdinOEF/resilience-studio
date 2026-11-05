@@ -4,6 +4,15 @@
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm turbo run build --filter=@resilience/studio... --filter=@resilience/api...",
   "outputDirectory": "apps/studio/dist",
-  "functions": { "api/[[...route]].ts": { "maxDuration": 60, "memory": 1024 } },
-  "rewrites": [{ "source": "/((?!api/).*)", "destination": "/index.html" }]
+  "functions": {
+    "api/[[...route]].ts": {
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
+  ]
 }
