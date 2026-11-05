@@ -26,6 +26,7 @@ You are continuing work on Resilience Studio, a pnpm + Turborepo monorepo built 
 - Long paths break esbuild on Windows: keep the repo at `C:\Users\ferdi\dev\...`.
 - Large bash heredocs fail in this environment; write files with the Write tool or small python patch scripts.
 - The permission classifier blocks a shell command that embeds a credential literal. Put secrets in a scratch file with the Write tool and read them with `head -1`. Never print `DATABASE_URL` or `VITE_ARCGIS_API_KEY`.
+- GitHub rejected a push three times with "fatal error in commit_refs_rules" (and once with "Internal Server Error") on 2026-11-05; the same commit went through once its message was rewritten in plain ASCII (no en/em dashes or arrows in the message). Keep commit messages ASCII; the docs themselves can hold any character.
 - Ferdin wants no permission prompts (he added allow rules in `~/.claude/settings.json`; only deletions ask). Do not edit that file yourself.
 
 ## Open items (owner side, ask by name, do not substitute)
