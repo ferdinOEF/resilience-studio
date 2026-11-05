@@ -1,6 +1,6 @@
 /**
  * One MapLibre map per view. Basemap: Esri World Imagery when VITE_ARCGIS_API_KEY is set, otherwise the EOX
- * Sentinel-2 cloudless 2016 WMTS; a light scrim sits over the imagery so the teal and orange overlays read.
+ * Sentinel-2 cloudless 2020 WMTS; a light scrim sits over the imagery so the teal and orange overlays read.
  * Labels are HTML markers (no glyph server needed); overlays are GeoJSON sources added by useGeoJson().
  */
 import maplibregl, { type LayerSpecification, type LngLatBoundsLike, type Map as MLMap, type StyleSpecification } from "maplibre-gl";
@@ -19,10 +19,10 @@ export function basemap(): Basemap {
   const esri = !!key;
   const tiles = esri
     ? [`https://ibasemaps-api.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}?token=${key}`]
-    : ["https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2016_3857/default/g/{z}/{y}/{x}.jpg"];
-  const attribution = esri ? "Esri, Maxar, Earthstar Geographics, and the GIS User Community" : "Sentinel-2 cloudless 2016 by EOX IT Services GmbH, CC BY 4.0";
+    : ["https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg"];
+  const attribution = esri ? "Esri, Maxar, Earthstar Geographics, and the GIS User Community" : "Sentinel-2 cloudless 2020 by EOX IT Services GmbH, CC BY 4.0";
   return {
-    name: esri ? "Esri World Imagery" : "Sentinel-2 cloudless 2016 (EOX)",
+    name: esri ? "Esri World Imagery" : "Sentinel-2 cloudless 2020 (EOX)",
     credit: attribution,
     style: {
       version: 8,
