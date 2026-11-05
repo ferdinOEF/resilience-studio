@@ -27,14 +27,14 @@ You are continuing work on Resilience Studio, a pnpm + Turborepo monorepo built 
 - Large bash heredocs fail in this environment; write files with the Write tool or small python patch scripts.
 - The permission classifier blocks a shell command that embeds a credential literal. Put secrets in a scratch file with the Write tool and read them with `head -1`. Never print `DATABASE_URL` or `VITE_ARCGIS_API_KEY`.
 - GitHub rejected a push three times with "fatal error in commit_refs_rules" (and once with "Internal Server Error") on 2026-11-05; the same commit went through once its message was rewritten in plain ASCII (no en/em dashes or arrows in the message). Keep commit messages ASCII; the docs themselves can hold any character.
+- `VITE_ARCGIS_API_KEY` is set in Vercel (all environments, 2026-11-05 evening, from the git-ignored `apps/studio/.env.local`), so the studio shows Esri World Imagery; the EOX Sentinel-2 fallback only appears if the key is removed or the build runs without it. The key is a browser-side value: restrict it by referrer in the ArcGIS dashboard rather than treating it as a secret.
 - Ferdin wants no permission prompts (he added allow rules in `~/.claude/settings.json`; only deletions ask). Do not edit that file yourself.
 
 ## Open items (owner side, ask by name, do not substitute)
 
-1. `VITE_ARCGIS_API_KEY` in Vercel (value is in the old repo's `.env.local`; copy the file, never print it). Until set, the studio shows the Sentinel-2 cloudless fallback and says so.
-2. `MAIL_WEBHOOK_URL` so production magic links are mailed.
-3. Spec §7 sources: DDMP 2022 and SDMP 2024 PDFs, CSTEP 2024, the Shetye reference, observed flood extents (Tauktae 2021, 2019 monsoon), the CCP ward shapefile, the Panaji ODP/CZMP vector, the Mormugao tide gauge record. The observed extents are the gate: without a real calibration event no model can be signed off and the studio keeps saying "not yet modelled".
-4. Ward geometry is nine landmark-derived placeholder zones (admin-only) until the CCP shapefile arrives. Relief-centre positions, solution cost and time, and the exposure and SVI map layers also wait on data.
+1. `MAIL_WEBHOOK_URL` so production magic links are mailed.
+2. Spec §7 sources: DDMP 2022 and SDMP 2024 PDFs, CSTEP 2024, the Shetye reference, observed flood extents (Tauktae 2021, 2019 monsoon), the CCP ward shapefile, the Panaji ODP/CZMP vector, the Mormugao tide gauge record. The observed extents are the gate: without a real calibration event no model can be signed off and the studio keeps saying "not yet modelled".
+3. Ward geometry is nine landmark-derived placeholder zones (admin-only) until the CCP shapefile arrives. Relief-centre positions, solution cost and time, and the exposure and SVI map layers also wait on data.
 
 ## Suggested next work (only when Ferdin asks)
 

@@ -25,7 +25,8 @@ Production: https://resilience-studio.vercel.app (main). Steps 1–6 and 8 were 
 | 1 Basemap fallback | `fix-01-basemap-2020` | ffce418 | https://resilience-studio-git-fix-01-basemap-2020-ferdin-5189s-projects.vercel.app | 2026-11-05 | EOX `s2cloudless-2016_3857` returns 404 for every tile; now `s2cloudless-2020_3857`, legend and attribution read 2020 |
 | 2 Map first paint | `fix-02-map-first-paint` | 888cdec | https://resilience-studio-git-fix-02-map-first-paint-ferdin-5189s-projects.vercel.app | 2026-11-05 | explicit container size before MapLibre init, `map.resize()` on style load and from a ResizeObserver on the map box; `/risk/state` and `/risk/city` drew nothing until the first zoom |
 | 3 State-view legend | `fix-03-state-legend` | 17ed78f | https://resilience-studio-git-fix-03-state-legend-ferdin-5189s-projects.vercel.app | 2026-11-05 | compact legend pinned bottom-left: one risk ramp row, one place-status row, the not-modelled explanation on one line |
-| Port provenance | `docs-port-provenance` | (this commit) | https://resilience-studio-git-docs-port-provenance-ferdin-5189s-projects.vercel.app | 2026-11-05 | `REGRESSION_LOG.md`: the ported commit cb732bd is the head of `feature/model-p3` and carries p0, p1 and p2; M1–M18 already in; nothing to apply |
+| Port provenance | `docs-port-provenance` | ba7ee31, 6fb241c | https://resilience-studio-git-docs-port-provenance-ferdin-5189s-projects.vercel.app | 2026-11-05 | `REGRESSION_LOG.md`: the ported commit cb732bd is the head of `feature/model-p3` and carries p0, p1 and p2; M1–M18 already in; nothing to apply |
+| ArcGIS key | `env-arcgis-key` | (this commit) | https://resilience-studio-git-env-arcgis-key-ferdin-5189s-projects.vercel.app | 2026-11-05 | `VITE_ARCGIS_API_KEY` added to the Vercel project (production, preview, development) from the local `apps/studio/.env.local`; docs updated; the studio now shows Esri World Imagery |
 
 Checked on the fix-03 preview in a browser without zooming: Sentinel-2 cloudless 2020 tiles and the GADM talukas paint on load; production (old code) stays blank after the same wait. `pnpm --filter @resilience/studio smoke` passes on the stack; `pnpm --filter @resilience/core test` 104 pass, regression pins unchanged.
 
@@ -35,7 +36,7 @@ Done: the GitHub repository `ferdinOEF/resilience-studio`, the Vercel project, t
 
 Still open:
 
-1. **`VITE_ARCGIS_API_KEY`** (Esri World Imagery): until it is set the studio shows the Sentinel-2 cloudless fallback and says so.
+1. ~~**`VITE_ARCGIS_API_KEY`**~~ set on 2026-11-05 (evening) in all three environments; the studio shows Esri World Imagery from the next build.
 2. **Mail for magic links**: no `MAIL_WEBHOOK_URL`, so production sign-in links are read from the function log.
 3. **Sources named in spec §7** (DDMP/SDMP PDFs, CSTEP 2024, Shetye, observed flood extents, CCP wards, ODP/CZMP vector, Mormugao tide gauge): all still to be supplied; tracked in `DATA_INVENTORY.md`. Item 4 (observed extents) is the gate for anything to appear in the studio: no model can be signed off without a calibration event, so the gate stays closed and the studio shows "not yet modelled".
 

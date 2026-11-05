@@ -32,7 +32,7 @@ One Vercel project serves the studio (static Vite build from `apps/studio/dist`)
 
 ### State on 2026-11-05
 
-All five steps are done. Production `https://resilience-studio.vercel.app` runs on the Neon store `store_RJVholriCzdKVALk` (Postgres 18.6, PostGIS 3.6.4); migrations 0001–0003 are applied and the registry holds the 88 seeded rows, all `in_review`. The bootstrap admin signed in once through the logged magic link. Still unset: `VITE_ARCGIS_API_KEY` (the studio uses the Sentinel-2 fallback) and `MAIL_WEBHOOK_URL` (production magic links are only in the function log: Vercel → project → Logs, filter `magic link`).
+All five steps are done. Production `https://resilience-studio.vercel.app` runs on the Neon store `store_RJVholriCzdKVALk` (Postgres 18.6, PostGIS 3.6.4); migrations 0001–0003 are applied and the registry holds the 88 seeded rows, all `in_review`. The bootstrap admin signed in once through the logged magic link. `VITE_ARCGIS_API_KEY` was added to all three environments on 2026-11-05 (evening) from the local `apps/studio/.env.local` (an ArcGIS Location Platform key; it is a build-time value that ends up in the studio bundle, so restrict it by referrer in the ArcGIS dashboard to `resilience-studio.vercel.app` and `*-ferdin-5189s-projects.vercel.app`). Still unset: `MAIL_WEBHOOK_URL` (production magic links are only in the function log: Vercel → project → Logs, filter `magic link`).
 
 Function note: the Vercel Node runtime reads the request body before the handler runs, so `api/index.ts` hands that pre-read body to Hono as `rawBody`. Without this every POST with a body hung until the 60 s timeout (found and fixed on 2026-11-05, commit ae46c5a).
 
