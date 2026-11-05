@@ -84,9 +84,9 @@ export function RiskChip({ cls, rank }: { cls: 1 | 2 | 3 | 4; rank?: boolean }) 
   );
 }
 
-export function Legend({ title, children }: { title: ReactNode; children?: ReactNode }) {
+export function Legend({ title, children, className }: { title: ReactNode; children?: ReactNode; className?: string }) {
   return (
-    <div className="legend">
+    <div className={`legend${className ? " " + className : ""}`}>
       <div className="legend-title">{title}</div>
       {children}
     </div>

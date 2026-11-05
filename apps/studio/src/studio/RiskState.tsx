@@ -165,16 +165,25 @@ export function RiskState() {
   return (
     <Layout view="risk" scale="state" rail={rail} card={card}>
       <StudioMap bounds={bounds} padding={24} onLoad={setMap} onUnload={() => setMap(null)}>
-        <Legend title={modelled ? `${SHOW_LABEL[show]} · ${eventLabel}` : `${SHOW_LABEL[show]} · not yet modelled`}>
-          <Swatch color="var(--risk-1)" label="Low" />
-          <Swatch color="var(--risk-2)" label="Moderate" />
-          <Swatch color="var(--risk-3)" label="High" />
-          <Swatch color="var(--risk-4)" label="Very high" />
-          <div className="legend-sep" />
-          <Swatch kind="dot" color="var(--teal)" label="Modelled to the studio standard" />
-          <Swatch kind="dot" color="var(--flood-shallow)" label="Ready to run" />
-          <Swatch kind="dot" color="var(--not-modelled)" label="Not yet modelled" />
-          <div className="legend-note">Only places modelled to the studio standard show results.{previewOn ? " Admin preview is on." : ""}</div>
+        <Legend className="legend-compact" title={modelled ? `${SHOW_LABEL[show]} · ${eventLabel}` : `${SHOW_LABEL[show]} · not yet modelled`}>
+          {/* risk classes as one ramp, place status as one row: the card to the right carries the explanation */}
+          <div className="legend-ramp" role="img" aria-label="Combined risk: low, moderate, high, very high">
+            <span className="legend-ramp-label">Low</span>
+            <span className="swatch" style={{ background: "var(--risk-1)" }} />
+            <span className="swatch" style={{ background: "var(--risk-2)" }} />
+            <span className="swatch" style={{ background: "var(--risk-3)" }} />
+            <span className="swatch" style={{ background: "var(--risk-4)" }} />
+            <span className="legend-ramp-label">Very high</span>
+          </div>
+          <div className="legend-inline">
+            <Swatch kind="dot" color="var(--teal)" label="Modelled" />
+            <Swatch kind="dot" color="var(--flood-shallow)" label="Ready to run" />
+            <Swatch kind="dot" color="var(--not-modelled)" label="Not yet modelled" />
+          </div>
+          <div className="legend-note" title={modelled ? "Only places modelled to the studio standard show results." : `Panjim is not yet modelled to the studio standard: ${reason}.`}>
+            {modelled ? "Only places modelled to the studio standard show results." : "Not yet modelled: results appear once the chain is calibrated and signed off."}
+            {previewOn ? " Admin preview on." : ""}
+          </div>
           <div className="legend-credit">
             Boundaries: GADM 4.1 · Basemap: {bm.name} · {bm.credit}
           </div>

@@ -305,6 +305,16 @@ button, input, select, textarea { font: inherit; }
 .legend-credit { color: var(--muted); font-size: 11px; margin-top: 4px; line-height: 1.4; }
 .legend-strip { left: 12px; right: auto; bottom: 28px; flex-direction: row; align-items: center; gap: 14px; max-width: none; }
 .legend-strip .legend-credit { margin: 0; }
+/* compact legend (State view): pinned bottom-left, one ramp row, one status row, one-line note */
+.legend-compact { left: 12px; right: auto; bottom: 12px; max-width: 272px; padding: 8px 10px; font-size: 11px; gap: 4px; }
+.legend-compact .legend-title { font-size: 12px; margin-bottom: 0; }
+.legend-ramp { display: flex; align-items: center; gap: 3px; }
+.legend-ramp .swatch { width: 20px; height: 9px; border-radius: 2px; }
+.legend-ramp-label { color: var(--muted-2); padding: 0 3px; }
+.legend-inline { display: flex; flex-wrap: wrap; gap: 2px 10px; }
+.legend-inline .legend-row { gap: 5px; }
+.legend-compact .legend-note { margin-top: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.legend-compact .legend-credit { margin-top: 2px; font-size: 10px; line-height: 1.35; }
 .map-note { position: absolute; left: 50%; top: 14px; transform: translateX(-50%); background: rgba(255, 255, 255, 0.96); border: 1px solid var(--hairline); border-radius: 8px; padding: 8px 12px; font-size: 13px; color: var(--muted-2); z-index: 2; white-space: nowrap; }
 .map-note-top { left: 12px; transform: none; }
 .map-label { font-size: 12px; font-weight: 500; color: var(--ink); white-space: nowrap; text-shadow: 0 0 3px #fff, 0 0 3px #fff, 0 0 2px #fff; pointer-events: none; }
