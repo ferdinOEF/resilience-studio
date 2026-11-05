@@ -1,5 +1,5 @@
-/** Top-level route switch: "/" is the studio shell (App), "/admin/..." the role-gated admin side. */
-import { App } from "./App";
+/** Top-level route switch: the studio views (App: /, /risk/*, /scenarios, /solutions, /policy), "/admin/..." the role-gated admin side. */
+import { App, isStudioPath } from "./App";
 import { AdminApp } from "./admin/AdminApp";
 import { Link, usePath } from "./router";
 import { SessionProvider } from "./session";
@@ -13,7 +13,7 @@ export function Root() {
       </SessionProvider>
     );
   }
-  if (path === "/" || path === "/index.html") return <App />;
+  if (isStudioPath(path)) return <App path={path} />;
   return (
     <div style={{ padding: 28 }}>
       <h1 style={{ fontSize: 20, fontWeight: 600, margin: 0 }}>Not found</h1>

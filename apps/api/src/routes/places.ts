@@ -1,5 +1,6 @@
 /** Place layer API: manifests and vector layers of the national base data and the place packs. */
 import { Hono } from "hono";
+import { sessionUser } from "../auth";
 import { getLayer, getManifest, inventory, listPlaces, studioLayers, tiswadiFootprint } from "@resilience/places";
 import { GRID_DATA } from "@resilience/core";
 import { crzClassesGeoJSON } from "../studio/geometry";
@@ -16,6 +17,7 @@ places.get("/:id", (c) => {
 
 places.get("/:id/layers/:layer", (c) => {
   const admin = c.req.query("admin") === "1";
+  if (admin && !sessionUser(c)) return c.json({ error: "Sign in required for admin-only layers", code: "unauthenticated" }, 401);
   const r = getLayer(c.req.param("id"), c.req.param("layer"));
   if (!r) return c.json({ error: "not found" }, 404);
   if (r.layer.admin_only && !admin) return c.json({ error: `${r.layer.id} is admin-only (${r.layer.grounding}, ${r.layer.status})`, code: "admin_only" }, 403);

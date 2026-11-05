@@ -10,7 +10,7 @@ import { getLayer } from "@resilience/places";
 import { PANJIM, resolveAll } from "@resilience/registry";
 import { extentGeoJSON, zoneStats } from "../studio/geometry";
 import { z } from "zod";
-import { requireUser } from "../auth";
+import { requireUser, sessionUser } from "../auth";
 import { registryStore, writesAllowed } from "../registry";
 import { currentContracts, runStore } from "../runs/stores";
 
@@ -64,6 +64,10 @@ runs.get("/library", async (c) => {
 });
 
 runs.get("/:id", async (c) => {
+  if (!sessionUser(c)) {
+    const peek = await runStore().get(c.req.param("id"));
+    if (!peek || !peek.chain_signed_off || peek.stale) return c.json({ error: "Sign in required for unsigned results", code: "unauthenticated" }, 401);
+  }
   const run = await runStore().get(c.req.param("id"));
   if (!run) return c.json({ error: "not found" }, 404);
   const fresh = markStale(run, await registryStore().all());
@@ -93,6 +97,7 @@ async function runForMap(id: string, studio: boolean) {
 
 /** Flood extent polygons of the run's headline event (central bound), by depth band and behind-bund flag. */
 runs.get("/:id/extent", async (c) => {
+  if (c.req.query("studio") !== "1" && !sessionUser(c)) return c.json({ error: "Sign in required for unsigned results", code: "unauthenticated" }, 401);
   const r = await runForMap(c.req.param("id"), c.req.query("studio") === "1");
   if ("error" in r) return c.json({ error: r.error }, r.status);
   c.header("cache-control", "public, max-age=300");
@@ -101,6 +106,7 @@ runs.get("/:id/extent", async (c) => {
 
 /** Per-zone aggregates of the run over a zones layer of the place pack (admin-only while the zones are placeholders). */
 runs.get("/:id/zones", async (c) => {
+  if (c.req.query("studio") !== "1" && !sessionUser(c)) return c.json({ error: "Sign in required for unsigned results", code: "unauthenticated" }, 401);
   const r = await runForMap(c.req.param("id"), c.req.query("studio") === "1");
   if ("error" in r) return c.json({ error: r.error }, r.status);
   const layerId = c.req.query("layer") ?? "ward_zones";

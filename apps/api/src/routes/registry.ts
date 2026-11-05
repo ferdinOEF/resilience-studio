@@ -5,7 +5,7 @@
 import { Hono, type Context } from "hono";
 import { diffVersions, groupById, PANJIM, RegistryError, resolveAll, currentVersion, type Place, type RegistryEntry } from "@resilience/registry";
 import { registryService, registryStore, writesAllowed } from "../registry";
-import { requireUser } from "../auth";
+import { requireUser, sessionUser } from "../auth";
 
 export const registry = new Hono();
 
@@ -47,6 +47,7 @@ registry.get("/", async (c) => {
 registry.get("/resolve", async (c) => {
   const all = await registryStore().all();
   const admin = c.req.query("admin") === "1";
+  if (admin && !sessionUser(c)) return c.json({ error: "Sign in required for unapproved values", code: "unauthenticated" }, 401);
   const resolved = resolveAll(all, placeOf(c.req.query("place")), { allowUnapproved: admin });
   const out: Record<string, { version_id: string; value: RegistryEntry["value"]; unit: string; level_used: string; level_label: string; grounding: string; status: string; citation: string; citation_ids: string[]; overrode: string[] }> = {};
   for (const [id, r] of resolved) out[id] = { version_id: r.entry.version_id, value: r.entry.value, unit: r.entry.unit, level_used: r.levelUsed, level_label: r.levelLabel, grounding: r.entry.grounding, status: r.entry.status, citation: r.entry.source.citation, citation_ids: r.entry.source.citation_ids, overrode: r.overrode };

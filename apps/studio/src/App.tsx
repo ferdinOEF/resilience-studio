@@ -1,33 +1,65 @@
-import { useEffect, useState } from "react";
+/**
+ * The studio (user side): one map-first layout at State, City and Ward scale, plus Scenarios, Solutions and Policy.
+ * Routes: / → /risk/city; /risk/state, /risk/city, /risk/ward, /scenarios, /solutions, /policy. The admin side lives
+ * under /admin (Root.tsx). Everything shown here passes the gate in studio/data.tsx.
+ */
+import { useEffect } from "react";
+import { navigate } from "./router";
+import { SessionProvider } from "./session";
+import { StudioProvider } from "./studio/data";
+import { Policy } from "./studio/Policy";
+import { RiskCity } from "./studio/RiskCity";
+import { RiskState } from "./studio/RiskState";
+import { RiskWard } from "./studio/RiskWard";
+import { Scenarios } from "./studio/Scenarios";
+import { Solutions } from "./studio/Solutions";
+import { Layout } from "./studio/Shell";
 
-/** Step 1 shell: header and the "not yet modelled" state. The views to the mockups land in step 7. */
-export function App() {
-  const [health, setHealth] = useState<string>("checking");
+export const STUDIO_PATHS = ["/", "/index.html", "/risk", "/risk/state", "/risk/city", "/risk/ward", "/scenarios", "/solutions", "/policy"];
+
+export function isStudioPath(path: string): boolean {
+  const clean = path.replace(/\/+$/, "") || "/";
+  return STUDIO_PATHS.includes(clean);
+}
+
+function Routes({ path }: { path: string }) {
+  const clean = path.replace(/\/+$/, "") || "/";
+  const redirect = clean === "/" || clean === "/index.html" || clean === "/risk" ? "/risk/city" : null;
   useEffect(() => {
-    fetch("/api/health")
-      .then((r) => r.json())
-      .then((j) => setHealth(typeof j.database === "string" ? j.database : j.database?.postgis ? "PostGIS " + j.database.postgis : "database error"))
-      .catch(() => setHealth("api unreachable"));
-  }, []);
+    if (redirect) navigate(redirect, { replace: true });
+  }, [redirect]);
+  if (redirect) return null;
+  switch (clean) {
+    case "/risk/state":
+      return <RiskState />;
+    case "/risk/city":
+      return <RiskCity />;
+    case "/risk/ward":
+      return <RiskWard />;
+    case "/scenarios":
+      return <Scenarios />;
+    case "/solutions":
+      return <Solutions />;
+    case "/policy":
+      return <Policy />;
+    default:
+      return (
+        <Layout view="risk" scale={null}>
+          <div style={{ padding: 28 }}>
+            <h1 className="page-title">Not found</h1>
+            <p className="muted">There is nothing at {clean}.</p>
+          </div>
+        </Layout>
+      );
+  }
+}
+
+export function App({ path }: { path: string }) {
   return (
-    <div style={{ minHeight: "100%", display: "flex", flexDirection: "column" }}>
-      <header style={{ height: 56, boxSizing: "border-box", display: "flex", alignItems: "center", gap: 24, padding: "0 20px", borderBottom: "1px solid var(--hairline)" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
-            <circle cx="11" cy="11" r="9" fill="none" stroke="#0F6E76" strokeWidth="2" />
-            <path d="M4 13c2-2 4-2 7 0s5 2 7 0" fill="none" stroke="#0F6E76" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-          <span style={{ fontWeight: 600, fontSize: 15 }}>Resilience Studio</span>
-        </div>
-        <span style={{ marginLeft: "auto", fontSize: 12, color: "var(--muted)" }}>API: {health}</span>
-      </header>
-      <main style={{ flex: 1, display: "grid", placeItems: "center", background: "var(--map-bg)" }}>
-        <div style={{ padding: "14px 18px", background: "#fff", border: "1px solid var(--hairline)", borderRadius: 12, maxWidth: 420 }}>
-          <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--muted)" }}>Panjim, Goa / pilot</div>
-          <div style={{ fontSize: 18, fontWeight: 600, marginTop: 4 }}>Not yet modelled</div>
-          <div style={{ color: "var(--muted)", marginTop: 6 }}>Results appear only where a place is modelled to the studio standard and its chain is signed off.</div>
-        </div>
-      </main>
-    </div>
+    <SessionProvider>
+      <StudioProvider>
+        <Routes path={path} />
+      </StudioProvider>
+    </SessionProvider>
   );
 }

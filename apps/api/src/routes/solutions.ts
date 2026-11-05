@@ -6,12 +6,14 @@
 import { Hono } from "hono";
 import { AREA, CITATIONS, RAW_DATA, SOLUTIONS, type SegmentDef } from "@resilience/core";
 import { PANJIM, resolveAll } from "@resilience/registry";
+import { sessionUser } from "../auth";
 import { registryStore } from "../registry";
 
 export const solutions = new Hono();
 
 solutions.get("/", async (c) => {
   const admin = c.req.query("admin") === "1";
+  if (admin && !sessionUser(c)) return c.json({ error: "Sign in required for unapproved values", code: "unauthenticated" }, 401);
   const all = await registryStore().all();
   const resolved = resolveAll(all, PANJIM, { allowUnapproved: admin });
   const segs = (AREA.segments as SegmentDef[]).map((s) => ({ id: s.id, name: s.name, setting: s.setting, khazanPresent: s.khazanPresent, settingNote: s.settingNote }));
