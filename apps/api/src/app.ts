@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import { adminDb } from "./routes/admin-db";
 import { auth } from "./routes/auth";
 import { health } from "./routes/health";
 import { models } from "./routes/models";
@@ -15,6 +16,7 @@ export function createApp() {
   app.use("*", cors());
   app.route("/health", health);
   app.route("/auth", auth);
+  app.route("/admin/db", adminDb);
   app.route("/registry", registry);
   app.route("/runs", runs);
   app.route("/models", models);
