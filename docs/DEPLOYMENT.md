@@ -1,6 +1,6 @@
 # Deployment and bootstrap
 
-One Vercel project serves the studio (static Vite build from `apps/studio/dist`) and the API (one Node function, `api/[[...route]].ts`, which mounts `apps/api`). Postgres with PostGIS is Neon, attached through the Vercel Marketplace integration that already exists on the team.
+One Vercel project serves the studio (static Vite build from `apps/studio/dist`) and the API (one Node function, `api/index.ts`, which mounts `apps/api`; `vercel.json` rewrites every `/api/*` path to it). Postgres with PostGIS is Neon, attached through the Vercel Marketplace integration that already exists on the team.
 
 ## One-time setup (owner actions)
 
@@ -22,12 +22,19 @@ One Vercel project serves the studio (static Vite build from `apps/studio/dist`)
    | `AUTH_DEV_ECHO` | preview only, `1` | returns the magic link in the response (no mail provider yet); never in production |
    | `MAIL_WEBHOOK_URL` | optional | POST `{to, subject, text}` to send magic links by mail |
    | `AUTH_USERS` | local dev only | `email:role,…` in-memory users when there is no database |
-5. **Migrate and seed** once `DATABASE_URL` exists (locally, with the value pasted into the shell, or from a Vercel CLI session):
+5. **Migrate and seed** once `DATABASE_URL` exists. The first time this must run from a shell (the admin endpoints below need a signed-in admin, and sign-in needs the `users` table), with the unpooled connection string from the Vercel project's environment variables:
    ```bash
    DATABASE_URL=... pnpm --filter @resilience/api db:migrate
    DATABASE_URL=... pnpm --filter @resilience/api db:seed
    ```
    The seed inserts the 88 registry entries from the ported data files as `in_review` with the port as author. Nothing is approved by the seed.
+   Later migrations can be applied from the signed-in admin side: `GET /api/admin/db/status` lists available and applied migrations and the registry row count; `POST /api/admin/db/migrate` applies the pending ones; `POST /api/admin/db/seed` inserts seed rows that are not present yet.
+
+### State on 2026-11-05
+
+All five steps are done. Production `https://resilience-studio.vercel.app` runs on the Neon store `store_RJVholriCzdKVALk` (Postgres 18.6, PostGIS 3.6.4); migrations 0001–0003 are applied and the registry holds the 88 seeded rows, all `in_review`. The bootstrap admin signed in once through the logged magic link. Still unset: `VITE_ARCGIS_API_KEY` (the studio uses the Sentinel-2 fallback) and `MAIL_WEBHOOK_URL` (production magic links are only in the function log: Vercel → project → Logs, filter `magic link`).
+
+Function note: the Vercel Node runtime reads the request body before the handler runs, so `api/index.ts` hands that pre-read body to Hono as `rawBody`. Without this every POST with a body hung until the 60 s timeout (found and fixed on 2026-11-05, commit ae46c5a).
 
 ## Roles and the review workflow
 

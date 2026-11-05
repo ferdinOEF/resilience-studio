@@ -18,12 +18,22 @@ Previews and production are behind Vercel deployment protection (team setting "V
 
 Production: https://resilience-studio.vercel.app (main). Steps 1–6 and 8 were merged first (main at f011f2f, 2026-11-05); steps 7 and 9 followed the same day once their previews were recorded.
 
-## Blockers on the owner's side (as of 2026-11-05)
+## Owner-side items (as of 2026-11-05, evening)
 
-1. **GitHub repository** `ferdinOEF/resilience-studio` does not exist yet and cannot be created from this machine (no GitHub CLI, no signed-in browser session, and the assistant may not use stored credentials). Until it exists there are no previews and no merges.
-2. **Neon Postgres**: the Marketplace integration is installed on the Vercel team; the database is created from the Vercel project's Storage tab once the project exists.
-3. **Environment variables**: `AUTH_SECRET`, `ADMIN_EMAIL`, `VITE_ARCGIS_API_KEY` (see `DEPLOYMENT.md`).
-4. **Sources named in spec §7** (DDMP/SDMP PDFs, CSTEP 2024, Shetye, observed flood extents, CCP wards, ODP/CZMP vector, Mormugao tide gauge): all still to be supplied; tracked in `DATA_INVENTORY.md`. Item 4 (observed extents) is the gate for anything to appear in the studio.
+Done: the GitHub repository `ferdinOEF/resilience-studio`, the Vercel project, the Neon store (created from the Storage tab and connected; `DATABASE_URL` and the `POSTGRES_*`/`PG*` set injected into all environments), migrations 0001–0003 applied, 88 registry rows seeded (`in_review`), the bootstrap admin signed in on production.
+
+Still open:
+
+1. **`VITE_ARCGIS_API_KEY`** (Esri World Imagery): until it is set the studio shows the Sentinel-2 cloudless fallback and says so.
+2. **Mail for magic links**: no `MAIL_WEBHOOK_URL`, so production sign-in links are read from the function log.
+3. **Sources named in spec §7** (DDMP/SDMP PDFs, CSTEP 2024, Shetye, observed flood extents, CCP wards, ODP/CZMP vector, Mormugao tide gauge): all still to be supplied; tracked in `DATA_INVENTORY.md`. Item 4 (observed extents) is the gate for anything to appear in the studio: no model can be signed off without a calibration event, so the gate stays closed and the studio shows "not yet modelled".
+
+## After the merge of step 9
+
+| Commit | Date | What |
+|---|---|---|
+| b176d90 | 2026-11-05 | empty commit to redeploy production with the Neon variables |
+| ae46c5a | 2026-11-05 | `api/index.ts` hands the body the Vercel runtime pre-reads to Hono; before this every POST with a JSON body on Vercel hung until the 60 s function timeout (GETs and body-less POSTs were unaffected, which is why the earlier previews looked healthy). Verified on the `fix-post-body` preview (400 for a bad address in 2 s), then fast-forwarded to main. |
 
 ## Decisions taken without the owner (to confirm)
 
