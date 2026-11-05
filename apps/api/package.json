@@ -15,7 +15,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsx watch src/dev.ts",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "lint": "eslint src",
     "db:migrate": "tsx scripts/migrate.ts",
