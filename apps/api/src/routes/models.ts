@@ -28,7 +28,7 @@ models.get("/", async (c) => {
     models: contracts.map((m) => {
       const g = gateStatus(m, approved, ids);
       const deps = expandDependencies(m.registry_dependencies, ids);
-      return { id: m.id, name: m.name, version: m.version, kind: m.kind, grounding: m.grounding, calibration: m.calibration, inputs: m.inputs.length, outputs: m.outputs.length, routing: m.routing.length, agent: m.agent, registry_dependencies: { declared: m.registry_dependencies, resolved: deps.length, approved: deps.length - g.unapproved.length - g.missing.length, unapproved: g.unapproved, missing: g.missing }, gate: { signed_off: g.signed_off, blocked_by: m.calibration.status !== "signed_off" ? ["calibration"] : [], unapproved_count: g.unapproved.length }, health: "healthy" };
+      return { id: m.id, name: m.name, version: m.version, kind: m.kind, grounding: m.grounding, calibration: m.calibration, inputs: m.inputs.length, outputs: m.outputs.length, produces: m.outputs.map((o) => ({ name: o.name, unit: o.unit, dtype: o.dtype, resolution_m: o.grid.resolution_m, extent: o.grid.extent, timestep: o.timestep })), routing: m.routing.length, agent: m.agent, registry_dependencies: { declared: m.registry_dependencies, resolved: deps.length, approved: deps.length - g.unapproved.length - g.missing.length, unapproved: g.unapproved, missing: g.missing }, gate: { signed_off: g.signed_off, blocked_by: m.calibration.status !== "signed_off" ? ["calibration"] : [], unapproved_count: g.unapproved.length }, health: "healthy" };
     }),
     chain: { ok: chain.ok, handoffs: chain.checks.length, failing: chain.checks.filter((x) => !x.ok).length },
     writes: writesAllowed()

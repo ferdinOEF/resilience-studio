@@ -1,18 +1,26 @@
-/** Admin shell to the Admin mockup: 56 px header, 220 px left nav, main content. Desktop only. */
+/** Admin shell to the Admin mockup: 56 px header, 220 px left nav with counts, main content, optional 280 px right rail. Desktop only. */
 import type { ReactNode } from "react";
 import { Link } from "../router";
 import { useSession } from "../session";
-import { useCounts } from "./counts";
+import { useCounts, type NavCounts } from "./counts";
 
 export type NavKey = "runs" | "models" | "library" | "registry" | "sign-off" | null;
 
-const NAV: { key: Exclude<NavKey, null>; label: string; href: string }[] = [
-  { key: "runs", label: "Runs", href: "/admin/runs" },
-  { key: "models", label: "Models", href: "/admin/models" },
-  { key: "library", label: "Scenario library", href: "/admin/library" },
-  { key: "registry", label: "Registry", href: "/admin/registry" },
-  { key: "sign-off", label: "Sign-off queue", href: "/admin/sign-off" }
+const NAV: { key: Exclude<NavKey, null>; label: string; href: string; count: (c: NavCounts) => string | null }[] = [
+  { key: "runs", label: "Runs", href: "/admin/runs", count: (c) => (c.runs === null ? null : String(c.runs)) },
+  { key: "models", label: "Models", href: "/admin/models", count: (c) => (c.models === null ? null : String(c.models)) },
+  { key: "library", label: "Scenario library", href: "/admin/library", count: (c) => (c.library ? `${c.library.pre_run}/${c.library.total}` : null) },
+  { key: "registry", label: "Registry", href: "/admin/registry", count: (c) => (c.registry ? String(c.registry.in_review) : null) },
+  { key: "sign-off", label: "Sign-off queue", href: "/admin/sign-off", count: (c) => (c.signoff_pending === null ? null : String(c.signoff_pending)) }
 ];
+
+const NAV_TITLE: Record<Exclude<NavKey, null>, string> = {
+  runs: "runs on record",
+  models: "model contracts",
+  library: "scenario cells pre-run / total",
+  registry: "registry versions in review",
+  "sign-off": "items awaiting a human"
+};
 
 export function LogoMark() {
   return (
@@ -23,10 +31,9 @@ export function LogoMark() {
   );
 }
 
-export function AdminLayout({ active, children }: { active: NavKey; children: ReactNode }) {
+export function AdminLayout({ active, rail, children }: { active: NavKey; rail?: ReactNode; children: ReactNode }) {
   const { user, signOut } = useSession();
   const counts = useCounts();
-  const signOffCount = user && counts ? counts.in_review : null;
   return (
     <div className="adm">
       <header className="adm-header">
@@ -54,14 +61,22 @@ export function AdminLayout({ active, children }: { active: NavKey; children: Re
       </header>
       <div className="adm-body">
         <nav className="adm-nav" aria-label="Admin">
-          {NAV.map((n) => (
-            <Link key={n.key} href={n.href} className={`adm-nav-row${active === n.key ? " is-active" : ""}`} aria-current={active === n.key ? "page" : undefined}>
-              <span>{n.label}</span>
-              {n.key === "sign-off" && signOffCount !== null ? <span className="adm-nav-count">{signOffCount}</span> : null}
-            </Link>
-          ))}
+          {NAV.map((n) => {
+            const count = user ? n.count(counts) : null;
+            return (
+              <Link key={n.key} href={n.href} className={`adm-nav-row${active === n.key ? " is-active" : ""}`} aria-current={active === n.key ? "page" : undefined}>
+                <span>{n.label}</span>
+                {count !== null ? (
+                  <span className="adm-nav-count" title={NAV_TITLE[n.key]}>
+                    {count}
+                  </span>
+                ) : null}
+              </Link>
+            );
+          })}
         </nav>
         <main className="adm-main">{children}</main>
+        {rail ? <aside className="adm-rail">{rail}</aside> : null}
       </div>
     </div>
   );

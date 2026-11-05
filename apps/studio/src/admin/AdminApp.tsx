@@ -1,24 +1,22 @@
 /** Admin routes. Everything under /admin needs a session; without one the sign-in page shows inside the same layout. */
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { matchPath, navigate } from "../router";
 import { useSession } from "../session";
-import { AdminLayout, type NavKey } from "./AdminLayout";
-import { refreshCounts, useCounts } from "./counts";
+import { AdminLayout } from "./AdminLayout";
+import { refreshCounts } from "./counts";
 import { EntryDetail } from "./EntryDetail";
-import { Placeholder } from "./Placeholder";
+import { Library } from "./Library";
+import { ModelDetail } from "./ModelDetail";
+import { ModelsTable } from "./ModelsTable";
 import { RegistryTable } from "./RegistryTable";
+import { RightRail } from "./RightRail";
+import { RunPage } from "./RunPage";
+import { RunsList } from "./RunsList";
 import { SignIn } from "./SignIn";
-
-const PLACEHOLDERS: Record<string, { key: NavKey; title: string }> = {
-  "/admin/runs": { key: "runs", title: "Runs" },
-  "/admin/models": { key: "models", title: "Models" },
-  "/admin/library": { key: "library", title: "Scenario library" },
-  "/admin/sign-off": { key: "sign-off", title: "Sign-off queue" }
-};
+import { SignOffQueue } from "./SignOffQueue";
 
 export function AdminApp({ path }: { path: string }) {
   const { user, loading } = useSession();
-  const counts = useCounts();
   const clean = path.replace(/\/+$/, "") || "/";
 
   const redirectTo = clean === "/admin" ? "/admin/registry" : clean === "/admin/sign-in" && user ? "/admin/registry" : null;
@@ -26,10 +24,15 @@ export function AdminApp({ path }: { path: string }) {
     if (redirectTo) navigate(redirectTo, { replace: true });
   }, [redirectTo]);
 
-  // the Sign-off queue count in the nav, once signed in
+  // the counts in the left nav, once signed in (once per signed-in user)
+  const countedFor = useRef<string | null>(null);
   useEffect(() => {
-    if (user && !counts) void refreshCounts();
-  }, [user, counts]);
+    if (user && countedFor.current !== user.email) {
+      countedFor.current = user.email;
+      void refreshCounts();
+    }
+    if (!user) countedFor.current = null;
+  }, [user]);
 
   if (loading) {
     return (
@@ -62,11 +65,47 @@ export function AdminApp({ path }: { path: string }) {
       </AdminLayout>
     );
   }
-  const ph = PLACEHOLDERS[clean];
-  if (ph) {
+  if (clean === "/admin/runs") {
     return (
-      <AdminLayout active={ph.key}>
-        <Placeholder title={ph.title} />
+      <AdminLayout active="runs" rail={<RightRail />}>
+        <RunsList />
+      </AdminLayout>
+    );
+  }
+  const run = matchPath("/admin/runs/:id", clean);
+  if (run) {
+    return (
+      <AdminLayout active="runs" rail={<RightRail />}>
+        <RunPage key={run.id} id={run.id} />
+      </AdminLayout>
+    );
+  }
+  if (clean === "/admin/models") {
+    return (
+      <AdminLayout active="models">
+        <ModelsTable />
+      </AdminLayout>
+    );
+  }
+  const model = matchPath("/admin/models/:id", clean);
+  if (model) {
+    return (
+      <AdminLayout active="models">
+        <ModelDetail key={model.id} id={model.id} />
+      </AdminLayout>
+    );
+  }
+  if (clean === "/admin/library") {
+    return (
+      <AdminLayout active="library">
+        <Library />
+      </AdminLayout>
+    );
+  }
+  if (clean === "/admin/sign-off") {
+    return (
+      <AdminLayout active="sign-off">
+        <SignOffQueue />
       </AdminLayout>
     );
   }

@@ -40,8 +40,13 @@ runs.post("/", requireUser("run"), async (c) => {
   const plan = metaMind.plan(body.question ?? `${scenario.hazard} at RP ${scenario.return_periods.join("/")}, ${scenario.horizon} ${scenario.pathway}, ${scenario.solution_set.label}`, scenario);
   const liaison = new DeterministicLiaison({ agents: portedChainAgents(resolved), contracts, resolved, keepCells: true });
   const run = await liaison.execute(plan, c.get("user").email);
+  // the Meta Mind's own entries (its plan, then its reading of the result) join the run's agent log
+  const planned = metaMind.log.filter((l) => l.data?.plan_id === plan.id);
+  run.log.unshift(...planned);
+  const outlay = metaMind.read(run);
+  run.log.push(...metaMind.log.filter((l) => l.data?.run_id === run.id));
   await runStore().insert(run);
-  return c.json({ run: summarize(run), outlay: metaMind.read(run) }, run.status === "ok" ? 201 : 500);
+  return c.json({ run: summarize(run), outlay }, run.status === "ok" ? 201 : 500);
 });
 
 runs.get("/", async (c) => {

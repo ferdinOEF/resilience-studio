@@ -121,7 +121,9 @@ export class ApiError extends Error {
   constructor(
     message: string,
     public readonly code: string | undefined,
-    public readonly status: number
+    public readonly status: number,
+    /** the parsed JSON body, when the API sent one (a gate error's unapproved list, a failed run's record) */
+    public readonly data?: unknown
   ) {
     super(message);
     this.name = "ApiError";
@@ -144,7 +146,7 @@ export async function api<T>(path: string, init: RequestInit & { json?: unknown 
   } catch {
     data = null;
   }
-  if (!res.ok) throw new ApiError(typeof data?.error === "string" ? data.error : `${res.status} ${res.statusText || "request failed"}`, data?.code, res.status);
+  if (!res.ok) throw new ApiError(typeof data?.error === "string" ? data.error : `${res.status} ${res.statusText || "request failed"}`, data?.code, res.status, data ?? undefined);
   if (data === null) throw new ApiError("The API returned no JSON", undefined, res.status);
   return data as T;
 }
