@@ -342,6 +342,18 @@
       "full": "Field knowledge, Ferdin, OneEarth Foundation, 23 Oct 2026: Patto and Taleigao fields are bunded; the St Inez / Merces fields east of 73.848 E are bunded too (same day). Personal communication recorded in docs/STEP_PROMPT_model_p3_accuracy.md and docs/model-audit/LOG.md (Phase 3).",
       "usedFor": "Treating the low fields at Patto, Taleigao and St Inez / Merces (outside the CZMP khazan mask) as bund-protected land (audit A1, Phase 3).",
       "provenance": "this_pass"
+    },
+    "gadm41": {
+      "short": "GADM 4.1",
+      "full": "GADM (2022). Database of Global Administrative Areas, version 4.1 (gadm41_IND shapefiles, release 2022-07-19). University of California, Davis. https://gadm.org. Licence: free for academic and other non-commercial use; redistribution requires permission (https://gadm.org/license.html).",
+      "usedFor": "State, district and taluka boundaries of Goa (data/national/boundaries), as used in the approved mockups; supplied by Ferdin on 2026-11-04.",
+      "provenance": "this_pass"
+    },
+    "osm": {
+      "short": "OpenStreetMap",
+      "full": "OpenStreetMap contributors (2026). OpenStreetMap data, via the Overpass API (admin relations, creeks, building footprints) and Nominatim (landmark positions, queried 2026-11-04). Open Database Licence (ODbL) 1.0. https://www.openstreetmap.org/copyright",
+      "usedFor": "Landmark positions behind the placeholder ward zones; creeks; administrative relation tags; building footprints in the exposure grid.",
+      "provenance": "this_pass"
     }
   }
 }

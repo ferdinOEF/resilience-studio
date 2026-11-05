@@ -7,6 +7,7 @@ import { places } from "./routes/places";
 import { registry } from "./routes/registry";
 import { runs } from "./routes/runs";
 import { signoff } from "./routes/signoff";
+import { solutions } from "./routes/solutions";
 
 /** The API, mounted under /api on Vercel (api/[[...route]].ts) and on the local dev server (src/dev.ts). */
 export function createApp() {
@@ -19,6 +20,7 @@ export function createApp() {
   app.route("/models", models);
   app.route("/places", places);
   app.route("/signoff", signoff);
+  app.route("/solutions", solutions);
   app.notFound((c) => c.json({ error: "not found", path: c.req.path }, 404));
   app.onError((err, c) => {
     console.error(err);

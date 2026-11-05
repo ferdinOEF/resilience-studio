@@ -6,7 +6,9 @@ import { Hono } from "hono";
 import { PORTED_CHAIN_CONTRACTS } from "@resilience/contracts";
 import { RETURN_PERIODS, type ReturnPeriod, type ScenarioId } from "@resilience/core";
 import { DeterministicLiaison, exportAudit, libraryCoverage, markStale, PANJIM_LIBRARY, portedChainAgents, StubMetaMind, type ScenarioSpec } from "@resilience/meta-mind";
+import { getLayer } from "@resilience/places";
 import { PANJIM, resolveAll } from "@resilience/registry";
+import { extentGeoJSON, zoneStats } from "../studio/geometry";
 import { z } from "zod";
 import { requireUser } from "../auth";
 import { registryStore, writesAllowed } from "../registry";
@@ -77,6 +79,35 @@ runs.get("/:id/audit", async (c) => {
   const rows = await registryStore().all();
   c.header("content-disposition", `attachment; filename="${run.id}-audit.json"`);
   return c.json(exportAudit(markStale(run, rows), rows));
+});
+
+
+/** A run, re-checked against the registry; with studio=1 only a signed-off, non-stale run is served (spec rule 2). */
+async function runForMap(id: string, studio: boolean) {
+  const run = await runStore().get(id);
+  if (!run) return { error: "not found", status: 404 as const };
+  const fresh = markStale(run, await registryStore().all());
+  if (studio && (!fresh.chain_signed_off || fresh.stale || fresh.status !== "ok")) return { error: "this run is not shown in the studio: the chain is not signed off or the run is stale", status: 403 as const };
+  return { run: fresh };
+}
+
+/** Flood extent polygons of the run's headline event (central bound), by depth band and behind-bund flag. */
+runs.get("/:id/extent", async (c) => {
+  const r = await runForMap(c.req.param("id"), c.req.query("studio") === "1");
+  if ("error" in r) return c.json({ error: r.error }, r.status);
+  c.header("cache-control", "public, max-age=300");
+  return c.json({ run_id: r.run.id, return_period: r.run.result?.headline_return_period ?? null, bound: "central", depth_band_m: 0.5, data: extentGeoJSON(r.run) });
+});
+
+/** Per-zone aggregates of the run over a zones layer of the place pack (admin-only while the zones are placeholders). */
+runs.get("/:id/zones", async (c) => {
+  const r = await runForMap(c.req.param("id"), c.req.query("studio") === "1");
+  if ("error" in r) return c.json({ error: r.error }, r.status);
+  const layerId = c.req.query("layer") ?? "ward_zones";
+  const layer = getLayer("panjim", layerId);
+  if (!layer) return c.json({ error: `no zones layer ${layerId}` }, 404);
+  if (layer.layer.admin_only && c.req.query("admin") !== "1") return c.json({ error: `${layerId} is admin-only (${layer.layer.grounding})`, code: "admin_only" }, 403);
+  return c.json({ run_id: r.run.id, layer: layer.layer, ...zoneStats(r.run, layer.data as Parameters<typeof zoneStats>[1]) });
 });
 
 /** The studio's gate for a place: results only from a signed-off, non-stale chain run; otherwise "not yet modelled". */
