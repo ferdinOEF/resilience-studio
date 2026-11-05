@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@hono/node-server':
+        specifier: ^1.19.5
+        version: 1.19.18(hono@4.13.16)
       '@resilience/api':
         specifier: workspace:*
         version: link:apps/api
