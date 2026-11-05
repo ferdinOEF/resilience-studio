@@ -117,7 +117,15 @@ export function useZoneLayer(map: MLMap | null, data: FeatureCollection | null, 
 export function rankClasses(zones: ZoneStats[], measure: (z: ZoneStats) => number): Map<string, 1 | 2 | 3 | 4> {
   const sorted = [...zones].sort((a, b) => measure(b) - measure(a));
   const out = new Map<string, 1 | 2 | 3 | 4>();
-  // a zone where the measure is zero ranks lowest whatever its position: nothing was measured there
-  sorted.forEach((z, k) => out.set(z.id, measure(z) > 0 ? ((4 - Math.min(3, Math.floor((k / sorted.length) * 4))) as 1 | 2 | 3 | 4) : 1));
+  const values = sorted.map(measure);
+  const max = values[0] ?? 0, min = values[values.length - 1] ?? 0;
+  // no spread among zones (all zero or all equal): nothing ranks above anything else
+  if (!(max > 0) || max === min) { for (const z of sorted) out.set(z.id, 1); return out; }
+  // tied zones share the class of the first of their tie group; a zero measure always ranks lowest
+  let groupStart = 0;
+  sorted.forEach((z, k) => {
+    if (k > 0 && values[k] !== values[k - 1]) groupStart = k;
+    out.set(z.id, values[k] > 0 ? ((4 - Math.min(3, Math.floor((groupStart / sorted.length) * 4))) as 1 | 2 | 3 | 4) : 1);
+  });
   return out;
 }

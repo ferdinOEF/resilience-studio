@@ -35,7 +35,7 @@ function paramValue(p: InstanceParam) {
         {p.unit ? ` ${p.unit}` : ""}
       </strong>
       {p.level_label ? <span className="chip chip-level">{p.level_label}</span> : null}
-      <span className={`chip ${p.grounding === "solid_direct" ? "chip-ground-solid" : p.grounding === "reasoned_extrapolation" ? "chip-ground-reasoned" : "chip-ground-placeholder"}`}>{String(p.grounding).replace(/_/g, " ")}</span>
+      <span className={`chip ${p.grounding === "solid_direct" ? "chip-ground-solid" : p.grounding === "reasoned_extrapolation" ? "chip-ground-reasoned" : "chip-ground-placeholder"}`}>{GROUNDING_SHORT[String(p.grounding)] ?? String(p.grounding).replace(/_/g, " ")}</span>
       {p.status !== "approved" ? <UnsignedChip /> : null}
     </span>
   );
@@ -224,6 +224,8 @@ export function Solutions() {
   );
 }
 
+const GROUNDING_SHORT: Record<string, string> = { solid_direct: "solid · direct", reasoned_extrapolation: "reasoned", placeholder_needs_calibration: "placeholder" };
+
 function SolutionCard({ s, selected, onSelect, segments, activeSegment, onSegment }: { s: Solution; selected: boolean; onSelect: () => void; segments: SolutionsResponse["segments"]; activeSegment: string | null; onSegment: (id: string) => void }) {
   const ref = s.ipcc_ar6_reference;
   return (
@@ -272,7 +274,10 @@ function SolutionCard({ s, selected, onSelect, segments, activeSegment, onSegmen
           ) : (
             <div className="muted small">No instance parameters.</div>
           )}
-          <div className="muted small">{s.evidence}</div>
+          <details className="small sol-evidence">
+            <summary className="muted">Evidence</summary>
+            <div className="muted">{s.evidence}</div>
+          </details>
         </div>
       ) : null}
     </div>

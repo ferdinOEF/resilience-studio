@@ -149,7 +149,7 @@ export function RiskState() {
             ) : (
               <span className="chip chip-not-modelled">not yet modelled</span>
             )}
-            <span className="ranked-val muted" title="people in extent, central bound">{modelled && run?.result ? fmtPeople(run.result.totals.people_affected.central) : DASH}</span>
+            <span className="ranked-val muted" title="people in extent, central bound">{modelled && run?.result ? fmtPeople(run.result.totals.people_affected.central) : "—"}</span>
           </li>
         ))}
         {!cityPlaces.length ? <li className="muted small">{places.length ? "No city place pack" : "Places not loaded"}</li> : null}

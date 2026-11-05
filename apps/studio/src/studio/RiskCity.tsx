@@ -121,11 +121,15 @@ export function RiskCity() {
               <div>{detail.data.outlay.summary}</div>
               {detail.data.outlay.references.length ? (
                 <ul className="note-list" style={{ marginTop: 6 }}>
-                  {detail.data.outlay.references.map((r) => (
-                    <li key={r.path} className="muted">
-                      {r.label} · <span className="mono">{r.path}</span>
-                    </li>
-                  ))}
+                  {detail.data.outlay.references.map((r) => {
+                    const v = valueAtPath(detail.data!.run as unknown as Record<string, unknown>, r.path);
+                    return (
+                      <li key={r.path} className="muted" title={r.path}>
+                        {r.label}
+                        {v !== null ? <>: <strong className="ink">{v}</strong></> : null}
+                      </li>
+                    );
+                  })}
                 </ul>
               ) : null}
               <div className="muted small" style={{ marginTop: 6 }}>
@@ -180,4 +184,18 @@ export function RiskCity() {
       </StudioMap>
     </Layout>
   );
+}
+
+/** Read a reference path such as result.totals.flooded_km2.central from the run summary; null when the path is not a plain number. */
+function valueAtPath(run: Record<string, unknown>, path: string): string | null {
+  if (/\[/.test(path)) return null;
+  let cur: unknown = run;
+  for (const part of path.split(".")) {
+    if (!cur || typeof cur !== "object") return null;
+    cur = (cur as Record<string, unknown>)[part];
+  }
+  if (typeof cur !== "number") return null;
+  if (/inr/.test(path)) return cur >= 1e7 ? `₹${(cur / 1e7).toFixed(1)} cr` : `₹${Math.round(cur).toLocaleString("en-IN")}`;
+  if (/km2/.test(path)) return `${cur.toFixed(3)} km²`;
+  return Math.round(cur).toLocaleString("en-IN");
 }

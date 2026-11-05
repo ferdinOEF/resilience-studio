@@ -38,7 +38,7 @@ export function RiskCard({ zone, zones, run, modelled, reason, unsigned, cls, sh
     <div className="rc-head">
       <SectionLabel>Ward</SectionLabel>
       <div className="rc-name">{name}</div>
-      <div className="muted small">{zone ? "Landmark-derived placeholder zone · Census 2001 Panaji footprint · awaiting the CCP ward shapefile" : "No ward selected · ward boundaries awaiting the CCP shapefile"}</div>
+      <div className="muted small">{zone ? "Landmark-derived placeholder zone · Census 2001 Panaji footprint · awaiting the CCP ward shapefile" : "Ward scale · Panjim"}</div>
     </div>
   );
 

@@ -100,7 +100,13 @@ export function zoneStats(run: RunRecord, zones: FeatureCollection): { method: s
     out.push({ id: props.id ?? "zone", name: props.name ?? "zone", cells: n, people_total: Math.round(people), buildings_total: Math.round(bld), flooded_cells: wet, flooded_km2: Math.round(fl * cellKm2 * 1e4) / 1e4, bunded_km2: Math.round(bd * cellKm2 * 1e4) / 1e4, people_in_flood: Math.round(pf), buildings_in_flood: Math.round(bf), depth_mean_m: wet ? Math.round((dsum / wet) * 100) / 100 : null, depth_max_m: wet ? Math.round(dmax * 100) / 100 : null, people_share: people ? Math.round((pf / people) * 1000) / 1000 : 0, svi_higher_share: n ? Math.round((lower / n) * 1000) / 1000 : 0, rank: 0, rank_class: 1 });
   }
   out.sort((a, b) => b.people_in_flood - a.people_in_flood || b.flooded_km2 - a.flooded_km2);
-  out.forEach((z, k) => { z.rank = k + 1; z.rank_class = (4 - Math.min(3, Math.floor((k / out.length) * 4))) as 1 | 2 | 3 | 4; });
+  // the class is the quarter of the ranking by people in the flood; tied zones share a class; no people in the flood ranks lowest
+  let groupStart = 0;
+  out.forEach((z, k) => {
+    if (k > 0 && z.people_in_flood !== out[k - 1].people_in_flood) groupStart = k;
+    z.rank = k + 1;
+    z.rank_class = z.people_in_flood > 0 ? ((4 - Math.min(3, Math.floor((groupStart / out.length) * 4))) as 1 | 2 | 3 | 4) : 1;
+  });
   return { method: "zones ranked by people in the flooded cells of the run's headline event (central bound); rank_class is the quarter of that ranking, not a sourced risk rating", zones: out };
 }
 
