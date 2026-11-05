@@ -11,10 +11,12 @@ One branch and one Vercel preview per step (spec §8); the preview URL is record
 | 5 Meta Mind skeleton | `step-05-meta-mind` | 8e64a97 | https://resilience-studio-git-step-05-meta-mind-ferdin-5189s-projects.vercel.app | 2026-11-05 | Liaison reproduces the pinned values; audit export; sign-off queue |
 | 6 Place pack panjim | `step-06-place-pack` | ba98dd2, 4b92dce | https://resilience-studio-git-step-06-place-pack-ferdin-5189s-projects.vercel.app | 2026-11-05 | GADM Goa, Census 2001 footprint, placeholder zones (admin-only), khazan polygons, manifest |
 | 8 Admin shell | `step-08-admin-shell` | ce7097d | https://resilience-studio-git-step-08-admin-shell-ferdin-5189s-projects.vercel.app | 2026-11-05 | built in parallel with step 7 and committed before it (branch order 6 → 8 → 7) |
-| 7 Studio shell | `step-07-studio` | 03bad08 (API), UI pending | https://resilience-studio-git-step-07-studio-ferdin-5189s-projects.vercel.app | no | |
+| 7 Studio shell | `step-07-studio` | 03bad08 (API), a8aebe9 (views) | https://resilience-studio-git-step-07-studio-ferdin-5189s-projects.vercel.app | 2026-11-05 | State, City, Ward, Scenarios, Solutions, Policy to the mockups; gated on a signed-off chain |
 
 Previews and production are behind Vercel deployment protection (team setting "Vercel Authentication", all except custom domains): open them while signed in to Vercel. The GitHub repository is `ferdinOEF/resilience-studio`; the Vercel project is `resilience-studio` (prj_TSfA6L68ea0KASFPxpTVQGV5yWHW).
-| 9 Gauntlet loop | `step-09-gauntlet` | — | — | — | |
+| 9 Gauntlet loop | `step-09-gauntlet` | dc2a619 | https://resilience-studio-git-step-09-gauntlet-ferdin-5189s-projects.vercel.app | 2026-11-05 | three rounds, no criterion below 4 (`GAUNTLET_LOG.md`) |
+
+Production: https://resilience-studio.vercel.app (main). Steps 1–6 and 8 were merged first (main at f011f2f, 2026-11-05); steps 7 and 9 followed the same day once their previews were recorded.
 
 ## Blockers on the owner's side (as of 2026-11-05)
 
