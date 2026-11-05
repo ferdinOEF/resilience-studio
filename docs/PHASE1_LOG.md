@@ -4,14 +4,16 @@ One branch and one Vercel preview per step (spec §8); the preview URL is record
 
 | Step | Branch | Commit | Preview URL | Merged | Notes |
 |---|---|---|---|---|---|
-| 1 Scaffold | `step-01-scaffold` | 4062c40 | pending GitHub + Vercel | no | pnpm + Turborepo, Hono/Neon API, studio shell, CI, vercel.json, docs |
-| 2 Port packages/core | `step-02-core-port` | c31b527 | pending | no | 241 of 241 pinned regression values unchanged (`REGRESSION_LOG.md`) |
-| 3 Registry | `step-03-registry` | 2364309 | pending | no | 88 seeded entries, all `in_review`; two-person rule; admin screens |
-| 4 Model contracts | `step-04-contracts` | 688eed9 | pending | no | validator passes the chain, rejects a mismatched hand-off |
-| 5 Meta Mind skeleton | `step-05-meta-mind` | 8e64a97 | pending | no | Liaison reproduces the pinned values; audit export; sign-off queue |
-| 6 Place pack panjim | `step-06-place-pack` | ba98dd2, 4b92dce | pending | no | GADM Goa, Census 2001 footprint, placeholder zones (admin-only), khazan polygons, manifest |
-| 8 Admin shell | `step-08-admin-shell` | ce7097d | pending | no | built in parallel with step 7 and committed before it (branch order 6 → 8 → 7) |
-| 7 Studio shell | `step-07-studio` | 03bad08 (API), UI pending | pending | no | |
+| 1 Scaffold | `step-01-scaffold` | 4062c40 + e7a64eb (handler fix) | https://resilience-studio-git-step-01-scaffold-ferdin-5189s-projects.vercel.app | 2026-11-05 | pnpm + Turborepo, Hono/Neon API, studio shell, CI, vercel.json, docs |
+| 2 Port packages/core | `step-02-core-port` | c31b527 | https://resilience-studio-git-step-02-core-port-ferdin-5189s-projects.vercel.app | 2026-11-05 | 241 of 241 pinned regression values unchanged (`REGRESSION_LOG.md`) |
+| 3 Registry | `step-03-registry` | 2364309 | https://resilience-studio-git-step-03-registry-ferdin-5189s-projects.vercel.app | 2026-11-05 | 88 seeded entries, all `in_review`; two-person rule; admin screens |
+| 4 Model contracts | `step-04-contracts` | 688eed9 | https://resilience-studio-git-step-04-contracts-ferdin-5189s-projects.vercel.app | 2026-11-05 | validator passes the chain, rejects a mismatched hand-off |
+| 5 Meta Mind skeleton | `step-05-meta-mind` | 8e64a97 | https://resilience-studio-git-step-05-meta-mind-ferdin-5189s-projects.vercel.app | 2026-11-05 | Liaison reproduces the pinned values; audit export; sign-off queue |
+| 6 Place pack panjim | `step-06-place-pack` | ba98dd2, 4b92dce | https://resilience-studio-git-step-06-place-pack-ferdin-5189s-projects.vercel.app | 2026-11-05 | GADM Goa, Census 2001 footprint, placeholder zones (admin-only), khazan polygons, manifest |
+| 8 Admin shell | `step-08-admin-shell` | ce7097d | https://resilience-studio-git-step-08-admin-shell-ferdin-5189s-projects.vercel.app | 2026-11-05 | built in parallel with step 7 and committed before it (branch order 6 → 8 → 7) |
+| 7 Studio shell | `step-07-studio` | 03bad08 (API), UI pending | https://resilience-studio-git-step-07-studio-ferdin-5189s-projects.vercel.app | no | |
+
+Previews and production are behind Vercel deployment protection (team setting "Vercel Authentication", all except custom domains): open them while signed in to Vercel. The GitHub repository is `ferdinOEF/resilience-studio`; the Vercel project is `resilience-studio` (prj_TSfA6L68ea0KASFPxpTVQGV5yWHW).
 | 9 Gauntlet loop | `step-09-gauntlet` | — | — | — | |
 
 ## Blockers on the owner's side (as of 2026-11-05)
