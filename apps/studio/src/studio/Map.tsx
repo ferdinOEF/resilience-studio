@@ -65,27 +65,74 @@ export function StudioMap({ bounds, padding = 40, onLoad, onUnload, onClick, nav
   paddingRef.current = padding;
 
   useEffect(() => {
-    if (!el.current) return;
-    const bm = basemap();
-    const map = new maplibregl.Map({ container: el.current, style: bm.style, center: [73.83, 15.49], zoom: 11, attributionControl: false, interactive, dragRotate: false, pitchWithRotate: false, touchPitch: false, fadeDuration: 0 });
-    map.touchZoomRotate.disableRotation();
-    map.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-right");
-    if (nav) map.addControl(new maplibregl.NavigationControl({ showCompass: false, visualizePitch: false }), "top-right");
-    // a tile that does not load is not an error for the studio (the smoke test runs offline)
-    map.on("error", (e) => {
-      const msg = String((e as { error?: { message?: string } }).error?.message ?? "");
-      if (!/tile|AJAX|fetch|network|abort/i.test(msg)) console.warn("map:", msg);
-    });
-    map.on("click", (e) => clickRef.current?.(e.lngLat));
-    map.on("load", () => {
-      mapRef.current = map;
-      if (boundsRef.current) map.fitBounds(boundsRef.current, { padding: paddingRef.current, duration: 0 });
-      loadRef.current(map);
-    });
+    const container = el.current;
+    if (!container) return;
+    let map: MLMap | null = null;
+    let raf = 0;
+    let disposed = false;
+
+    // MapLibre sizes its canvas once, from the container's box at construction. On first paint the flex layout
+    // (header 56 px, then rails and map) may not have settled, so the box can be 0 × 0 and the map draws nothing
+    // until the next resize (a zoom). Give the container an explicit size, wait until it has one, and resize once
+    // the style has loaded and whenever the box changes.
+    const sizeContainer = () => {
+      const parent = container.parentElement;
+      const w = container.clientWidth || parent?.clientWidth || 0;
+      const h = container.clientHeight || parent?.clientHeight || 0;
+      if (w && h) {
+        container.style.width = `${w}px`;
+        container.style.height = `${h}px`;
+      }
+      return !!(w && h);
+    };
+
+    let tries = 0;
+    const init = () => {
+      if (disposed || map) return;
+      if (!sizeContainer()) {
+        // not laid out yet: retry for a few frames, after that the ResizeObserver below starts the map
+        if (tries++ < 60) raf = requestAnimationFrame(init);
+        return;
+      }
+      const bm = basemap();
+      const m = new maplibregl.Map({ container, style: bm.style, center: [73.83, 15.49], zoom: 11, attributionControl: false, interactive, dragRotate: false, pitchWithRotate: false, touchPitch: false, fadeDuration: 0 });
+      map = m;
+      m.touchZoomRotate.disableRotation();
+      m.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-right");
+      if (nav) m.addControl(new maplibregl.NavigationControl({ showCompass: false, visualizePitch: false }), "top-right");
+      // a tile that does not load is not an error for the studio (the smoke test runs offline)
+      m.on("error", (e) => {
+        const msg = String((e as { error?: { message?: string } }).error?.message ?? "");
+        if (!/tile|AJAX|fetch|network|abort/i.test(msg)) console.warn("map:", msg);
+      });
+      m.on("click", (e) => clickRef.current?.(e.lngLat));
+      m.on("load", () => {
+        m.resize();
+        mapRef.current = m;
+        if (boundsRef.current) m.fitBounds(boundsRef.current, { padding: paddingRef.current, duration: 0 });
+        loadRef.current(m);
+      });
+    };
+
+    // follow the layout: the map's box is the parent's box (the parent is the positioned .st-map, inset 0 in .st-main)
+    const target = container.parentElement ?? container;
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(() => {
+      if (disposed) return;
+      const sized = sizeContainer();
+      if (map && sized) map.resize();
+      else if (!map) init();
+    }) : null;
+    ro?.observe(target);
+    init();
+
     return () => {
+      disposed = true;
+      cancelAnimationFrame(raf);
+      ro?.disconnect();
       mapRef.current = null;
       unloadRef.current?.();
-      map.remove();
+      map?.remove();
+      map = null;
     };
   }, [interactive, nav]);
 

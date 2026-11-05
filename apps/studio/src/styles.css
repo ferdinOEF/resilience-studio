@@ -290,7 +290,7 @@ button, input, select, textarea { font: inherit; }
 
 /* map */
 .st-map { position: absolute; inset: 0; background: var(--water); }
-.st-map-canvas { position: absolute; inset: 0; }
+.st-map-canvas { position: absolute; inset: 0; width: 100%; height: 100%; min-height: 240px; }
 .st-map .maplibregl-ctrl-top-right { top: 12px; right: 12px; }
 .st-map .maplibregl-ctrl-group { border-radius: 8px; box-shadow: none; border: 1px solid var(--hairline); overflow: hidden; }
 .st-map .maplibregl-ctrl-group button { width: 36px; height: 36px; }
