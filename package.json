@@ -31,6 +31,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@hono/node-server": "^1.19.5",
     "@resilience/api": "workspace:*",
     "hono": "^4.10.3"
   }
